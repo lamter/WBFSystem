@@ -13,4 +13,4 @@ class IndexHandler(object):
   def GET(self):
     """Returns the homepage (`index.html`) of the app.
     """
-    return render.index(title='Hello World')
+    return render.index()

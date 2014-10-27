@@ -7,12 +7,12 @@ file.
 
 import web
 from settings import DEBUG
-from urls import URLS
+from urls import (URLS, HANDLER)
 from app.tools.app_processor import (header_html, notfound, internalerror)
 
 web.config.debug = DEBUG
 
-app = web.application(URLS, globals(), autoreload=False)
+app = web.application(URLS, HANDLER, autoreload=False)
 app.notfound = notfound
 app.internalerror = internalerror
 app.add_processor(web.loadhook(header_html))

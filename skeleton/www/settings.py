@@ -4,6 +4,7 @@
 """
 
 import web
+import redisco
 DEBUG = False
 
 session = None
@@ -15,11 +16,12 @@ VALIDATE_KEY = ''
 ENCRYPT_KEY = ''
 SECRET_KEY = ''
 
-DB_USERNAME = ''
-DB_PASSWORD = ''
-DB_PORT = 1234
-DB = ''
+REDIS_HOST = 'localhost'
+REDIS_PW = ''
+REDIS_PORT = 8911
+REDIS_DB = 1
 
+rd = redisco.connection_setup(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
 
 def absolute(path):
   """Get the absolute path of the given file/folder.

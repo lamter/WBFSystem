@@ -5,5 +5,7 @@
 # pycharm
 .idea/
 
+# Redis
+
 # tmp
 sessions/

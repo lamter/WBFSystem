@@ -4,3 +4,6 @@
 
 # pycharm
 .idea/
+
+# tmp
+sessions/

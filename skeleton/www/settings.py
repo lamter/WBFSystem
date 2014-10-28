@@ -3,7 +3,10 @@
 """Default options for the application.
 """
 
-DEBUG = True
+import web
+DEBUG = False
+
+session = None
 
 SESSION_TIMEOUT = 3600  # 1 Hour
 
@@ -16,6 +19,7 @@ DB_USERNAME = ''
 DB_PASSWORD = ''
 DB_PORT = 1234
 DB = ''
+
 
 def absolute(path):
   """Get the absolute path of the given file/folder.

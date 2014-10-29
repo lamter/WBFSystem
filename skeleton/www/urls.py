@@ -8,8 +8,8 @@ from app.controllers.main_handler import IndexHandler
 from app.controllers.main_handler import LoginHandler
 
 URLS = (
-    r'^/', IndexHandler.__name__,
-    r'/login', LoginHandler.__name__,
+    r'^/',                  IndexHandler.__name__,
+    r'/login',              LoginHandler.__name__,
 )
 
 

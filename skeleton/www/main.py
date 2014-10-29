@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Created on 2014-10-28
 
-"""The only file which is directly executed. There's no reason to modify this
+@author: Shawn
+
+The only file which is directly executed. There's no reason to modify this
 file.
+
 """
 
-import getopt
 import web
 import settings
 from urls import (URLS, HANDLER)

@@ -20,10 +20,8 @@ class Counter(orm.RediscoModle):
 
     ''' 计数项 '''
     count_user = models.Counter(unique=True)
-    count_userGroup = models.Counter(unique=True)
-
-    ''' 计数项的变量名'''
     user = u'count_user'
+    count_userGroup = models.Counter(unique=True)
     userGroup = u'count_userGroup'
 
     def __init__(self, **kwargs):

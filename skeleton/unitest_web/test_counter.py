@@ -9,6 +9,7 @@ import unittest
 
 import redis
 import redisco
+from redisco import models
 
 from skeleton.www import settings
 from skeleton.www.app.tools.counter import Counter
@@ -69,6 +70,37 @@ class TestCounter(unittest.TestCase):
         print "c.uuid->", c.uuid
         print "c.uguid->", c.uguid
 
+
+
+    def test_addCountItem(self):
+        '''
+        旧数据中的计数器能否兼容添加新的计数项
+        :return:
+        '''
+        ''' 清空数据库 '''
+        # self.redis.flushdb()
+
+        ''' 生成数据 '''
+        c = Counter.obj()
+        c.incr(Counter.user)
+
+        ''' 生成新统计项数据 '''
+        c = Counter.obj()
+        c.incr(Counter.userGroup)
+
+        print "c.uuid->", c.uuid
+        print "c.uguid->", c.uguid
+
+
+        # ''' 添加计数项 test_item1'''
+        # Counter.count_test_item1 = models.Counter(unique=True)
+        # Counter.test_item1 = u'count_test_item1'
+
+        # ''' 重新生成实例 '''
+        # c = Counter.obj()
+        # c.incr(Counter.test_item1)
+        #
+        # print "Counter.count_test_item1->", Counter.count_test_item1
 
 
 

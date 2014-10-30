@@ -7,10 +7,9 @@ Created on 2014-09-27
 @author: Shawn
 '''
 
-import json
-import orm
 from redisco import models
 
+from skeleton.www.app.models import orm
 
 
 class Counter(orm.RediscoModle):

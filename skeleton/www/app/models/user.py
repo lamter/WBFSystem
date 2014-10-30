@@ -10,8 +10,10 @@ import json
 from redisco import models
 
 from counter import Counter
-import orm
+from skeleton.www.app.models import orm
+from skeleton.www.app.models.usergroup import UserGroup
 import usergroup
+
 
 Encoder = json.JSONEncoder()
 Decoder = json.JSONDecoder()
@@ -210,7 +212,7 @@ class User(orm.RediscoModle):
             raise ValueError(u'该用户不是root用户!!!')
 
         ''' 检查用户组 '''
-        rootUg = serverdata.globa.getUserGroupByName(usergroup.UserGroup.rootGroup)
+        rootUg = UserGroup.obj(UserGroup.rootGroup)
 
         if rootUg == None:
             ''' 如果不存在root用户组 '''

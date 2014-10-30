@@ -9,10 +9,9 @@ import unittest
 
 import redis
 import redisco
-from redisco import models
 
 from skeleton.www import settings
-from skeleton.www.app.tools.counter import Counter
+from skeleton.www.app.models.counter import Counter
 
 def suite():
     testSuite1 = unittest.makeSuite(TestCounter, "test")
@@ -59,16 +58,16 @@ class TestCounter(unittest.TestCase):
         c.incr(Counter.user)
         c.incr(Counter.userGroup)
         print 'id(c)->', id(c)
-        print "c.uuid->", c.uuid
-        print "c.uguid->", c.uguid
+        print "c.uuid->", c.uid
+        print "c.uguid->", c.ugid
 
         print u'\n重新生成实例...'
         c = Counter.obj()
         print 'id(c)->', id(c)
         c.incr(Counter.user)
         c.incr(Counter.userGroup)
-        print "c.uuid->", c.uuid
-        print "c.uguid->", c.uguid
+        print "c.uuid->", c.uid
+        print "c.uguid->", c.ugid
 
 
 
@@ -88,8 +87,8 @@ class TestCounter(unittest.TestCase):
         c = Counter.obj()
         c.incr(Counter.userGroup)
 
-        print "c.uuid->", c.uuid
-        print "c.uguid->", c.uguid
+        print "c.uuid->", c.uid
+        print "c.uguid->", c.ugid
 
 
         # ''' 添加计数项 test_item1'''
@@ -101,17 +100,4 @@ class TestCounter(unittest.TestCase):
         # c.incr(Counter.test_item1)
         #
         # print "Counter.count_test_item1->", Counter.count_test_item1
-
-
-
-    def test_userUid(self):
-        '''
-        :return:
-        '''
-        c = Counter.createNewCounter()
-
-        print u'userUid->', c.uuid
-        c.incr('user')
-        print u'after incr ...'
-        print u'userUid->', c.uuid
 

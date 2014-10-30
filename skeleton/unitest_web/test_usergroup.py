@@ -12,7 +12,7 @@ import redis
 import redisco
 
 from skeleton.www import settings
-from skeleton.www.app.tools.usergroup import UserGroup
+from skeleton.www.app.models.usergroup import UserGroup
 
 
 def suite():

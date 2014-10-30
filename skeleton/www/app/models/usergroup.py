@@ -6,9 +6,12 @@ Created on 2014-09-21
 '''
 
 import json
+
 from redisco import models
-import orm
+
 from counter import Counter
+from skeleton.www.app.models import orm
+
 
 Encoder = json.JSONEncoder()
 Decoder = json.JSONDecoder()
@@ -185,7 +188,6 @@ class UserGroup(orm.RediscoModle):
 
         ''' root 用户组拥有全部权限 '''
         ug = UserGroup.createNewUserGroup(UserGroup.rootGroup, cls.getAllPms())
-        serverdata.globa.userGroupDic.pop(ug.uid)
 
         return ug
 

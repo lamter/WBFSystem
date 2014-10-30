@@ -5,7 +5,6 @@ Created on 2014-10-27
 @author: Shawn
 '''
 
-
 import unittest
 import traceback
 
@@ -13,9 +12,9 @@ import redis
 import redisco
 
 from skeleton.www import settings
-from skeleton.www.app.tools.user import User
-from skeleton.www.app.tools import user
-from skeleton.www.app.tools.usergroup import UserGroup
+from skeleton.www.app.models.user import User
+from skeleton.www.app.models import user
+from skeleton.www.app.models.usergroup import UserGroup
 
 
 def suite():
@@ -92,7 +91,6 @@ class TestUser(unittest.TestCase):
             u = User.createNewUser(username, password)
         except:
             errInfo = traceback.format_exc()
-            from skeleton.www.app.tools import user
             if user.NEW_ACCOUNT_ERR_NOT_UNIQUE in errInfo:
                 print u'不能创建重名账户...'
             else:

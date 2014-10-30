@@ -4,7 +4,9 @@
 """
 
 import web
+import redis.exceptions
 import redisco
+
 DEBUG = False
 
 session = None
@@ -21,7 +23,10 @@ REDIS_PW = ''
 REDIS_PORT = 8911
 REDIS_DB = 1
 
-rd = redisco.connection_setup(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
+redisco.connection_setup(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
+if not redisco.connection.ping():
+    raise redis.exceptions.ConnectionError(u'redisco 链接失败!!!')
+
 
 def absolute(path):
   """Get the absolute path of the given file/folder.

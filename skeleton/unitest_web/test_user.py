@@ -26,7 +26,6 @@ def suite():
 
 class TestUser(unittest.TestCase):
     '''
-    ServerData的测试
     '''
     def setUp(self):
         '''

@@ -45,7 +45,7 @@ class Counter(orm.RediscoModle):
 
 
     @property
-    def uuid(self):
+    def uid(self):
         '''
         返回用户当前最大的的uid
         :return:
@@ -55,7 +55,7 @@ class Counter(orm.RediscoModle):
 
 
     @property
-    def uguid(self):
+    def ugid(self):
         '''
         返回用户组uid
         :return:

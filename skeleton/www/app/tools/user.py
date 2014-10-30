@@ -9,7 +9,7 @@ import json
 
 from redisco import models
 
-import counter
+from counter import Counter
 import orm
 import usergroup
 
@@ -58,7 +58,7 @@ class User(orm.RediscoModle):
     '''
     要存库的数据类型
     '''
-    uid = models.IntegerField(required=True, unique=True)
+    # uid = models.IntegerField(required=True, unique=True)
     username = models.Attribute(required=True, unique=True, validator=validateAccount)
     password = models.Attribute(required=True, validator=validatePassword)
 
@@ -94,6 +94,17 @@ class User(orm.RediscoModle):
 
 
     @classmethod
+    def obj(cls, *args):
+        '''
+        根据用户名获取玩家
+        :param args: [username]
+        :return:
+        '''
+        username = args[0]
+        return cls.objects.filter(username=username).first()
+
+
+    @classmethod
     def createNewUser(cls, username, password):
         '''
         创建新的用户
@@ -103,24 +114,23 @@ class User(orm.RediscoModle):
         '''
         # TODO 密码明文加密, 暂时不做加密，直接保存明文
 
-        serverdata.globa.counter.incr('user')
-
-        ''' 生成新的用户的uid '''
-        userUid = serverdata.globa.counter.userUid
-
-        user = User(uid=userUid, username=username, password=password)
+        # user = User(uid=userUid, username=username, password=password)
+        user = User(username=username, password=password)
 
         ''' 检查账号是否生成成功 '''
         if user.is_valid() is not True:
             ''' 生成失败，直接报错退出 '''
-            if NEW_ACCOUNT_ERR_NOT_UNIQUE in user.validate():
-                raise ValueError(u'用户名重复!!!')
+            raise ValueError(user._errors)
+            # if NEW_ACCOUNT_ERR_NOT_UNIQUE in user.validate():
+            #     raise ValueError(u'用户名重复!!!')
+
+        ''' 生成新的用户的id '''
+        counter = Counter.obj()
+        counter.incr(Counter.user)
+        user.id = counter.uid
 
         ''' 生成成功，账号存库 '''
         user.save()
-
-        # ''' 账号添加到用户列表 '''
-        # serverdata.globa.userDic[user.uid] = user
 
         return user
 

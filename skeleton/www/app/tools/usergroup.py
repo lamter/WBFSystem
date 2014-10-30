@@ -8,6 +8,7 @@ Created on 2014-09-21
 import json
 from redisco import models
 import orm
+from counter import Counter
 
 Encoder = json.JSONEncoder()
 Decoder = json.JSONDecoder()
@@ -33,10 +34,21 @@ class UserGroup(orm.RediscoModle):
     ''' 超级用户组 '''
     rootGroup = 'root'
 
-    uid = models.IntegerField(required=True, unique=True)
+    # uid = models.IntegerField(required=True, unique=True)
     name =models.Attribute(required=True, unique=True)
     permissions = models.IntegerField(default=0)
     # users = models.ListField(target_type=baseuser.User)
+
+
+    @classmethod
+    def obj(cls, *args):
+        '''
+        根据用户组名生成实例
+        :param args:
+        :return:
+        '''
+        ugname = args[0]
+        return cls.objects.filter().first()
 
 
     @property
@@ -73,18 +85,12 @@ class UserGroup(orm.RediscoModle):
 
 
     @classmethod
-    def createNewUserGroup(cls, name=None, permissions=None):
+    def createNewUserGroup(cls, name, permissions=None):
         '''
         创建新的用户组
         :return:
         '''
-        serverdata.globa.counter.incr("userGroup")
-        uid = serverdata.globa.counter.userGroupUid
-
-        if name is None:
-            name = u'用户组%d' % uid
-
-        userGroup = UserGroup(uid=uid, name=name)
+        userGroup = UserGroup(name=name)
 
         ''' 配置用户组权限 '''
         if permissions is None:
@@ -92,21 +98,18 @@ class UserGroup(orm.RediscoModle):
         else:
             userGroup.permissions = permissions
 
-
         if userGroup.is_valid() is not True:
-            raise ValueError(u'创建用户组失败!!')
+            raise ValueError(userGroup.errors)
 
-        # ''' 创建有效 '''
-        # serverdata.globa.userGroupDic[uid] = userGroup
+        ''' 设置用户组id和用户组名 '''
+        counter = Counter.obj()
+        counter.incr(Counter.userGroup)
+        userGroup.id = counter.ugid
 
         ''' 存库 '''
         userGroup.save()
 
-        # ''' 添加到用户组列表 '''
-        # serverdata.globa.userGroupDic[userGroup.uid] = userGroup
-
         return userGroup
-
 
 
     @classmethod

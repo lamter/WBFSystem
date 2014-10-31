@@ -37,7 +37,7 @@ class Views(object):
             ''' 拥有权限才能渲染模板 '''
             return
 
-        self.manager_user_option = render.manager_user_option(self.user, sd)
+        self.manager_user_option = render.manager_user_option(self.user)
 
 
 
@@ -46,13 +46,12 @@ class Views(object):
 
         :return:
         '''
-        sd = serverdata.globa
 
         ''' 设置这个模块相关的权限 '''
-        pms = sd.pm.PERMISSION_USER_GROUP_LIST
+        pms = UserGroup.PERMISSION_USER_GROUP_LIST
 
         ''' 拥有权限才能渲染模板 '''
         if not self.user.isHavePms(pms):
             return
 
-        self.user_list = modles.user_list(self.user, sd)
+        self.user_list = render.user_list(self.user)

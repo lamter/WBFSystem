@@ -4,12 +4,12 @@
 class handlers.
 """
 
-from app.controllers.main_handler import IndexHandler
-from app.controllers.main_handler import LoginHandler
+from app.controllers.login_handler import Login
+from app.controllers.index_handler import Index
 
 URLS = (
-    r'^/',                  IndexHandler.__name__,
-    r'/login',              LoginHandler.__name__,
+    r'^/',                  Index.__name__,
+    r'/login',              Login.__name__,
 )
 
 

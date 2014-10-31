@@ -2,13 +2,20 @@
 
 """Default options for the application.
 """
+import sys
+import traceback
 
 import web
 import redis.exceptions
 import redisco
 
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 DEBUG = False
 
+
+global session
 session = None
 
 SESSION_TIMEOUT = 3600  # 1 Hour
@@ -24,8 +31,12 @@ REDIS_PORT = 8911
 REDIS_DB = 1
 
 redisco.connection_setup(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
-if not redisco.connection.ping():
+try:
+    if not redisco.connection.ping():
+        raise redis.exceptions.ConnectionError(u'redisco 链接失败!!!')
+except redis.exceptions:
     raise redis.exceptions.ConnectionError(u'redisco 链接失败!!!')
+
 
 
 def absolute(path):

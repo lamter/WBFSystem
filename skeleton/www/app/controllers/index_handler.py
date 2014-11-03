@@ -8,6 +8,7 @@ import traceback
 
 import web
 
+import skeleton.www.app as app
 from base_handler import *
 from main_handler import *
 from skeleton.www.app.models.views import Views
@@ -22,8 +23,9 @@ class Index(BaseHandler):
 
     def GET(self):
         try:
-            if session.loggedin:
-                return web.redirect(MainMenu.URL)
+            print app.session.user
+            if app.session.user:
+                return web.redirect(Main.URL)
 
         except AttributeError:
 

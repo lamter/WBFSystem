@@ -25,8 +25,10 @@ class UserGroup(orm.RediscoModle):
     '''
     ''' 用户权限枚举=> '''
 
-    ''' 登录 '''
-    PERMISSION_LOG_IN = 1 << 0
+    ''' 登录权限比较特殊 '''
+    PERMISSION_BAN_LOGIN = 1 << 0
+
+    ''' 其他权限 '''
     PERMISSION_CREATE_USER_GROUP = 1 << 1
     PERMISSION_CREATE_USER = 1 << 2
     PERMISSION_USER_LIST = 1 << 3
@@ -187,7 +189,8 @@ class UserGroup(orm.RediscoModle):
         '''
 
         ''' root 用户组拥有全部权限 '''
-        ug = UserGroup.createNewUserGroup(UserGroup.rootGroup, cls.getAllPms())
+        pms = cls.getAllPms() - cls.PERMISSION_BAN_LOGIN
+        ug = UserGroup.createNewUserGroup(UserGroup.rootGroup, pms)
 
         return ug
 

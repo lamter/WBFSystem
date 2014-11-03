@@ -264,6 +264,10 @@ class User(orm.RediscoModle):
             if ug.name == name:
                 return ug
 
-        return ug
+        return None
+
+
+    def isPW(self, pw):
+        return self.password == pw
 
 

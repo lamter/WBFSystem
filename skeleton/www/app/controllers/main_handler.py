@@ -8,31 +8,31 @@ import traceback
 
 import web
 
-from skeleton.www.settings import session
+import skeleton.www.app as app
 from base_handler import *
 from skeleton.www.app.models.views import Views
 from skeleton.www.app.models.user import User
 
 
 
-class MainMenu(BaseHandler):
+class Main(BaseHandler):
 
-    URL = u'/main_menu'
-    url = r'/main_menu'
+    URL = u'/main'
+    url = r'/main'
 
     def GET(self):
         try:
-            if session.loggedin == False:
+            if app.session.user:
                 return render.login(u'登录超时，请重新登录')
 
-            user = User.obj(session.username)
+            user = User.obj(app.session.username)
             views = Views(user)
 
-            ''' 渲染管理用户选项 '''
+            print ''' 渲染管理用户选项 '''
             views.render_manager_user_option()
 
             ''' 用户管理选择 '''
-            return render.main_menu(user, views)
+            return render.main(user, views)
 
         except:
             return self.errInfo(traceback.format_exc())
@@ -41,15 +41,15 @@ class MainMenu(BaseHandler):
 
 class UserList(BaseHandler):
 
-    URL = MainMenu.URL + u'/user_list'
-    url = r'%s/user_list' % MainMenu.URL
+    URL = Main.URL + u'/user_list'
+    url = r'%s/user_list' % Main.URL
 
     def GET(self):
         try:
-            if session.loggedin == False:
+            if app.session.loggedin == False:
                 return render.login(u'登录超时，请重新登录')
 
-            user = sd.getUserByUsername(session.username)
+            user = User.obj(app.session.username)
             views = Views(user)
 
             ''' 渲染管理用户选项 '''

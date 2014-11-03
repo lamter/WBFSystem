@@ -40,6 +40,7 @@ class Login(BaseHandler):
 
         elif user.isPW(password):
             ''' 通过验证 '''
+            app.session.username = u'%s' % username
             return web.redirect(Main.URL)
 
         else:

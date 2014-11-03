@@ -77,8 +77,8 @@ class User(orm.RediscoModle):
     is_cancel = models.BooleanField(default=True)
 
     ''' root用户的账号和密码 '''
-    rootAccount = 'root'
-    rootPassword = '123456'
+    rootAccount = u'root'
+    rootPassword = u'123456'
 
 
     def validate(self):

@@ -37,7 +37,7 @@ class UserGroup(orm.RediscoModle):
     ''' <=用户权限枚举 '''
 
     ''' 超级用户组 '''
-    rootGroup = 'root'
+    rootGroup = u'root'
 
     # uid = models.IntegerField(required=True, unique=True)
     name =models.Attribute(required=True, unique=True)

@@ -19,7 +19,6 @@ class Init(object):
         :return:
         '''
 
-        ''' 初始化root用户 '''
         self.root()
 
 

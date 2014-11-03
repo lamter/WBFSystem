@@ -37,7 +37,7 @@ class Views(object):
             ''' 拥有权限才能渲染模板 '''
             return
 
-        self.manager_user_option = render.manager_user_option(self.user)
+        self.manager_user_option = render.manager_user_option(self.user, UserGroup)
 
 
 

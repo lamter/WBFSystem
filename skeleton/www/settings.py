@@ -13,7 +13,7 @@ import redisco
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-DEBUG = False
+DEBUG = True
 
 
 # global session

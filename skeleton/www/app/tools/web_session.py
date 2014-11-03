@@ -23,16 +23,16 @@ class Session(object):
         :param kwargs:
         :return:
         '''
-        app.session.user = None
+        web.ctx.session.user = None
 
         print ''' 尚未注册的用户 '''
-        if app.session.user is None:
+        if web.ctx.session.user is None:
             errInfo = u'未注册的账户...'
             print errInfo
             web.redirect(Login.URL)
             return
 
         ''' 禁止登录 '''
-        if app.session.user.isHavePms(UserGroup.PERMISSION_BAN_LOGIN):
+        if web.ctx.session.user.isHavePms(UserGroup.PERMISSION_BAN_LOGIN):
             web.redirect(BanLogin.URL)
             return

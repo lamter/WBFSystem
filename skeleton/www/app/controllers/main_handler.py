@@ -12,6 +12,7 @@ import skeleton.www.app as app
 from base_handler import *
 from skeleton.www.app.models.views import Views
 from skeleton.www.app.models.user import User
+from skeleton.www.app.models.usergroup import UserGroup
 
 
 
@@ -22,20 +23,20 @@ class Main(BaseHandler):
 
     def GET(self):
         try:
-            if app.session.user:
+            user = User.obj(app.session.username)
+            if not user:
                 return render.login(u'登录超时，请重新登录')
 
-            user = User.obj(app.session.username)
             views = Views(user)
 
             print ''' 渲染管理用户选项 '''
             views.render_manager_user_option()
 
             ''' 用户管理选择 '''
-            return render.main(user, views)
+            return render.main(user, UserGroup, views)
 
         except:
-            return self.errInfo(traceback.format_exc())
+            return self.errInfo()
 
 
 
@@ -62,4 +63,4 @@ class UserList(BaseHandler):
             return render.user_list(user, sd, views)
 
         except:
-            return self.errInfo(traceback.format_exc())
+            return self.errInfo()

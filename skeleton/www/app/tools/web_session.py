@@ -23,16 +23,22 @@ class Session(object):
         :param kwargs:
         :return:
         '''
-        web.ctx.session.user = None
+        if not hasattr(app.session, 'username'):
+            setattr(app.session, 'username', None)
 
-        print ''' 尚未注册的用户 '''
-        if web.ctx.session.user is None:
-            errInfo = u'未注册的账户...'
-            print errInfo
-            web.redirect(Login.URL)
-            return
+        if not hasattr(app.session, 'login'):
+            setattr(app.session, 'login', False)
+
+        user = User.obj(app.session.username)
+
+        # ''' 尚未注册的用户 '''
+        # if app.session.user is None:
+        #     errInfo = u'未注册的账户...'
+        #     print errInfo
+        #     web.redirect(Login.URL)
+        #     return
 
         ''' 禁止登录 '''
-        if web.ctx.session.user.isHavePms(UserGroup.PERMISSION_BAN_LOGIN):
+        if user and user.isHavePms(UserGroup.PERMISSION_BAN_LOGIN):
             web.redirect(BanLogin.URL)
             return

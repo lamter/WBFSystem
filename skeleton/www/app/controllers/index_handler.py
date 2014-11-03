@@ -23,11 +23,13 @@ class Index(BaseHandler):
 
     def GET(self):
         try:
-            print app.session.user
-            if app.session.user:
+            # print "app.session.login->", app.session.login
+            if app.session.login:
                 return web.redirect(Main.URL)
+            else:
+                return render.login(u'未登录')
 
         except AttributeError:
-
+            traceback.print_exc()
             return render.login(u'登录请输入密码')
 

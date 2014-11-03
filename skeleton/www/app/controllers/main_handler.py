@@ -29,7 +29,7 @@ class Main(BaseHandler):
 
             views = Views(user)
 
-            print ''' 渲染管理用户选项 '''
+            ''' 渲染管理用户选项 '''
             views.render_manager_user_option()
 
             ''' 用户管理选择 '''

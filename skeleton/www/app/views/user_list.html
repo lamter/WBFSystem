@@ -1,0 +1,10 @@
+$def with (user, sd, views)
+
+<!-- 管理用户选项 -->
+$if views.isHasAttr("manager_user_option"):
+    $:views.manager_user_option
+
+<!-- 用户列表 -->
+$if views.isHasAttr("user_list"):
+    $:views.user_list
+

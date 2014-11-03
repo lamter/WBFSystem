@@ -3,10 +3,21 @@
 """Default options for the application.
 """
 
-import web
-DEBUG = False
+import sys
+import traceback
 
-session = None
+import web
+import redis.exceptions
+import redisco
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+DEBUG = True
+
+
+# global session
+
 
 SESSION_TIMEOUT = 3600  # 1 Hour
 
@@ -15,10 +26,18 @@ VALIDATE_KEY = ''
 ENCRYPT_KEY = ''
 SECRET_KEY = ''
 
-DB_USERNAME = ''
-DB_PASSWORD = ''
-DB_PORT = 1234
-DB = ''
+REDIS_HOST = 'localhost'
+REDIS_PW = ''
+REDIS_PORT = 8911
+REDIS_DB = 1
+
+redisco.connection_setup(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
+try:
+    if not redisco.connection.ping():
+        raise redis.exceptions.ConnectionError(u'redisco 链接失败!!!')
+except redis.exceptions:
+    raise redis.exceptions.ConnectionError(u'redisco 链接失败!!!')
+
 
 
 def absolute(path):

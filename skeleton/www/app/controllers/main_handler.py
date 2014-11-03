@@ -1,56 +1,66 @@
 # -*- coding: utf-8 -*-
 
-"""This module contains the main handler of the application.
+"""
+This module contains the main handler of the application.
 """
 
+import traceback
+
 import web
-from settings import session
-from . import render
+
+import skeleton.www.app as app
+from base_handler import *
+from skeleton.www.app.models.views import Views
+from skeleton.www.app.models.user import User
+from skeleton.www.app.models.usergroup import UserGroup
 
 
-class IndexHandler(object):
-  """Homepage of the app.
-  """
-  def GET(self):
-    """Returns the homepage (`index.html`) of the app.
-    """
-    # try:
-    #     if session.loggedin:
-    #         user = serverdata.globa.getUserByUsername(session.username)
-    #         return main_menu_render(user, serverdata.globa)
-    # except:
-    #     return render.login('')
 
-    return render.login(u'登录请输入密码')
+class Main(BaseHandler):
+
+    URL = u'/main'
+    url = r'/main'
+
+    def GET(self):
+        try:
+            user = User.obj(app.session.username)
+            if not user:
+                return render.login(u'登录超时，请重新登录')
+
+            views = Views(user)
+
+            print ''' 渲染管理用户选项 '''
+            views.render_manager_user_option()
+
+            ''' 用户管理选择 '''
+            return render.main(user, UserGroup, views)
+
+        except:
+            return self.errInfo()
 
 
-class LoginHandler(object):
-    def POST(self):
-        username = web.input().get("username")
-        password = str(web.input().get("password"))
 
-        if not username:
-            errInfo = u'请输入账号!!'
-            return render.login(errInfo)
+class UserList(BaseHandler):
 
-        # user = serverdata.globa.getUserByUsername(username)
+    URL = Main.URL + u'/user_list'
+    url = r'%s/user_list' % Main.URL
 
-        if user is None:
-            errInfo = u'未注册的账号!!'
-            return render.login(errInfo)
+    def GET(self):
+        try:
+            if app.session.loggedin == False:
+                return render.login(u'登录超时，请重新登录')
 
-        elif user.password != password:
-            ''' 密码错误 '''
-            errInfo = u'密码错误!!'
-            return render.login(errInfo)
-        #
-        # elif user.password == password:
-        #     ''' 通过验证 '''
-        #     session.loggedin = True
-        #     session.username = username
-        #     return main_menu_render(user, serverdata.globa)
+            user = User.obj(app.session.username)
+            views = Views(user)
 
-        else:
-            errInfo = u''
-            return render.login(errInfo)
+            ''' 渲染管理用户选项 '''
+            views.render_manager_user_option()
 
+            ''' 渲染用户列表 '''
+            views.render_user_list()
+
+            ''' 用户管理选择 '''
+            return render.user_list(user, sd, views)
+
+        except:
+            return self.errInfo()

@@ -4,18 +4,20 @@
 class handlers.
 """
 
-from app.controllers.main_handler import IndexHandler
-from app.controllers.main_handler import LoginHandler
+from app.controllers.login_handler import Login
+from app.controllers.index_handler import Index
+from app.controllers.main_handler import Main
 
 URLS = (
-    r'^/', IndexHandler.__name__,
-    r'/login', LoginHandler.__name__,
+    Index.url,                  Index.__name__,
+    Login.url,                  Login.__name__,
+    Main.url,                   Main.__name__,
 )
 
 
 HANDLER = {}
 
 for i, name in enumerate(URLS):
-    if (i+1) % 2  == 0:
+    if (i+1) % 2 == 0:
         cls = eval(name)
         HANDLER[name] = cls

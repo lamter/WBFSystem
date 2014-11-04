@@ -9,6 +9,8 @@ Created on 2014-10-31
 __author__ = 'Shawn'
 
 import web
+
+from skeleton.www import settings
 from skeleton.www.app.controllers import render
 from skeleton.www.app.controllers.login_handler import (Login, BanLogin)
 import skeleton.www.app as app
@@ -25,6 +27,10 @@ class Session(object):
         '''
         if not hasattr(app.session, 'username'):
             setattr(app.session, 'username', None)
+
+            if settings.DEBUG:
+                setattr(app.session, 'username', settings.debug_username)
+
 
         if not hasattr(app.session, 'login'):
             setattr(app.session, 'login', False)

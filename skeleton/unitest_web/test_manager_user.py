@@ -76,8 +76,8 @@ class TestManageUser(unittest.TestCase):
         测试 创建用户组
         :return:
         '''
-        session.username = User.rootAccount
-        user = User.obj(session.username)
+        settings.debug_username = User.rootAccount
+        user = User.obj(settings.debug_username)
         v = Views(user)
         v.html(main.application.request(ManageUser.url).data)
 

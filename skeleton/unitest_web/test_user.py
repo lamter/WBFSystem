@@ -14,6 +14,8 @@ import redisco
 from skeleton.www import settings
 from skeleton.www.app.models.user import User
 from skeleton.www.app.models import user
+from skeleton.www.app.models import init
+
 from skeleton.www.app.models.usergroup import UserGroup
 
 
@@ -156,3 +158,13 @@ class TestUser(unittest.TestCase):
 
 
 
+    def test_userAll(self):
+        '''
+        实例化所有角色
+        :return:
+        '''
+        init()
+        users = User.all()
+        print len(users)
+        for u in users:
+            print u.username

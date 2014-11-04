@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 
-"""This module contains the main handler of the application.
+"""
+This module contains the main handler of the application.
+
+@author: Shawn
+
 """
 
 __author__ = 'Shawn'
 
 import traceback
 
-import settings
+import skeleton.www.settings as settings
 from skeleton.www.app.controllers import render
 
 

@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 
+"""
+Created on 2014-10-28
+
+@author: Shawn
+
+"""
+
+
 import traceback
 
 import web
@@ -41,12 +49,14 @@ class Login(BaseHandler):
         elif user.isPW(password):
             ''' 通过验证 '''
             app.session.username = u'%s' % username
+            app.session.login = True
             return web.redirect(Main.URL)
 
         else:
             errInfo = u''
             return render.login(errInfo)
 
+        return render.login(u'')
 
 
 class BanLogin(BaseHandler):

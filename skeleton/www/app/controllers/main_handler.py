@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """
+Created on 2014-10-28
+
+@author: Shawn
+
 This module contains the main handler of the application.
 """
 
@@ -40,27 +44,27 @@ class Main(BaseHandler):
 
 
 
-class UserList(BaseHandler):
+class ManageUser(BaseHandler):
 
-    URL = Main.URL + u'/user_list'
-    url = r'%s/user_list' % Main.URL
+    URL = Main.URL + u'/manage_user'
+    url = r'%s/manage_user.*' % Main.URL
 
     def GET(self):
         try:
-            if app.session.loggedin == False:
+            if not app.session.login and not settings.DEBUG:
                 return render.login(u'登录超时，请重新登录')
 
             user = User.obj(app.session.username)
             views = Views(user)
 
             ''' 渲染管理用户选项 '''
-            views.render_manager_user_option()
+            views.render_manage_user_option()
 
             ''' 渲染用户列表 '''
-            views.render_user_list()
+            views.render_manage_user()
 
             ''' 用户管理选择 '''
-            return render.user_list(user, sd, views)
+            return views.manage_user
 
         except:
             return self.errInfo()

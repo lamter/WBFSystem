@@ -1,4 +1,4 @@
-$def with (user, UserGroup)
+$def with (user, UserGroup, main_handler)
 
 <br/>
 <br/>
@@ -26,7 +26,7 @@ $if user.isHavePms(UserGroup.PERMISSION_USER_GROUP_LIST):
 $if user.isHavePms(UserGroup.PERMISSION_USER_LIST):
     <tr>
         <td>
-             用户组列表
+             <p>查看<a href=$main_handler.ManageUser.URL>用户列表</a></p>
         </td>
     </tr>
 

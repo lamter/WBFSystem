@@ -6,7 +6,7 @@ controllers of the app.
 
 from web.contrib.template import render_mako
 import web.template
-from settings import (absolute, DEBUG)
+from skeleton.www.settings import (absolute, DEBUG)
 
 # Mako Template options
 # render = render_mako(
@@ -22,4 +22,4 @@ from settings import (absolute, DEBUG)
 # )
 
 
-render =  web.template.render(absolute('app/views'))
+render = web.template.render(absolute('app/views'))

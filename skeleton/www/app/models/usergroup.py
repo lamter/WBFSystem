@@ -29,10 +29,20 @@ class UserGroup(orm.RediscoModle):
     PERMISSION_BAN_LOGIN = 1 << 0
 
     ''' 其他权限 '''
+
+    ''' 创建用户组 '''
     PERMISSION_CREATE_USER_GROUP = 1 << 1
+
+    ''' 创建用户 '''
     PERMISSION_CREATE_USER = 1 << 2
+
+    ''' 查看用户列表 '''
     PERMISSION_USER_LIST = 1 << 3
+
+    ''' 创建用户组 '''
     PERMISSION_USER_GROUP_LIST = 1 << 4
+
+    ''' 以 PERMISSION_* 的形式来命名变量 '''
 
     ''' <=用户权限枚举 '''
 
@@ -194,5 +204,18 @@ class UserGroup(orm.RediscoModle):
 
         return ug
 
+
+    @classmethod
+    def getPmNames(cls):
+        '''
+        所有权限的名字数组
+        :return:
+        '''
+        names = []
+        for n in cls.getPermissionDic().keys():
+            ls = n.split('_')
+            n = '_'.join(ls[0:])
+            names.append(n)
+        return names
 
 

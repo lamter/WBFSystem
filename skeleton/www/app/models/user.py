@@ -107,6 +107,16 @@ class User(orm.RediscoModle):
 
 
     @classmethod
+    def all(cls):
+        '''
+        获得所有用户的实例
+        :return:
+        '''
+        return cls.objects.filter().all()
+
+
+
+    @classmethod
     def createNewUser(cls, username, password):
         '''
         创建新的用户
@@ -271,3 +281,10 @@ class User(orm.RediscoModle):
         return self.password == pw
 
 
+    @property
+    def groups(self):
+        '''
+        :return:
+        '''
+        groups = [ug for ug in self.userGroups]
+        return groups

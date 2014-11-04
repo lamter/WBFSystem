@@ -54,6 +54,7 @@ class ManageUser(BaseHandler):
             if not app.session.login and not settings.DEBUG:
                 return render.login(u'登录超时，请重新登录')
 
+            print "app.session.username->", app.session.username
             user = User.obj(app.session.username)
             views = Views(user)
 

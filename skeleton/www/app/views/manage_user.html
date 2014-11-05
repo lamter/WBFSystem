@@ -1,4 +1,4 @@
-$def with (user, UserGroup, views, users)
+$def with (user, UserGroup, views, users, manage_handler)
 
 <html>
 <body>
@@ -38,7 +38,7 @@ $if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
                 <th>权限</th>
             </tr>
             <tr>
-                <td><input type="text" name="ugname" /></td>
+                <td><input type="text" name=$manage_handler.CreateUserGroup.ugname /></td>
                 <td>
                     <table>
                         <tr>

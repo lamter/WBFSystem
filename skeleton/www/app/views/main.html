@@ -1,4 +1,4 @@
-$def with (user, UserGroup, views)
+$def with (user, UserGroup, views, main_handler)
 
 $ title = u"某种管理系统"
 
@@ -12,9 +12,16 @@ $ title = u"某种管理系统"
     <tr>
         <td>业务1</td>
     </tr>
+    <!-- 管理用户选项 -->
+    $if views.isHasAttr('manage_user_option'):
+        <tr>
+            <td>
+                <!-- 不再提供选项，直接跳到管理页面 -->
+                <p>进入<a href=$main_handler.get("ManageUser").URL>管理用户页面</a></p>
+                <!--$:views.manage_user_option-->
+            </td>
+        </tr>
 </table>
-<!-- 管理用户选项 -->
-$if views.isHasAttr('manage_user_option'):
-    $:views.manager_user_option
+
 </body>
 </html>

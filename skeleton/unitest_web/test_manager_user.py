@@ -19,7 +19,7 @@ from skeleton.www.app.models.counter import Counter
 from skeleton.www.app.models.user import User
 from skeleton.www.app.models.usergroup import UserGroup
 from skeleton.www.app.models.views import Views
-from skeleton.www.app.controllers.main_handler import ManageUser
+from skeleton.www.app.controllers.manage_handler import ManageUser
 from skeleton.www.app.controllers.login_handler import Login
 
 def suite():
@@ -77,6 +77,7 @@ class TestManageUser(unittest.TestCase):
         :return:
         '''
         settings.debug_username = User.rootAccount
+
         user = User.obj(settings.debug_username)
         v = Views(user)
         v.html(main.application.request(ManageUser.url).data)

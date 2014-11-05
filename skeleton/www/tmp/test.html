@@ -1,84 +1,12 @@
 
 <html>
 <body>
-<table  >
-<h1>管理用户</h1>
 
-<!-- 管理用户选项 -->
-<tr><td>
-    
-<br/>
-<br/>
-<table border="1">
-    <caption>管理用户</caption>
-
-<tr>
-    <td>
-        <p><a href="/">创建用户组</a></p>
-    </td>
-</tr>
-<tr>
-    <td>
-         创建用户
-    </td>
-</tr>
-<tr>
-    <td>
-         用户组列表
-    </td>
-</tr>
-<tr>
-    <td>
-         <p>查看<a href=/main/manage_user>用户列表</a></p>
-    </td>
-</tr>
-
+<table>
+    <tr>
+        <td>Traceback (most recent call last):<br/>  File "/Users/lamter/workspace/OpenSource/web.py-skeleton/skeleton/www/app/controllers/manage_handler.py", line 35, in GET<br/>    user = User.obj(session.username)<br/>AttributeError: 'NoneType' object has no attribute 'username'<br/></td>
+    </tr>
 </table>
 
-</td></tr>
-
-<!-- 用户列表 -->
-<tr><td>
-    <table border="1">
-        <caption>用户列表</caption>
-        <tr>
-            <th>用户名</th>
-            <th>用户组</th>
-        </tr>
-        <tr>
-            <td>root</td>
-            <td>root</td>
-        </tr>
-    </table>
-</td></tr>
-
-<!-- 创建用户组 -->
-<tr><td>
-    <table border="1">
-        <caption>创建用户组</caption>
-        <tr>
-            <th>组名</th>
-            <th>权限</th>
-        </tr>
-        <tr>
-            <td><input type="text" name="ugname" /></td>
-            <td>
-                <table>
-                    <tr>
-                        <td><input type="checkbox" name=PERMISSION_USER_LIST />PERMISSION_USER_LIST</td>
-                        <td><input type="checkbox" name=PERMISSION_BAN_LOGIN />PERMISSION_BAN_LOGIN</td>
-                        <td><input type="checkbox" name=PERMISSION_CREATE_USER_GROUP />PERMISSION_CREATE_USER_GROUP</td>
-                        <td><input type="checkbox" name=PERMISSION_CREATE_USER />PERMISSION_CREATE_USER</td>
-                        <td><input type="checkbox" name=PERMISSION_USER_GROUP_LIST />PERMISSION_USER_GROUP_LIST</td>
-                        </tr><tr>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</td></tr>
-
-<!-- 创建用户 -->
-</table>
 </body>
 </html>

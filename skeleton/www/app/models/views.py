@@ -7,8 +7,7 @@ Created on 2014-10-28
 
 import web
 from skeleton.www.settings import (absolute)
-from skeleton.www.app.controllers import render
-import skeleton.www.app.controllers.main_handler
+from skeleton.www.app.controllers import (render)
 from skeleton.www.app.models.usergroup import UserGroup
 from skeleton.www.app.models.user import User
 
@@ -55,6 +54,7 @@ class Views(object):
             ''' 拥有权限才能渲染模板 '''
             return
 
+        import skeleton.www.app.controllers.main_handler
         self.manage_user_option = render.manage_user_option(self.user, UserGroup, skeleton.www.app.controllers.main_handler)
 
 
@@ -77,4 +77,5 @@ class Views(object):
         ''' 所有用户 '''
         users = User.all()
 
-        self.manage_user = render.manage_user(self.user, UserGroup, self, users)
+        import skeleton.www.app.controllers.manage_handler
+        self.manage_user = render.manage_user(self.user, UserGroup, self, users, skeleton.www.app.controllers.manage_handler)

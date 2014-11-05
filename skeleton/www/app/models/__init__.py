@@ -5,7 +5,7 @@ Created on 2014-10-27
 @author: Shawn
 '''
 
-
+import views
 from user import User
 
 

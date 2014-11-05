@@ -34,38 +34,12 @@ class Main(BaseHandler):
             views = Views(user)
 
             ''' 渲染管理用户选项 '''
-            views.render_manager_user_option()
-
-            ''' 用户管理选择 '''
-            return render.main(user, UserGroup, views)
-
-        except:
-            return self.errInfo()
-
-
-
-class ManageUser(BaseHandler):
-
-    URL = Main.URL + u'/manage_user'
-    url = r'%s/manage_user.*' % Main.URL
-
-    def GET(self):
-        try:
-            if not app.session.login and not settings.DEBUG:
-                return render.login(u'登录超时，请重新登录')
-
-            print "app.session.username->", app.session.username
-            user = User.obj(app.session.username)
-            views = Views(user)
-
-            ''' 渲染管理用户选项 '''
             views.render_manage_user_option()
 
-            ''' 渲染用户列表 '''
-            views.render_manage_user()
-
             ''' 用户管理选择 '''
-            return views.manage_user
+            return render.main(user, UserGroup, views, locals())
 
         except:
             return self.errInfo()
+
+

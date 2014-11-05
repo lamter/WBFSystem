@@ -1,12 +1,15 @@
-#web.py skeleton
+# Web Business Flow System(WBFSystem)
 
-This is a sample skeleton for a web.py application.
+This is a skeleton of business flow system based on web.py and Redis. It affords a user management function.
 
 The structure is:
 
 	 |-doc
 	 |-licenses
+	 |-redis
+	 |-sh
 	 |-requirements
+	 |-unitest_web
 	 |-www
 	 |---app
 	 |-----controllers
@@ -31,8 +34,10 @@ The structure is:
 
 - **doc**: Documentation of the project.
 - **licenses**: Project license or any other licenses used by 3rd party libraries go here.
+- **reids**: A redis-server which can be run directly.
 - **requirements**: Mandatory Python libraries to install with pip.
 - **sh**: Bash script files of the project.
+- **unitest_web**: Unitest for all modle.
 - **www**: Project's www folder.
 	- **app**: The application itself.
 		- **controllers**: Handlers of the application. Each `{name}_handler` is a module.

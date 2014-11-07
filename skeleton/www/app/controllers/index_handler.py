@@ -14,7 +14,7 @@ import web
 
 import skeleton.www.app as app
 from base_handler import *
-from main_handler import *
+import main_handler
 from skeleton.www.app.models.views import Views
 
 
@@ -29,7 +29,7 @@ class Index(BaseHandler):
         try:
             # print "app.session.login->", app.session.login
             if app.session.login:
-                return web.redirect(Main.URL)
+                return web.redirect(main_handler.Main.URL)
             else:
                 return render.login(u'未登录')
 

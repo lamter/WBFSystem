@@ -5,8 +5,6 @@ Created on 2014-10-28
 
 @author: Shawn
 
-
-
 This module contains the main handler of the application.
 """
 
@@ -14,18 +12,34 @@ import traceback
 
 import web
 
+from skeleton.www import settings
+import base_handler
+import main_handler
 from skeleton.www.app import session
-from skeleton.www.app.models.views import Views
+import skeleton.www.app.models.views as views
 from skeleton.www.app.models.user import User
 from skeleton.www.app.models.usergroup import UserGroup
-from base_handler import *
-from main_handler import Main
+
+class ManageUser(base_handler.BaseHandler):
+
+    # __URL =
+    # __url =
+
+    @classmethod
+    def URL(cls):
+        '''
+        :return:
+        '''
+        return main_handler.Main().URL + u'/manage_user'
 
 
-class ManageUser(BaseHandler):
+    @classmethod
+    def url(self):
+        '''
+        :return:
+        '''
+        return r'%s/manage_user.*' % main_handler.Main.URL
 
-    URL = Main.URL + u'/manage_user'
-    url = r'%s/manage_user.*' % Main.URL
 
     def GET(self):
         try:
@@ -50,12 +64,20 @@ class ManageUser(BaseHandler):
 
 
 
-class CreateUserGroup(BaseHandler):
+class CreateUserGroup(base_handler.BaseHandler):
 
-    URL = ManageUser.URL + u'/create_user_group'
-    url = r'%s/create_user_group.*' % ManageUser.URL
+    URL = u'/create_user_group'
+    url = r'/create_user_group.*'
 
     ugname = u'ugname'
+
+    # @classmethod
+    # def URL(cls):
+    #     return ManageUser.URL + u'/create_user_group'
+
+    # @classmethod
+    # def url(cls):
+    #     return r'%s/create_user_group.*' % ManageUser.URL
 
     def POST(self):
         try:

@@ -11,13 +11,20 @@ __author__ = 'Shawn'
 import web
 
 from skeleton.www import settings
-from skeleton.www.app.controllers import render
-from skeleton.www.app.controllers.login_handler import (Login, BanLogin)
-import skeleton.www.app as app
-from skeleton.www.app.models.user import User
-from skeleton.www.app.models.usergroup import UserGroup
 
-class Session(object):
+global app
+
+
+class Initializer(object):
+    def __init__(self, app_modle):
+        '''
+        :param app:
+        :return:
+        '''
+        ''' app 模块 '''
+        global app
+        app = app_modle
+
     def __call__(self, *args, **kwargs):
         '''
         session登录后要做的操作

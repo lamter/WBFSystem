@@ -41,7 +41,7 @@ class Views(object):
 
 
 
-    def render_manage_user_option(self):
+    def render_manage_user_option(self, manage_handler):
         '''
         管理用户选项
         :return:
@@ -54,8 +54,7 @@ class Views(object):
             ''' 拥有权限才能渲染模板 '''
             return
 
-        import skeleton.www.app.controllers.main_handler
-        self.manage_user_option = render.manage_user_option(self.user, UserGroup, skeleton.www.app.controllers.main_handler)
+        self.manage_user_option = render.manage_user_option(self.user, UserGroup, manage_handler)
 
 
 

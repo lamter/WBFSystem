@@ -14,10 +14,10 @@ import web
 
 import skeleton.www.app as app
 from base_handler import *
+import manage_handler
 from skeleton.www.app.models.views import Views
 from skeleton.www.app.models.user import User
 from skeleton.www.app.models.usergroup import UserGroup
-
 
 
 class Main(BaseHandler):
@@ -34,10 +34,10 @@ class Main(BaseHandler):
             views = Views(user)
 
             ''' 渲染管理用户选项 '''
-            views.render_manage_user_option()
+            views.render_manage_user_option(manage_handler)
 
             ''' 用户管理选择 '''
-            return render.main(user, UserGroup, views, locals())
+            return render.main(user, UserGroup, views, Main)
 
         except:
             return self.errInfo()

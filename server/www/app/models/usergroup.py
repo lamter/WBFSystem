@@ -65,6 +65,14 @@ class UserGroup(orm.RediscoModle):
         ugname = args[0]
         return cls.objects.filter().first()
 
+    @classmethod
+    def all(cls):
+        '''
+        获取所有用户组
+        :return:
+        '''
+        return cls.objects.filter().all()
+
 
     @property
     def pms(self):
@@ -82,6 +90,17 @@ class UserGroup(orm.RediscoModle):
             allPms |= pm
         return allPms
 
+
+    def getPmsName(self):
+        '''
+        获得所持有的权限名
+        :return:
+        '''
+        pmsName = []
+        for pmn, pm in self.getPermissionDic().items():
+            if self.isHavePms(pm):
+                pmsName.append(pmn)
+        return pmsName
 
 
     def validate(self):

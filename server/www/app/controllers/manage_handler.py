@@ -66,7 +66,9 @@ class ManageUser(base_handler.BaseHandler):
 
 
 class CreateUserGroup(base_handler.BaseHandler):
-
+    """
+    创建用户组
+    """
     URL = u'/create_user_group'
     url = r'/create_user_group.*'
 
@@ -85,19 +87,21 @@ class CreateUserGroup(base_handler.BaseHandler):
             if not server.www.session.login and not settings.DEBUG:
                 return render.login(u'登录超时，请重新登录')
 
-            user = User.obj(server.www.session.username)
-            views = Views(user)
+            print u'创建用户中...'
+            newUg = web.input()
+            # print 'newUg->', newUg
 
-            ugname = web.input().get(self.ugname)
+            ''' 获取设定的权限 '''
+            pms = 0
+            for pmn, pm in UserGroup.getPermissionDic().items():
+                if newUg.get(pmn) == u'on':
+                    pms |= pm
+            # print 'pms->', pms
 
-            ''' 渲染管理用户选项 '''
-            # views.render_manage_user_option()
+            ''' 创建用户组 '''
+            UserGroup.createNewUserGroup(newUg.ugname, pms)
 
-            ''' 渲染用户列表 '''
-            views.render_manage_user()
-
-            ''' 用户管理选择 '''
-            return views.manage_user
+            return u'创建用户组%s成功' % newUg.ugname
 
         except:
             return self.errInfo()

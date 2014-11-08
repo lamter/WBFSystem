@@ -1,4 +1,4 @@
-$def with (user, UserGroup, views, users, ManageUser, CreateUserGroup)
+$def with (user, UserGroup, views, users, userGroups, ManageUser, CreateUserGroup)
 
 <html>
 <body>
@@ -28,10 +28,37 @@ $if user.isHavePms(UserGroup.PERMISSION_USER_LIST):
         </table>
     </td></tr>
 
+<!-- 用户组列表 -->
+    <tr><td>
+        <table border="1">
+            <caption>用户组列表</caption>
+            <tr>
+                <th>用户组</th>
+                <th>权限</th>
+            </tr>
+            $for ug in userGroups:
+                <tr>
+                    <td>$ug.name</td>
+                    <!-- 用户组权限列表 -->
+                    <td>
+                        <table>
+                            <tr>
+                            $for i,pmn in enumerate(ug.getPmsName()):
+                                <td>$pmn;</td>
+                                $if (i+1) % 5 == 0:</tr><tr>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+        </table>
+    </td></tr>
+
 <!-- 创建用户组 -->
 $if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
     <tr><td>
         <table border="1">
+            <form name="input" action=$CreateUserGroup.URL method="POST">
             <caption>创建用户组</caption>
             <tr>
                 <th>组名</th>
@@ -49,6 +76,10 @@ $if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
                     </table>
                 </td>
             </tr>
+            <tr>
+                <td><input type="submit" value="创建用户组" /></td>
+            </tr>
+            </form>
         </table>
     </td></tr>
 

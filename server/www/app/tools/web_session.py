@@ -35,7 +35,7 @@ class Initializer(object):
         if not hasattr(server.www.session, 'username'):
             ''' 新的会话，动态绑定username属性 '''
             setattr(server.www.session, 'username', None)
-            if settings.DEBUG:
+            if settings.DEBUG and hasattr(server.www.settings, 'debug_username'):
                 ''' 测试环境需要在其他地方将预设的debug_username传进来作为seesion.username的值 '''
                 setattr(server.www.session, 'username', server.www.settings.debug_username)
 

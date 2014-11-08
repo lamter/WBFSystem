@@ -79,7 +79,10 @@ class Views(object):
         ''' 所有用户 '''
         users = User.all()
 
-        self.manage_user = render.manage_user(self.user, UserGroup, self, users, ManageUser, CreateUserGroup)
+        ''' 所有用户组 '''
+        userGroups = UserGroup.all()
+
+        self.manage_user = render.manage_user(self.user, UserGroup, self, users, userGroups, ManageUser, CreateUserGroup)
 
 
 

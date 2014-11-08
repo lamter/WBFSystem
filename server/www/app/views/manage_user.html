@@ -1,0 +1,58 @@
+$def with (user, UserGroup, views, users, ManageUser, CreateUserGroup)
+
+<html>
+<body>
+<table  >
+<h1>管理用户</h1>
+
+<!-- 管理用户选项 -->
+$if views.isHasAttr("manage_user_option"):
+    <tr><td>
+        $:views.manage_user_option
+    </td></tr>
+
+<!-- 用户列表 -->
+$if user.isHavePms(UserGroup.PERMISSION_USER_LIST):
+    <tr><td>
+        <table border="1">
+            <caption>用户列表</caption>
+            <tr>
+                <th>用户名</th>
+                <th>用户组</th>
+            </tr>
+            $for u in users:
+                <tr>
+                    <td>$u.username</td>
+                    <td>$','.join([ug.name for ug in u.groups])</td>
+                </tr>
+        </table>
+    </td></tr>
+
+<!-- 创建用户组 -->
+$if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
+    <tr><td>
+        <table border="1">
+            <caption>创建用户组</caption>
+            <tr>
+                <th>组名</th>
+                <th>权限</th>
+            </tr>
+            <tr>
+                <td><input type="text" name=$CreateUserGroup.ugname /></td>
+                <td>
+                    <table>
+                        <tr>
+                            $for i, pm in enumerate(UserGroup.getPmNames()):
+                                <td><input type="checkbox" name=$pm />$pm</td>
+                                $if (i+1) % 5 == 0:</tr><tr>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </td></tr>
+
+<!-- 创建用户 -->
+</table>
+</body>
+</html>

@@ -12,7 +12,7 @@ import traceback
 
 import server.www
 from base_handler import *
-import manage_handler
+from manage_handler import (ManageUser)
 from server.www.app.models.views import Views
 from server.www.app.models.user import User
 from server.www.app.models.usergroup import UserGroup
@@ -32,10 +32,10 @@ class Main(BaseHandler):
             views = Views(user)
 
             ''' 渲染管理用户选项 '''
-            # views.render_manage_user_option(manage_handler)
+            views.render_manage_user_option(ManageUser)
 
             ''' 用户管理选择 '''
-            return render.main(user, UserGroup, views, manage_handler)
+            return render.main(user, UserGroup, views, ManageUser)
 
         except:
             return self.errInfo()

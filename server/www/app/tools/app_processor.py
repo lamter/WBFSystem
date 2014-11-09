@@ -4,7 +4,8 @@
 """
 
 import web
-from app.controllers import render
+from server.www.app.controllers import render
+from server.www.app.models.user import User
 
 def header_html():
   """Global header setter for `text/html` documents.
@@ -22,3 +23,4 @@ def internalerror():
   """
   web.ctx.status = '500 Internal Server Error'
   return web.internalerror(str(render._500()))
+

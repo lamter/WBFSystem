@@ -1,0 +1,27 @@
+$def with (user, UserGroup, views, ManageUser)
+
+$ title = u"某种管理系统"
+
+<html>
+<head><title>$title</title></head>
+<body>
+
+<h1>$title</h1>
+<table border="1">
+<caption>业务列表</caption>
+    <tr>
+        <td>业务1</td>
+    </tr>
+    <!-- 管理用户选项 -->
+    $if views.isHasAttr('manage_user_option'):
+        <tr>
+            <td>
+                <!-- 不再提供选项，直接跳到管理页面 -->
+                <p>进入<a href=$ManageUser.URL>管理用户页面</a></p>
+                <!--$:views.manage_user_option-->
+            </td>
+        </tr>
+</table>
+
+</body>
+</html>

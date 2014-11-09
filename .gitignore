@@ -1,2 +1,13 @@
 .DS_Store*
 *.pyc
+
+
+# pycharm
+.idea/
+
+# Redis
+redis/
+
+# tmp
+sessions/
+tmp/

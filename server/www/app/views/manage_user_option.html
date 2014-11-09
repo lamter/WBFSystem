@@ -1,0 +1,33 @@
+$def with (user, UserGroup, ManageUser)
+
+<br/>
+<br/>
+<table border="1">
+    <caption>管理用户</caption>
+
+$if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
+    <tr>
+        <td>
+            <p><a href="/">创建用户组</a></p>
+        </td>
+    </tr>
+$if user.isHavePms(UserGroup.PERMISSION_CREATE_USER):
+    <tr>
+        <td>
+             创建用户
+        </td>
+    </tr>
+$if user.isHavePms(UserGroup.PERMISSION_USER_GROUP_LIST):
+    <tr>
+        <td>
+             用户组列表
+        </td>
+    </tr>
+$if user.isHavePms(UserGroup.PERMISSION_USER_LIST):
+    <tr>
+        <td>
+             <p>查看<a href=$ManageUser.URL>用户列表</a></p>
+        </td>
+    </tr>
+
+</table>

@@ -1,6 +1,7 @@
 # Web Business Flow System(WBFSystem)
 
 This is a skeleton of business flow system based on web.py and Redis. It affords a user management function.
+This skeleton is more advanced than the forked , faruken/web.py-skeleton(https://github.com/faruken/web.py-skeleton)
 
 The structure is:
 

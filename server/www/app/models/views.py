@@ -65,6 +65,7 @@ class Views(object):
         '''
         ManageUser = args[0]
         CreateUserGroup = args[1]
+        CreateUser = args[2]
 
         ''' 设置这个模块相关的权限 '''
         pms = UserGroup.PERMISSION_USER_GROUP_LIST
@@ -82,7 +83,7 @@ class Views(object):
         ''' 所有用户组 '''
         userGroups = UserGroup.all()
 
-        self.manage_user = render.manage_user(self.user, UserGroup, self, users, userGroups, ManageUser, CreateUserGroup)
+        self.manage_user = render.manage_user(self.user, UserGroup, self, users, userGroups, ManageUser, CreateUserGroup, CreateUser)
 
 
 

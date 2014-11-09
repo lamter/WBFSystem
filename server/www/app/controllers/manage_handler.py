@@ -26,22 +26,6 @@ class ManageUser(base_handler.BaseHandler):
     URL =u'/manage_user'
     url = r'/manage_user.*'
 
-    # @classmethod
-    # def URL(cls):
-    #     '''
-    #     :return:
-    #     '''
-    #     return main_handler.Main().URL + u'/manage_user'
-
-
-    # @classmethod
-    # def url(self):
-    #     '''
-    #     :return:
-    #     '''
-    #     return r'%s/manage_user.*' % main_handler.Main.URL
-
-
     def GET(self):
         try:
             if not settings.DEBUG and not server.www.session.login:
@@ -54,7 +38,7 @@ class ManageUser(base_handler.BaseHandler):
             # views.render_manage_user_option()
 
             ''' 渲染用户列表 '''
-            views.render_manage_user(ManageUser, CreateUserGroup)
+            views.render_manage_user(ManageUser, CreateUserGroup, CreateUser)
 
             ''' 用户管理选择 '''
             return views.manage_user
@@ -74,20 +58,16 @@ class CreateUserGroup(base_handler.BaseHandler):
 
     ugname = u'ugname'
 
-    # @classmethod
-    # def URL(cls):
-    #     return ManageUser.URL + u'/create_user_group'
-
-    # @classmethod
-    # def url(cls):
-    #     return r'%s/create_user_group.*' % ManageUser.URL
-
     def POST(self):
         try:
             if not server.www.session.login and not settings.DEBUG:
                 return render.login(u'登录超时，请重新登录')
 
-            print u'创建用户中...'
+            user = User.obj(server.www.session.username)
+            if not user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
+                return u'没有创建用户组的权限...'
+
+            # print u'创建用户中...'
             newUg = web.input()
             # print 'newUg->', newUg
 
@@ -102,6 +82,49 @@ class CreateUserGroup(base_handler.BaseHandler):
             UserGroup.createNewUserGroup(newUg.ugname, pms)
 
             return u'创建用户组%s成功' % newUg.ugname
+
+        except:
+            return self.errInfo()
+
+
+
+class CreateUser(base_handler.BaseHandler):
+    """
+    创建用户
+    """
+    URL = u'/create_user'
+    url = r'/create_user.*'
+
+    name = u'username'
+    passwd = u'userpasswd'
+
+    def POST(self):
+        try:
+            if not server.www.session.login and not settings.DEBUG:
+                return render.login(u'登录超时，请重新登录')
+
+            ''' 检查权限 '''
+            user = User.obj(server.www.session.username)
+            if not user.isHavePms(UserGroup.PERMISSION_CREATE_USER):
+                return u'没有创建用户的权限...'
+
+            # print u'创建用户中...'
+            newU = web.input()
+
+            # print 'newU->', newU
+
+            ''' 创建用户 '''
+            u = User.createNewUser(newU.username, newU.userpasswd)
+
+            ''' 设定用户组 '''
+            try:
+                for ug in UserGroup.all():
+                    if getattr(newU, ug.name) == u'on':
+                        u.addUserGroup(ug)
+            except:
+                raise ValueError(u'创建用户成功, 但是添加用户组失败')
+
+            return u'创建用户%s成功' % u.username
 
         except:
             return self.errInfo()

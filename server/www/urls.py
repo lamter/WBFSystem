@@ -7,7 +7,7 @@ class handlers.
 from app.controllers.login_handler import Login
 from app.controllers.index_handler import Index
 from app.controllers.main_handler import Main
-from app.controllers.manage_handler import (ManageUser, CreateUserGroup)
+from app.controllers.manage_handler import (ManageUser, CreateUserGroup, CreateUser)
 
 
 URLS = (
@@ -16,6 +16,7 @@ URLS = (
     Main.url,                   Main.__name__,
     ManageUser.url,             ManageUser.__name__,
     CreateUserGroup.url,        CreateUserGroup.__name__,
+    CreateUser.url,             CreateUser.__name__,
 )
 
 HANDLER = {}

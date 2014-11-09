@@ -30,7 +30,7 @@ $if user.isHavePms(UserGroup.PERMISSION_USER_LIST):
                         <input type="radio" name=$ModifUser.uname value=$u.username />
                     </td>
                     <td>$u.username</td>
-                    <td>$','.join([ug.name for ug in u.groups])</td>
+                    <td>$','.join(u.getUGNames())</td>
                 </tr>
             <!-- 提交按钮 -->
             <tr><td><input type="submit" value="修改" /></td></tr>

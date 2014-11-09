@@ -19,7 +19,7 @@ from server.www.app.models.counter import Counter
 from server.www.app.models.user import User
 from server.www.app.models.usergroup import UserGroup
 from server.www.app.models.views import Views
-from server.www.app.controllers.manage_handler import (ManageUser, ModifUserN, ModifUserPW)
+from server.www.app.controllers.manage_handler import (ManageUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
 from server.www.app.controllers.login_handler import Login
 
 def suite():
@@ -90,7 +90,7 @@ class TestManageUser(unittest.TestCase):
         '''
         user = User.obj(User.rootAccount)
         views = Views(user)
-        views.render_modif_user(user, ModifUserN, ModifUserPW)
+        views.render_modif_user(user, ModifUserN, ModifUserPW, AddUG, RemoveUG)
         views.html('modif_user')
 
 

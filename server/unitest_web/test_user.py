@@ -168,3 +168,36 @@ class TestUser(unittest.TestCase):
         print len(users)
         for u in users:
             print u.username
+
+    def test_addUserGroup(self):
+        '''
+        测试 给用户添加用户组
+        :return:
+        '''
+
+        ''' 清空数据库 '''
+        self.redis.flushdb()
+
+        ''' 生成测试用户 '''
+        un = u'test01'
+        pw = u'123456'
+        user = User.createNewUser(un, pw)
+
+        ''' 生成测试用户组 '''
+        ugn = u'testUG01'
+        ug = UserGroup.createNewUserGroup(ugn)
+        print u'ug->', id(ug), ug
+
+        ''' 添加用户组 '''
+        user.addUserGroup(ug)
+        ug = UserGroup.obj(ugn)
+        print 'ug->', id(ug), ug
+
+        ''' 添加用户组 '''
+        if ug not in user.userGroups:
+            raise ValueError(u'添加  用户组失败')
+
+        ''' 移除用户组 '''
+        user.removeUserGroup(ug)
+        if ug in user.userGroups:
+            raise ValueError(u'移除 用户组失败')

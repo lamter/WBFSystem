@@ -160,7 +160,7 @@ class ModifUser(base_handler.BaseHandler):
             if modfUser is None:
                 raise ValueError(u'指定的用户%s不存在...' % modifU.username)
 
-            views.render_modif_user(modfUser, ModifUserN, ModifUserPW)
+            views.render_modif_user(modfUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
 
             return views.modif_user
 
@@ -199,7 +199,7 @@ class ModifUserN(base_handler.BaseHandler):
             ''' 修改密码 '''
             u.username = u'%s' % modifU.newN
             if u.errors:
-                raise ValueError(u.errors)
+                raise ValueError(u.errStr)
 
             ''' 修改后存库 '''
             u.save()
@@ -207,8 +207,6 @@ class ModifUserN(base_handler.BaseHandler):
 
         except:
             return self.errInfo()
-
-
 
 
 
@@ -221,6 +219,7 @@ class ModifUserPW(base_handler.BaseHandler):
 
     name = u'username'
     pw = u'newpw'
+
     def POST(self):
         try:
             if not server.www.session.login and not settings.DEBUG:
@@ -232,6 +231,7 @@ class ModifUserPW(base_handler.BaseHandler):
                 return u'没有修改用户信息的权限...'
 
             modifU = web.input()
+            # print 'modfU->', modifU
 
             ''' 获得用户实例 '''
             u = User.obj(modifU.username)
@@ -240,8 +240,9 @@ class ModifUserPW(base_handler.BaseHandler):
 
             ''' 修改密码 '''
             u.password = u'%s' % modifU.newpw
-            if u.errInfo():
-                raise ValueError(u.errInfo)
+
+            if u.errors:
+                raise ValueError(u.errStr)
 
             ''' 修改后存库 '''
             u.save()
@@ -257,11 +258,98 @@ class AddUG(base_handler.BaseHandler):
     """
     给用户添加用户组
     """
-    pass
+    URL = u'/modif_user_add_ug'
+    url = r'/modif_user_add_ug.*'
+
+    uname = u'uname'
+
+    def POST(self):
+        try:
+            if not server.www.session.login and not settings.DEBUG:
+                return render.login(u'登录超时，请重新登录')
+
+            ''' 检查权限 '''
+            user = User.obj(server.www.session.username)
+            if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
+                return u'没有修改用户信息的权限...'
+
+            modifU = web.input()
+            # print 'modfU->', modifU
+
+            ''' 获得待修改的用户实例 '''
+            u = User.obj(modifU.uname)
+            if u is None:
+                raise ValueError(u'指定的用户%s不存在...' % modifU.uname)
+
+            ''' 添加用户组 '''
+            joinUGNames = u.getUGNames()
+            for ug in UserGroup.all():
+                if modifU.get(ug.name) != u'on':
+                    continue
+                if u.isInUg(ug):
+                    ''' 已经加入的组忽略 '''
+                    continue
+                ''' 符合条件则添加 '''
+                u.addUserGroup(ug)
+
+            ''' 没有错误则可以存库 '''
+            if u.errors:
+                raise ValueError(u.errStr)
+
+            ''' 修改后存库 '''
+            u.save()
+
+            return u'为用户%s添加用户组成功' % u.username
+
+        except:
+            return self.errInfo()
 
 
 class RemoveUG(base_handler.BaseHandler):
     """
     移除用户的用户组
     """
-    pass
+    URL = u'/modif_user_remove_ug'
+    url = r'/modif_user_remove_ug.*'
+
+    uname = u'uname'
+
+    def POST(self):
+        try:
+            if not server.www.session.login and not settings.DEBUG:
+                return render.login(u'登录超时，请重新登录')
+
+            ''' 检查权限 '''
+            user = User.obj(server.www.session.username)
+            if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
+                return u'没有修改用户信息的权限...'
+
+            modifU = web.input()
+            # print 'modfU->', modifU
+
+            ''' 获得用户实例 '''
+            u = User.obj(modifU.uname)
+            if u is None:
+                raise ValueError(u'指定的用户%s不存在...' % modifU.uname)
+
+            ''' 移除用户组 '''
+            for ug in UserGroup.all():
+                if modifU.get(ug.name) != u'on':
+                    continue
+                if not u.isInUg(ug):
+                    ''' 不在用户组中的忽略 '''
+                    continue
+                ''' 符合条件的移除 '''
+                u.removeUserGroup(ug)
+
+            ''' 没有错误则可以存库 '''
+            if u.errors:
+                raise ValueError(u.errStr)
+
+            ''' 修改后存库 '''
+            u.save()
+
+            return u'为用户%s移除用户组成功' % u.username
+
+        except:
+            return self.errInfo()

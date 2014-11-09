@@ -131,7 +131,8 @@ class UserGroup(orm.RediscoModle):
 
         ''' 配置用户组权限 '''
         if permissions is None:
-            userGroup.permissions = cls.PERMISSION_LOG_IN
+            # userGroup.permissions = cls.PERMISSION_LOG_IN
+            userGroup.permissions = 0
         else:
             userGroup.permissions = permissions
 

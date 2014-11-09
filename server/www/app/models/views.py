@@ -88,7 +88,7 @@ class Views(object):
         self.manage_user = render.manage_user(self.user, UserGroup, self, users, userGroups, ManageUser, CreateUserGroup, CreateUser, ModifUser)
 
 
-    def render_modif_user(self, modifUser, ModifUserN, ModifUserPW):
+    def render_modif_user(self, modifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG):
         '''
         渲染修改用户信息界面
         :return:
@@ -100,4 +100,4 @@ class Views(object):
             return
 
         ''' 渲染用户信息 '''
-        self.modif_user = render.modif_user(self.user, UserGroup, modifUser, ModifUserN, ModifUserPW)
+        self.modif_user = render.modif_user(self.user, UserGroup, modifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)

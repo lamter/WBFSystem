@@ -35,3 +35,17 @@ class RediscoModle(models.Model):
         '''
         c = cls.objects.filter().first()
         return c
+
+
+    @property
+    def errStr(self):
+        '''
+        将 self.errors转为字符串
+        :return:
+        '''
+        _errs = []
+        if self.errors:
+            for errs in self.errors:
+                _errs.append(u' '.join(errs))
+
+        return u'. '.join(_errs)

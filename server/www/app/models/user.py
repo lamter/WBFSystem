@@ -189,12 +189,28 @@ class User(orm.RediscoModle):
             raise TypeError(errInfo)
 
         if userGroup in self.userGroups:
-            errInfo = u'用户已经在用户组 uid:%d %s 中了' % (userGroup.uid, userGroup.name)
+            errInfo = u'用户已经在用户组 uid:%d %s 中了' % (userGroup.id, userGroup.name)
             raise ValueError(errInfo)
 
         self.userGroups.append(userGroup)
         self.save()
 
+
+    def removeUserGroup(self, userGroup):
+        '''
+        移除用户组
+        :param ug:
+        :return:
+        '''
+        if not isinstance(userGroup, usergroup.UserGroup):
+            errInfo = u'分配用户组失败!!!\nclass:%s不是指定的用户组类型%s!!!' % type(userGroup), usergroup.UserGroup.__name__
+            raise TypeError(errInfo)
+
+        if userGroup not in self.userGroups:
+            errInfo = u'用户不在用户组 id:%d %s 中了' % (userGroup.id, userGroup.name)
+            raise ValueError(errInfo)
+
+        self.userGroups.remove(userGroup)
 
 
     @classmethod
@@ -261,7 +277,15 @@ class User(orm.RediscoModle):
         '''
         return permissions & self.getPermissions()
 
-
+    def isInUg(self, ug):
+        '''
+        是否在这个用户组中
+        :param ug: UserGroup()
+        :return:
+        '''
+        if not isinstance(ug, UserGroup):
+            raise ValueError(u'错误的用户组类型: %s' % ug.__class__.__name__)
+        return ug in self.userGroups
 
 
     def getUserGroupByName(self, name):
@@ -281,10 +305,35 @@ class User(orm.RediscoModle):
         return self.password == pw
 
 
-    @property
-    def groups(self):
+    def getUserGroups(self):
         '''
+        获得加入的用户组
         :return:
         '''
         groups = [ug for ug in self.userGroups]
         return groups
+
+
+    def getUGNames(self):
+        '''
+        获得所有组名的数组
+        :return:
+        '''
+        ns = []
+        for ug in self.getUserGroups():
+            ns.append(ug.name)
+        return ns
+
+
+    def getUnjoinGroups(self):
+        '''
+        获得未加入的用户组
+        :return:
+        '''
+        ugs = UserGroup.all()
+        unj = []
+        j = self.getUGNames()
+        for ug in ugs:
+            if ug.name not in j:
+                unj.append(ug)
+        return unj

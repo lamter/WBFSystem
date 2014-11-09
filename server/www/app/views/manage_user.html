@@ -1,8 +1,8 @@
-$def with (user, UserGroup, views, users, userGroups, ManageUser, CreateUserGroup, CreateUser)
+$def with (user, UserGroup, views, users, userGroups, ManageUser, CreateUserGroup, CreateUser, ModifUser)
 
 <html>
 <body>
-<table  >
+<table >
 <h1>管理用户</h1>
 
 <!-- 管理用户选项 -->
@@ -17,14 +17,24 @@ $if user.isHavePms(UserGroup.PERMISSION_USER_LIST):
         <table border="1">
             <caption>用户列表</caption>
             <tr>
+                <!-- 表头 -->
+                <th>操作</th>
                 <th>用户名</th>
                 <th>用户组</th>
             </tr>
+            <form name="input" action=$ModifUser.URL method="POST">
             $for u in users:
                 <tr>
+                    <td>
+                        <!-- 指定跳转到修改用户信息的页面的信息 -->
+                        <input type="radio" name=$ModifUser.uname value=$u.username />
+                    </td>
                     <td>$u.username</td>
                     <td>$','.join([ug.name for ug in u.groups])</td>
                 </tr>
+            <!-- 提交按钮 -->
+            <tr><td><input type="submit" value="修改" /></td></tr>
+            </form>
         </table>
     </td></tr>
 

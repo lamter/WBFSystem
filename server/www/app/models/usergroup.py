@@ -42,6 +42,9 @@ class UserGroup(orm.RediscoModle):
     ''' 创建用户组 '''
     PERMISSION_USER_GROUP_LIST = 1 << 4
 
+    ''' 修改用户信息 '''
+    PERMISSION_MODIF_USER = 1 << 5
+
     ''' 以 PERMISSION_* 的形式来命名变量 '''
 
     ''' <=用户权限枚举 '''

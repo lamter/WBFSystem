@@ -66,6 +66,8 @@ class Views(object):
         ManageUser = args[0]
         CreateUserGroup = args[1]
         CreateUser = args[2]
+        ModifUser = args[3]
+
 
         ''' 设置这个模块相关的权限 '''
         pms = UserGroup.PERMISSION_USER_GROUP_LIST
@@ -83,7 +85,19 @@ class Views(object):
         ''' 所有用户组 '''
         userGroups = UserGroup.all()
 
-        self.manage_user = render.manage_user(self.user, UserGroup, self, users, userGroups, ManageUser, CreateUserGroup, CreateUser)
+        self.manage_user = render.manage_user(self.user, UserGroup, self, users, userGroups, ManageUser, CreateUserGroup, CreateUser, ModifUser)
 
 
+    def render_modif_user(self, modifUser, ModifUserN, ModifUserPW):
+        '''
+        渲染修改用户信息界面
+        :return:
+        '''
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_MODIF_USER
 
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染用户信息 '''
+        self.modif_user = render.modif_user(self.user, UserGroup, modifUser, ModifUserN, ModifUserPW)

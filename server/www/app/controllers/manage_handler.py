@@ -38,7 +38,7 @@ class ManageUser(base_handler.BaseHandler):
             # views.render_manage_user_option()
 
             ''' 渲染用户列表 '''
-            views.render_manage_user(ManageUser, CreateUserGroup, CreateUser)
+            views.render_manage_user(ManageUser, CreateUserGroup, CreateUser, ModifUser)
 
             ''' 用户管理选择 '''
             return views.manage_user
@@ -128,3 +128,140 @@ class CreateUser(base_handler.BaseHandler):
 
         except:
             return self.errInfo()
+
+
+
+class ModifUser(base_handler.BaseHandler):
+    """
+    修改用户信息界面
+    """
+    URL = u'/modif_user_info'
+    url = r'/modif_user_info.*'
+
+    uname = u'username'
+
+    def POST(self):
+        try:
+            if not server.www.session.login and not settings.DEBUG:
+                return render.login(u'登录超时，请重新登录')
+
+            ''' 检查权限 '''
+            user = User.obj(server.www.session.username)
+            if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
+                return u'没有修改用户信息的权限...'
+
+            views = Views(user)
+
+            modifU = web.input()
+            print 'modifU->', modifU
+
+            ''' 获得待修改的用户实例 '''
+            modfUser = User.obj(modifU.username)
+            if modfUser is None:
+                raise ValueError(u'指定的用户%s不存在...' % modifU.username)
+
+            views.render_modif_user(modfUser, ModifUserN, ModifUserPW)
+
+            return views.modif_user
+
+        except:
+            return self.errInfo()
+
+
+
+class ModifUserN(base_handler.BaseHandler):
+    """
+    修改用户名
+    """
+    URL = u'/modif_user_name'
+    url = r'/modif_user_name.*'
+
+    uname = u'uname'
+    newN = u'newN'
+
+    def POST(self):
+        try:
+            if not server.www.session.login and not settings.DEBUG:
+                return render.login(u'登录超时，请重新登录')
+
+            ''' 检查权限 '''
+            user = User.obj(server.www.session.username)
+            if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
+                return u'没有修改用户信息的权限...'
+
+            modifU = web.input()
+            print 'modifU->', modifU
+            ''' 获得用户实例 '''
+            u = User.obj(modifU.uname)
+            if u is None:
+                raise ValueError(u'指定的用户%s不存在...' % modifU.uname)
+
+            ''' 修改密码 '''
+            u.username = u'%s' % modifU.newN
+            if u.errors:
+                raise ValueError(u.errors)
+
+            ''' 修改后存库 '''
+            u.save()
+            return u'修改用户%s的用户名%s为成功' % (modifU.uname, modifU.newN)
+
+        except:
+            return self.errInfo()
+
+
+
+
+
+class ModifUserPW(base_handler.BaseHandler):
+    """
+    修改用户密码
+    """
+    URL = u'/modif_user_pw'
+    url = r'/modif_user_pw.*'
+
+    name = u'username'
+    pw = u'newpw'
+    def POST(self):
+        try:
+            if not server.www.session.login and not settings.DEBUG:
+                return render.login(u'登录超时，请重新登录')
+
+            ''' 检查权限 '''
+            user = User.obj(server.www.session.username)
+            if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
+                return u'没有修改用户信息的权限...'
+
+            modifU = web.input()
+
+            ''' 获得用户实例 '''
+            u = User.obj(modifU.username)
+            if u is None:
+                raise ValueError(u'指定的用户%s不存在...' % modifU.username)
+
+            ''' 修改密码 '''
+            u.password = u'%s' % modifU.newpw
+            if u.errInfo():
+                raise ValueError(u.errInfo)
+
+            ''' 修改后存库 '''
+            u.save()
+
+            return u'修改用户%s的密码成功' % u.username
+
+        except:
+            return self.errInfo()
+
+
+
+class AddUG(base_handler.BaseHandler):
+    """
+    给用户添加用户组
+    """
+    pass
+
+
+class RemoveUG(base_handler.BaseHandler):
+    """
+    移除用户的用户组
+    """
+    pass

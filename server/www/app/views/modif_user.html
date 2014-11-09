@@ -1,0 +1,27 @@
+$def with (user, UserGroup, modifUser, ModifUserN, ModifUserPW)
+
+<html>
+<body>
+$if user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
+    <table border="1">
+        <caption>创建用户组</caption>
+        <!-- 修改用户名表单 -->
+        <form name="input" action=$ModifUserN.URL method="POST">
+            <tr>
+                <th>用户名</th>
+            </tr>
+            <tr>
+                <td><input type="text" name=$ModifUserN.newN value=$modifUser.username /></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="hidden" name=$ModifUserN.uname value=$modifUser.username />
+                    <input type="submit" value="修改" />
+                </td>
+            </tr>
+        </form>
+        <!-- 内容 -->
+
+    </table>
+</body>
+</html>

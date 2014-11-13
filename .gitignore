@@ -6,7 +6,9 @@
 .idea/
 
 # Redis
-redis/
+src/redis/db/*
+src/redis/bin/stdout
+
 
 # tmp
 sessions/

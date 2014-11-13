@@ -33,11 +33,11 @@ class Views(object):
         '''
         print u'查看生成的文件: %s ' % absolute('tmp/test.html')
         if self.isHasAttr(attr):
-            with open(absolute('tmp/test.html'), 'wb') as h:
+            with open(absolute('test/test.html'), 'wb') as h:
                 a = u'%s' % getattr(self, attr)
                 h.write(a)
         else:
-            with open(absolute('tmp/test.html'), 'wb') as h:
+            with open(absolute('test/test.html'), 'wb') as h:
                 h.write(attr)
 
 

@@ -49,3 +49,12 @@ class RediscoModle(models.Model):
                 _errs.append(u' '.join(errs))
 
         return u'. '.join(_errs)
+
+
+    @classmethod
+    def all(cls):
+        '''
+        获得所有实例
+        :return:
+        '''
+        return cls.objects.filter().all()

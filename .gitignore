@@ -6,8 +6,8 @@
 .idea/
 
 # Redis
-redis/db/*
-redis/bin/stdout
+src/redis/db/*
+src/redis/bin/stdout
 
 
 # tmp

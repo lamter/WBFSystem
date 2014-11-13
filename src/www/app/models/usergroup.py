@@ -136,7 +136,7 @@ class UserGroup(orm.RediscoModle):
         else:
             userGroup.permissions = permissions
 
-        if userGroup.is_valid() is not True:
+        if not userGroup.is_valid():
             raise ValueError(userGroup.errors)
 
         ''' 设置用户组id和用户组名 '''

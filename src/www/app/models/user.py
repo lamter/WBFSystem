@@ -130,7 +130,7 @@ class User(orm.RediscoModle):
         user = User(username=username, password=password)
 
         ''' 检查账号是否生成成功 '''
-        if user.is_valid() is not True:
+        if not user.is_valid():
             ''' 生成失败，直接报错退出 '''
             raise ValueError(user._errors)
             # if NEW_ACCOUNT_ERR_NOT_UNIQUE in user.validate():

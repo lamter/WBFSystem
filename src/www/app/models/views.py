@@ -6,10 +6,10 @@ Created on 2014-10-28
 '''
 
 import web
-from server.www.settings import (absolute)
-from server.www.app.controllers import (render)
-from server.www.app.models.usergroup import UserGroup
-from server.www.app.models.user import User
+from src.www.settings import (absolute)
+from src.www.app.controllers import (render)
+from src.www.app.models.usergroup import UserGroup
+from src.www.app.models.user import User
 
 
 class Views(object):

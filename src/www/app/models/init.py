@@ -12,9 +12,9 @@ import json
 from redisco import models
 
 from counter import Counter
-from server.www.app.models import orm
-from server.www.app.models.user import User
-from server.www.app.models.usergroup import UserGroup
+from src.www.app.models import orm
+from src.www.app.models.user import User
+from src.www.app.models.usergroup import UserGroup
 import usergroup
 
 

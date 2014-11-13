@@ -16,7 +16,7 @@ import redisco
 import redis
 from redis.exceptions import *
 from redisco.containers import *
-from server.www import settings
+from src.www import settings
 
 
 

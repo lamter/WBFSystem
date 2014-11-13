@@ -11,16 +11,16 @@ import web
 import redis
 import redisco
 
-from server.www import settings
-from server.www import main
+from src.www import settings
+from src.www import main
 
-from server.www import (session)
-from server.www.app.models.counter import Counter
-from server.www.app.models.user import User
-from server.www.app.models.usergroup import UserGroup
-from server.www.app.models.views import Views
-from server.www.app.controllers.manage_handler import (ManageUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
-from server.www.app.controllers.login_handler import Login
+from src.www import (session)
+from src.www.app.models.counter import Counter
+from src.www.app.models.user import User
+from src.www.app.models.usergroup import UserGroup
+from src.www.app.models.views import Views
+from src.www.app.controllers.manage_handler import (ManageUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
+from src.www.app.controllers.login_handler import Login
 
 def suite():
     testSuite1 = unittest.makeSuite(TestManageUser, "test")

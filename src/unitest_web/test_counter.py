@@ -10,8 +10,8 @@ import unittest
 import redis
 import redisco
 
-from server.www import settings
-from server.www.app.models.counter import Counter
+from src.www import settings
+from src.www.app.models.counter import Counter
 
 def suite():
     testSuite1 = unittest.makeSuite(TestCounter, "test")

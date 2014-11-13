@@ -11,12 +11,12 @@ import traceback
 import redis
 import redisco
 
-from server.www import settings
-from server.www.app.models.user import User
-from server.www.app.models import user
-from server.www.app.models import init
+from src.www import settings
+from src.www.app.models.user import User
+from src.www.app.models import user
+from src.www.app.models import init
 
-from server.www.app.models.usergroup import UserGroup
+from src.www.app.models.usergroup import UserGroup
 
 
 def suite():

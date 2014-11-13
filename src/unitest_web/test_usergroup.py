@@ -11,8 +11,8 @@ import unittest
 import redis
 import redisco
 
-from server.www import settings
-from server.www.app.models.usergroup import UserGroup
+from src.www import settings
+from src.www.app.models.usergroup import UserGroup
 
 
 def suite():

@@ -10,7 +10,7 @@ import json
 from redisco import models
 
 from counter import Counter
-from server.www.app.models import orm
+from src.www.app.models import orm
 
 
 Encoder = json.JSONEncoder()

@@ -11,8 +11,8 @@ __author__ = 'Shawn'
 
 import traceback
 
-import server.www.settings as settings
-from server.www.app.controllers import render
+import src.www.settings as settings
+from src.www.app.controllers import render
 
 
 class BaseHandler(object):

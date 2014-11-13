@@ -11,7 +11,7 @@ file.
 """
 
 import web
-import server.www
+import src.www
 import settings
 # import app.models as models
 # # from skeleton.www.app.tools.web_session import Session
@@ -31,7 +31,7 @@ application.notfound = notfound
 application.internalerror = internalerror
 application.add_processor(web.loadhook(header_html))
 
-server.www.session = web.session.Session(application, web.session.DiskStore('sessions'), initializer=Initializer(
+src.www.session = web.session.Session(application, web.session.DiskStore('sessions'), initializer=Initializer(
                                                                                                       User=models.user.User,
                                                                                                       UserGroup=models.usergroup.UserGroup,
                                                                                                       BanLogin=controllers.login_handler.BanLogin,

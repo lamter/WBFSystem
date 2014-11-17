@@ -12,4 +12,5 @@ src/redis/bin/stdout
 
 # tmp
 sessions/
-tmp/
+src/www/tmp/
+src/www/test/

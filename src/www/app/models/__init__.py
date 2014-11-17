@@ -35,15 +35,11 @@ class Init(object):
 
         root = User.obj(User.rootAccount)
 
-        if root is None:
-            ''' 如果还没有root用户 '''
-            ''' 不存在root用户，重新生成 '''
-            root = User.createRoot()
+        if root:
+            ''' 如果已经存在root 用户，那么删除掉 '''
+            root.delete()
 
-        else:
-            ''' 如果已经有root用户了, 初始化root用户组 '''
-            root.initRootUg()
-
+        root = User.createRoot()
         root.save()
 
 

@@ -21,6 +21,8 @@ from src.www.app.models.usergroup import UserGroup
 from src.www.app.models.views import Views
 from src.www.app.controllers.manage_handler import (ManageUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
 from src.www.app.controllers.login_handler import Login
+from src.www.app.controllers.manage_handler import (CreateUserGroup,CreateUser,ModifUser)
+
 
 def suite():
     testSuite1 = unittest.makeSuite(TestManageUser, "test")
@@ -40,7 +42,7 @@ class TestManageUser(unittest.TestCase):
         ''' 配置测试用的redis配置信息  '''
         settings.REDIS_HOST = "localhost"
         settings.REDIS_PORT = 8911
-        settings.REDIS_DB_NUM = 0
+        # settings.REDIS_DB_NUM = 0
 
         ''' redisco连接 '''
         settings.rd = redisco.connection_setup(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
@@ -56,8 +58,8 @@ class TestManageUser(unittest.TestCase):
         '''
         user = User.obj(User.rootAccount)
         v = Views(user)
-        v.render_manage_user_option()
-        v.html('manage_user_option')
+        # v.render_manage_user_option(None)
+        # v.html('manage_user_option')
 
 
     def test_render_manage_user(self):
@@ -67,7 +69,7 @@ class TestManageUser(unittest.TestCase):
         '''
         user = User.obj(User.rootAccount)
         views = Views(user)
-        views.render_manage_user()
+        views.render_manage_user(ManageUser,CreateUserGroup,CreateUser,ModifUser)
         views.html('manage_user')
 
 
@@ -76,9 +78,14 @@ class TestManageUser(unittest.TestCase):
         测试 创建用户组
         :return:
         '''
+
         settings.debug_username = User.rootAccount
 
         user = User.obj(settings.debug_username)
+        if not user:
+            User.createRoot()
+            user = User.obj(settings.debug_username)
+
         v = Views(user)
         v.html(main.application.request(ManageUser.url).data)
 
@@ -89,6 +96,10 @@ class TestManageUser(unittest.TestCase):
         :return:
         '''
         user = User.obj(User.rootAccount)
+        if not user:
+            User.createRoot()
+            user = User.obj(User.rootAccount)
+
         views = Views(user)
         views.render_modif_user(user, ModifUserN, ModifUserPW, AddUG, RemoveUG)
         views.html('modif_user')

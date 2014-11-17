@@ -240,13 +240,11 @@ class User(orm.RediscoModle):
         ''' 检查用户组 '''
         rootUg = UserGroup.obj(UserGroup.rootGroup)
 
-        if rootUg == None:
-            ''' 如果不存在root用户组 '''
-            rootUg = usergroup.UserGroup.createRootGroup()
-        else:
-            ''' 存在用户组，重新全部授权 '''
-            rootUg.setPermissions(usergroup.UserGroup.getAllPms())
+        if rootUg:
+            ''' 如果用户组存在，删除掉 '''
+            rootUg.delete()
 
+        rootUg = usergroup.UserGroup.createRootGroup()
         rootUg.save()
 
         ''' 清空root的用户组 '''

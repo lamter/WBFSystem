@@ -169,6 +169,7 @@ class TestUser(unittest.TestCase):
         for u in users:
             print u.username
 
+
     def test_addUserGroup(self):
         '''
         测试 给用户添加用户组

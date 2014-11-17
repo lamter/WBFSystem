@@ -112,7 +112,7 @@ class User(orm.RediscoModle):
         获得所有用户的实例
         :return:
         '''
-        return cls.objects.filter().all()
+        return cls.objects.filter().all().exclude(username=cls.rootAccount)
 
 
 

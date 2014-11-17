@@ -74,7 +74,7 @@ class UserGroup(orm.RediscoModle):
         获取所有用户组
         :return:
         '''
-        return cls.objects.filter().all()
+        return cls.objects.filter().all().exclude(name=cls.rootGroup)
 
 
     @property

@@ -40,7 +40,6 @@ class Views(object):
                 h.write(attr)
 
 
-
     def render_manage_user_option(self, manage_handler):
         '''
         管理用户选项

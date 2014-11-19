@@ -23,6 +23,11 @@ URLS = (
     AddUG.url,                  AddUG.__name__,
     RemoveUG.url,               RemoveUG.__name__,
 )
+# for i,u in enumerate(URLS):
+#     print u, u'\t',
+#     if (i+1) % 2 == 0:
+#         print
+
 
 HANDLER = {}
 

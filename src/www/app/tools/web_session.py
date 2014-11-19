@@ -34,7 +34,7 @@ class Initializer(object):
             setattr(app.session, 'username', None)
             if settings.DEBUG and hasattr(settings, 'debug_username'):
                 ''' 测试环境需要在其他地方将预设的debug_username传进来作为seesion.username的值 '''
-                setattr(app.session, 'username', app.settings.debug_username)
+                setattr(app.session, 'username', settings.debug_username)
 
         if not hasattr(app.session, 'login'):
             ''' 新的会话，动态绑定login属性，默认是未登录 '''

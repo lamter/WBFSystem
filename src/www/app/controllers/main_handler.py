@@ -10,12 +10,12 @@ This module contains the main handler of the application.
 
 import traceback
 
-import src.www
+import app
 from base_handler import *
 from manage_handler import (ManageUser)
-from src.www.app.models.views import Views
-from src.www.app.models.user import User
-from src.www.app.models.usergroup import UserGroup
+from ..models.views import Views
+from ..models.user import User
+from ..models.usergroup import UserGroup
 
 
 class Main(BaseHandler):
@@ -25,7 +25,7 @@ class Main(BaseHandler):
 
     def GET(self):
         try:
-            user = User.obj(src.www.session.username)
+            user = User.obj(app.session.username)
             if not user:
                 return render.login(u'登录超时，请重新登录')
 

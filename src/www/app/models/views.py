@@ -5,11 +5,10 @@ Created on 2014-10-28
 @author: Shawn
 '''
 
-import web
-from src.www.settings import (absolute)
-from src.www.app.controllers import (render)
-from src.www.app.models.usergroup import UserGroup
-from src.www.app.models.user import User
+import settings
+from ..controllers import (render)
+from usergroup import UserGroup
+from user import User
 
 
 class Views(object):
@@ -31,13 +30,13 @@ class Views(object):
         :param attr:
         :return:
         '''
-        print u'查看生成的文件: %s ' % absolute('tmp/test.html')
+        print u'查看生成的文件: %s ' % settings.absolute('tmp/test.html')
         if self.isHasAttr(attr):
-            with open(absolute('test/test.html'), 'wb') as h:
+            with open(settings.absolute('test/test.html'), 'wb') as h:
                 a = u'%s' % getattr(self, attr)
                 h.write(a)
         else:
-            with open(absolute('test/test.html'), 'wb') as h:
+            with open(settings.absolute('test/test.html'), 'wb') as h:
                 h.write(attr)
 
 

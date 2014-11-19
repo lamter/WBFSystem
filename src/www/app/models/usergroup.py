@@ -10,13 +10,11 @@ import json
 from redisco import models
 
 from counter import Counter
-from src.www.app.models import orm
+import orm
 
 
 Encoder = json.JSONEncoder()
 Decoder = json.JSONDecoder()
-
-
 
 
 class UserGroup(orm.RediscoModle):

@@ -6,13 +6,10 @@ Created on 2014-10-31
 '''
 
 
-__author__ = 'Shawn'
-
 import web
 
-from src.www import settings
-import src.www
-# from app import session
+import settings
+import app
 
 class Initializer(object):
     def __init__(self, *args, **kwargs):
@@ -32,21 +29,21 @@ class Initializer(object):
         :param kwargs:
         :return:
         '''
-        if not hasattr(src.www.session, 'username'):
+        if not hasattr(app.session, 'username'):
             ''' 新的会话，动态绑定username属性 '''
-            setattr(src.www.session, 'username', None)
-            if settings.DEBUG and hasattr(src.www.settings, 'debug_username'):
+            setattr(app.session, 'username', None)
+            if settings.DEBUG and hasattr(settings, 'debug_username'):
                 ''' 测试环境需要在其他地方将预设的debug_username传进来作为seesion.username的值 '''
-                setattr(src.www.session, 'username', src.www.settings.debug_username)
+                setattr(app.session, 'username', app.settings.debug_username)
 
-        if not hasattr(src.www.session, 'login'):
+        if not hasattr(app.session, 'login'):
             ''' 新的会话，动态绑定login属性，默认是未登录 '''
-            setattr(src.www.session, 'login', False)
+            setattr(app.session, 'login', False)
             # if settings.DEBUG:
             #     ''' 测试环境需要在其他地方将预设的debug_login传进来作为seesion.login的值 '''
             #     setattr(app.session, 'login', settings.debug_login)
 
-        user = self.User.obj(src.www.session.username)
+        user = self.User.obj(app.session.username)
 
         # ''' 尚未注册的用户 '''
         # if app.session.user is None:

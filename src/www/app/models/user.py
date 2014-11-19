@@ -10,9 +10,8 @@ import json
 from redisco import models
 
 from counter import Counter
-from src.www.app.models import orm
-from src.www.app.models.usergroup import UserGroup
-import usergroup
+import orm
+from usergroup import UserGroup
 
 
 Encoder = json.JSONEncoder()
@@ -71,7 +70,7 @@ class User(orm.RediscoModle):
     last_login_time = models.DateTimeField(auto_now=True)
 
     ''' 所属的用户组 '''
-    userGroups = models.ListField(target_type=usergroup.UserGroup)
+    userGroups = models.ListField(target_type=UserGroup)
 
     ''' 是否注销 '''
     is_cancel = models.BooleanField(default=True)
@@ -184,8 +183,8 @@ class User(orm.RediscoModle):
         :param userGroup:
         :return:
         '''
-        if not isinstance(userGroup, usergroup.UserGroup):
-            errInfo = u'分配用户组失败!!!\nclass:%s不是指定的用户组类型%s!!!' % type(userGroup), usergroup.UserGroup.__name__
+        if not isinstance(userGroup, UserGroup):
+            errInfo = u'分配用户组失败!!!\nclass:%s不是指定的用户组类型%s!!!' % type(userGroup), UserGroup.__name__
             raise TypeError(errInfo)
 
         if userGroup in self.userGroups:
@@ -202,8 +201,8 @@ class User(orm.RediscoModle):
         :param ug:
         :return:
         '''
-        if not isinstance(userGroup, usergroup.UserGroup):
-            errInfo = u'分配用户组失败!!!\nclass:%s不是指定的用户组类型%s!!!' % type(userGroup), usergroup.UserGroup.__name__
+        if not isinstance(userGroup, UserGroup):
+            errInfo = u'分配用户组失败!!!\nclass:%s不是指定的用户组类型%s!!!' % type(userGroup), UserGroup.__name__
             raise TypeError(errInfo)
 
         if userGroup not in self.userGroups:
@@ -244,7 +243,7 @@ class User(orm.RediscoModle):
             ''' 如果用户组存在，删除掉 '''
             rootUg.delete()
 
-        rootUg = usergroup.UserGroup.createRootGroup()
+        rootUg = UserGroup.createRootGroup()
         rootUg.save()
 
         ''' 清空root的用户组 '''

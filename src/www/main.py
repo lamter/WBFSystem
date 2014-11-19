@@ -11,12 +11,9 @@ file.
 """
 
 import web
-import src.www
+import app
 import settings
-# import app.models as models
-# # from skeleton.www.app.tools.web_session import Session
 from app.tools.web_session import Initializer
-# import skeleton.www.app as app
 from app import (models, controllers)
 from urls import (URLS, HANDLER)
 from app.tools.app_processor import (header_html, notfound, internalerror)
@@ -31,7 +28,7 @@ application.notfound = notfound
 application.internalerror = internalerror
 application.add_processor(web.loadhook(header_html))
 
-src.www.session = web.session.Session(application, web.session.DiskStore('sessions'), initializer=Initializer(
+app.session = web.session.Session(application, web.session.DiskStore('sessions'), initializer=Initializer(
                                                                                                       User=models.user.User,
                                                                                                       UserGroup=models.usergroup.UserGroup,
                                                                                                       BanLogin=controllers.login_handler.BanLogin,

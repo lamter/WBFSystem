@@ -12,13 +12,13 @@ import traceback
 
 import web
 
-import src.www
+import app
 from . import render
 from base_handler import BaseHandler
 from main_handler import Main
 from index_handler import Index
-from src.www.app.models.user import User
-from src.www.app.models.usergroup import UserGroup
+from ..models.user import User
+from ..models.usergroup import UserGroup
 
 
 class Login(BaseHandler):
@@ -48,8 +48,8 @@ class Login(BaseHandler):
 
         elif user.isPW(password):
             ''' 通过验证 '''
-            src.www.session.username = u'%s' % username
-            src.www.session.login = True
+            app.session.username = u'%s' % username
+            app.session.login = True
             return web.redirect(Main.URL)
 
         else:
@@ -67,9 +67,9 @@ class BanLogin(BaseHandler):
     url = r'/ban_login'
 
     def GET(self):
-        if src.www.session.user.isHavePms(UserGroup.PERMISSION_BAN_LOGIN):
+        if app.session.user.isHavePms(UserGroup.PERMISSION_BAN_LOGIN):
             ''' 没有登录权限 '''
-            src.www.session.kill()
+            app.session.kill()
             return render.ban_login()
         else:
             ''' 不是被禁止登录，跳转回/index '''

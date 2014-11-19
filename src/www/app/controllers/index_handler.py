@@ -13,10 +13,9 @@ import traceback
 import web
 
 from . import render
-import src.www
+import app
 import base_handler
 import main_handler
-from src.www.app.models.views import Views
 
 
 class Index(base_handler.BaseHandler):
@@ -29,7 +28,7 @@ class Index(base_handler.BaseHandler):
     def GET(self):
         try:
             # print "app.session.login->", app.session.login
-            if src.www.session.login:
+            if app.session.login:
                 return web.redirect(main_handler.Main.URL)
             else:
                 return render.login(u'未登录')

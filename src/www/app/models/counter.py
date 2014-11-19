@@ -9,7 +9,7 @@ Created on 2014-09-27
 
 from redisco import models
 
-from src.www.app.models import orm
+import orm
 
 
 class Counter(orm.RediscoModle):

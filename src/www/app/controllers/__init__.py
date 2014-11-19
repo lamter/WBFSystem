@@ -6,7 +6,7 @@ controllers of the app.
 
 # from web.contrib.template import render_mako
 import web.template
-from src.www.settings import (absolute, DEBUG)
+from settings import (absolute, DEBUG)
 from . import *
 
 # Mako Template options

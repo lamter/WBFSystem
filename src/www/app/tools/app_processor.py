@@ -4,8 +4,7 @@
 """
 
 import web
-from src.www.app.controllers import render
-from src.www.app.models.user import User
+from ..controllers import render
 
 def header_html():
   """Global header setter for `text/html` documents.

@@ -14,6 +14,7 @@ $if views.isHasAttr("manage_user_option"):
 <!-- 用户列表 -->
 $if user.isHavePms(UserGroup.PERMISSION_USER_LIST):
     <tr><td>
+        <br/>
         <table border="1">
             <caption>用户列表</caption>
             <tr>
@@ -41,6 +42,7 @@ $if user.isHavePms(UserGroup.PERMISSION_USER_LIST):
 <!-- 用户组列表 -->
 $if user.isHavePms(UserGroup.PERMISSION_USER_GROUP_LIST):
     <tr><td>
+        <br/>
         <table border="1">
             <caption>用户组列表</caption>
             <tr>
@@ -68,6 +70,7 @@ $if user.isHavePms(UserGroup.PERMISSION_USER_GROUP_LIST):
 <!-- 创建用户组 -->
 $if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
     <tr><td>
+        <br/>
         <table border="1">
             <form name="input" action=$CreateUserGroup.URL method="POST">
             <caption>创建用户组</caption>
@@ -97,6 +100,7 @@ $if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
 <!-- 创建用户 -->
 $if user.isHavePms(UserGroup.PERMISSION_CREATE_USER):
     <tr><td>
+        <br/>
         <table border="1">
             <form name="input" action=$CreateUser.URL method="POST">
             <caption>创建用户</caption>

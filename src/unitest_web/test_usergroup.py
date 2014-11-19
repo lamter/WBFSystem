@@ -66,3 +66,9 @@ class TestUserGroup(unittest.TestCase):
         print u'生成用户组成功...'
 
 
+    def test_UserGroupAll(self):
+        ugs = UserGroup.all()
+        UserGroup.createRootGroup()
+        print u'查询到用户组%d个' % len(ugs)
+        for ug in ugs:
+            print ug.name

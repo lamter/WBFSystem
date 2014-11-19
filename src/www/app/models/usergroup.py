@@ -10,13 +10,11 @@ import json
 from redisco import models
 
 from counter import Counter
-from src.www.app.models import orm
+import orm
 
 
 Encoder = json.JSONEncoder()
 Decoder = json.JSONDecoder()
-
-
 
 
 class UserGroup(orm.RediscoModle):
@@ -74,7 +72,7 @@ class UserGroup(orm.RediscoModle):
         获取所有用户组
         :return:
         '''
-        return cls.objects.filter().all()
+        return cls.objects.filter().all().exclude(name=cls.rootGroup)
 
 
     @property

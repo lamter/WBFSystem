@@ -20,8 +20,8 @@ from ..models.usergroup import UserGroup
 
 class ManageUser(base_handler.BaseHandler):
 
-    URL =u'/manage_user'
-    url = r'/manage_user.*'
+    URL = base_handler.BaseHandler.URL + u'/manage_user'
+    url = base_handler.BaseHandler.url + r'/manage_user.*'
 
     def GET(self):
         try:
@@ -50,8 +50,8 @@ class CreateUserGroup(base_handler.BaseHandler):
     """
     创建用户组
     """
-    URL = u'/create_user_group'
-    url = r'/create_user_group.*'
+    URL = base_handler.BaseHandler.URL +  u'/create_user_group'
+    url = base_handler.BaseHandler.url + r'/create_user_group.*'
 
     ugname = u'ugname'
 
@@ -89,8 +89,8 @@ class CreateUser(base_handler.BaseHandler):
     """
     创建用户
     """
-    URL = u'/create_user'
-    url = r'/create_user.*'
+    URL = base_handler.BaseHandler.URL +  u'/create_user'
+    url = base_handler.BaseHandler.url + r'/create_user.*'
 
     name = u'username'
     passwd = u'userpasswd'
@@ -132,8 +132,8 @@ class ModifUser(base_handler.BaseHandler):
     """
     修改用户信息界面
     """
-    URL = u'/modif_user_info'
-    url = r'/modif_user_info.*'
+    URL = base_handler.BaseHandler.URL +  u'/modif_user_info'
+    url = base_handler.BaseHandler.url + r'/modif_user_info.*'
 
     uname = u'username'
 
@@ -170,8 +170,8 @@ class ModifUserN(base_handler.BaseHandler):
     """
     修改用户名
     """
-    URL = u'/modif_user_name'
-    url = r'/modif_user_name.*'
+    URL = base_handler.BaseHandler.URL +  u'/modif_user_name'
+    url = base_handler.BaseHandler.url + r'/modif_user_name.*'
 
     uname = u'uname'
     newN = u'newN'
@@ -211,8 +211,8 @@ class ModifUserPW(base_handler.BaseHandler):
     """
     修改用户密码
     """
-    URL = u'/modif_user_pw'
-    url = r'/modif_user_pw.*'
+    URL = base_handler.BaseHandler.URL +  u'/modif_user_pw'
+    url = base_handler.BaseHandler.url + r'/modif_user_pw.*'
 
     name = u'username'
     pw = u'newpw'
@@ -255,8 +255,8 @@ class AddUG(base_handler.BaseHandler):
     """
     给用户添加用户组
     """
-    URL = u'/modif_user_add_ug'
-    url = r'/modif_user_add_ug.*'
+    URL = base_handler.BaseHandler.URL +  u'/modif_user_add_ug'
+    url = base_handler.BaseHandler.url + r'/modif_user_add_ug.*'
 
     uname = u'uname'
 
@@ -306,8 +306,8 @@ class RemoveUG(base_handler.BaseHandler):
     """
     移除用户的用户组
     """
-    URL = u'/modif_user_remove_ug'
-    url = r'/modif_user_remove_ug.*'
+    URL = base_handler.BaseHandler.URL +  u'/modif_user_remove_ug'
+    url = base_handler.BaseHandler.url + r'/modif_user_remove_ug.*'
 
     uname = u'uname'
 

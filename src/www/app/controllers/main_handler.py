@@ -20,8 +20,8 @@ from ..models.usergroup import UserGroup
 
 class Main(BaseHandler):
 
-    URL = u'/main'
-    url = r'/main'
+    URL = BaseHandler.URL + u'/main'
+    url = BaseHandler.url + r'/main'
 
     def GET(self):
         try:

@@ -16,8 +16,8 @@ from . import render
 
 
 class BaseHandler(object):
-    URL = u"/"
-    url = r'^/'
+    URL = u""
+    url = r'^'
 
     def errInfo(self):
         '''

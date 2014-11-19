@@ -23,28 +23,26 @@ from ..models.usergroup import UserGroup
 
 class Login(BaseHandler):
 
-    URL = u'/login'
-    url = r'/login'
+    URL = BaseHandler.URL + u'/login'
+    url = BaseHandler.url + r'/login.*'
 
     def POST(self):
 
         username = web.input().get("username")
         password = str(web.input().get("password"))
-
         if not username:
             errInfo = u'请输入账号!!'
-            return render.login(errInfo)
-
+            return render.login(errInfo, Login)
         user = User.obj(username)
 
         if user is None:
             errInfo = u'未注册的账号!!'
-            return render.login(errInfo)
+            return render.login(errInfo, Login)
 
         elif not user.isPW(password):
             ''' 密码错误 '''
             errInfo = u'密码错误!!'
-            return render.login(errInfo)
+            return render.login(errInfo, Login)
 
         elif user.isPW(password):
             ''' 通过验证 '''
@@ -54,17 +52,17 @@ class Login(BaseHandler):
 
         else:
             errInfo = u''
-            return render.login(errInfo)
+            return render.login(errInfo, Login)
 
-        return render.login(u'')
+        return render.login(u'', Login)
 
 
 class BanLogin(BaseHandler):
     '''
     禁止登录
     '''
-    URL = u'/ban_login'
-    url = r'/ban_login'
+    URL = BaseHandler.URL + u'/ban_login'
+    url = BaseHandler.url + r'/ban_login'
 
     def GET(self):
         if app.session.user.isHavePms(UserGroup.PERMISSION_BAN_LOGIN):

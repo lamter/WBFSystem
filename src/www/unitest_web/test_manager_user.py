@@ -6,13 +6,14 @@ Created on 2014-11-04
 '''
 
 import unittest
+import random
 
 import web
 import redis
 import redisco
 
 from src.www import settings
-from src.www import app
+import src.www.app as app
 from src.www.app.tools.web_session import Initializer
 from src.www.app import (models, controllers)
 from urls import (URLS, HANDLER)
@@ -23,7 +24,7 @@ from src.www.app.models.usergroup import UserGroup
 from src.www.app.models.views import Views
 from src.www.app.controllers.manage_handler import (ManageUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
 from src.www.app.controllers.login_handler import Login
-from src.www.app.controllers.manage_handler import (CreateUserGroup,CreateUser,ModifUser)
+from src.www.app.controllers.manage_handler import (CreateUserGroup,CreateUser,ModifUser, ModifUserGroup)
 
 
 def suite():
@@ -104,7 +105,7 @@ class TestManageUser(unittest.TestCase):
         User.createRoot()
         user = User.obj(User.rootAccount)
         views = Views(user)
-        views.render_manage_user(ManageUser,CreateUserGroup,CreateUser,ModifUser)
+        views.render_manage_user()
         views.html('manage_user')
 
 
@@ -216,6 +217,7 @@ class TestManageUser(unittest.TestCase):
         '''
         :return:
         '''
+
         User.createRoot()
         ''' 渲染 '''
         settings.debug_username = User.rootAccount
@@ -223,3 +225,31 @@ class TestManageUser(unittest.TestCase):
 
         v = Views(user)
         v.html(self.appM.request(localpart=ManageUser.URL, method='GET').data)
+
+
+    def test_ModifUserGroup(self):
+        '''
+        测试 修改用户组信息
+        :return:
+        '''
+
+        ugn = u'测试1'
+        pms = UserGroup.getAllPms()
+        UserGroup.createNewUserGroup(ugn, pms)
+
+        User.createRoot()
+
+        ''' 渲染 '''
+        settings.debug_username = User.rootAccount
+        user = User.obj(settings.debug_username)
+        data = {
+            'oname': u'测试1',
+            'name': u'原测试1',
+        }
+
+        for pmn in UserGroup.getPmNames():
+            if random.randint(0, 1):
+                data[pmn] = 'on'
+
+        v = Views(user)
+        v.html(self.appM.request(localpart=ModifUserGroup.URL, data=data, method='POST').data)

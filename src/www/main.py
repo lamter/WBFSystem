@@ -11,7 +11,7 @@ file.
 """
 
 import web
-import app
+from src.www import app
 import settings
 from app.tools.web_session import Initializer
 from app import (models, controllers)
@@ -45,4 +45,4 @@ web.config.session_parameters['expired_message'] = 'Session expired'
 
 
 if __name__ == '__main__':
-  application.run()
+  appM.run()

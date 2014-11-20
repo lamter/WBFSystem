@@ -2,32 +2,29 @@ $def with (user, UserGroup, CreateUser)
 
 <!-- 创建用户 -->
 $if user.isHavePms(UserGroup.PERMISSION_CREATE_USER):
-    <tr><td>
-        <br/>
-        <table border="1">
-            <form name="input" action=$CreateUser.URL method="POST">
-            <caption>创建用户</caption>
-            <tr>
-                <th>用户名名</th>
-                <th>密码</th>
-                <th>权限</th>
-            </tr>
-            <tr>
-                <td><input type="text" name=$CreateUser.name /></td>
-                <td><input type="text" name=$CreateUser.passwd /></td>
-                <td>
-                    <table>
-                        <tr>
-                            $for i, ug in enumerate(UserGroup.all()):
-                                <td><input type="checkbox" name=$ug.name />$ug.name</td>
-                                $if (i+1) % 5 == 0:</tr><tr>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="创建用户" /></td>
-            </tr>
-            </form>
-        </table>
-    </td></tr>
+    <table border="1">
+        <form name="input" action=$CreateUser.URL method="POST">
+        <caption>创建用户</caption>
+        <tr>
+            <th>用户名名</th>
+            <th>密码</th>
+            <th>用户组</th>
+        </tr>
+        <tr>
+            <td><input type="text" name=$CreateUser.name /></td>
+            <td><input type="text" name=$CreateUser.passwd /></td>
+            <td>
+                <table>
+                    <tr>
+                        $for i, ug in enumerate(UserGroup.all()):
+                            <td><input type="checkbox" name=$ug.name />$ug.name</td>
+                            $if (i+1) % 5 == 0:</tr><tr>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="创建用户" /></td>
+        </tr>
+        </form>
+    </table>

@@ -131,7 +131,7 @@ class User(orm.RediscoModle):
         ''' 检查账号是否生成成功 '''
         if not user.is_valid():
             ''' 生成失败，直接报错退出 '''
-            raise ValueError(user._errors)
+            raise ValueError(user.errStr)
             # if NEW_ACCOUNT_ERR_NOT_UNIQUE in user.validate():
             #     raise ValueError(u'用户名重复!!!')
 

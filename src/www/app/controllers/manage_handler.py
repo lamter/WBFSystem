@@ -11,8 +11,8 @@ This module contains the main handler of the application.
 import web
 
 from . import render
-import app
-import settings
+import src.www.app as app
+import src.www.settings as settings
 from base_handler import BaseHandler
 from ..models.views import Views
 from ..models.user import User
@@ -43,15 +43,26 @@ class ManageUser(BaseHandler):
             ''' 渲染 创建用户组界面 '''
             views.render_create_user_group(CreateUserGroup)
 
+            ''' 渲染 创建用户 界面 '''
+            views.render_create_user(CreateUser)
+
+            ''' 渲染 修改用户组 界面 '''
+            views.render_modif_user_group(ModifUserGroup)
+
             ''' 渲染用户管理界面列表 '''
-            views.render_manage_user(ManageUser, CreateUserGroup, CreateUser, ModifUser)
+            views.render_manage_user()
+
+            print 'user->',
+            print user.userGroups
+
+            print 'ug->',
+            print UserGroup.all()
 
             ''' 用户管理选择 '''
             return views.manage_user
 
         except:
             return self.errInfo()
-
 
 
 
@@ -366,8 +377,11 @@ class ModifUserGroup(BaseHandler):
     """
     修改用户组信息
     """
-    URL = BaseHandler.URL +  u'/modif_user_ug'
-    url = BaseHandler.url + r'/modif_user_ug.*'
+    URL = BaseHandler.URL +  u'/modif_user_group'
+    url = BaseHandler.url + r'/modif_user_group.*'
+
+    oname = u'oname'
+    name = u'name'
 
     def POST(self):
         try:
@@ -384,9 +398,12 @@ class ModifUserGroup(BaseHandler):
 
             ''' 实例化 '''
             ug = UserGroup.obj(newUg.oname)
+            if ug is None:
+                raise ValueError(u'用户组%s' % newUg.oname)
 
             ''' 改名 '''
-            ug.name = newUg.name
+            if newUg.name:
+                ug.name = newUg.name
 
             ''' 获取设定的权限 '''
             pms = 0
@@ -394,11 +411,8 @@ class ModifUserGroup(BaseHandler):
                 if newUg.get(pmn) == u'on':
                     pms |= pm
 
-            ''' 清空该用户组的权限 '''
-            ug.removeAllPms()
-
             ''' 重设权限 '''
-            ug.addPms(pms)
+            ug.setPms(pms)
 
             ''' 保存 '''
             ug.save()
@@ -406,6 +420,12 @@ class ModifUserGroup(BaseHandler):
             ''' 是否有错误 '''
             if ug.errStr:
                 raise ValueError(ug.errStr)
+
+            ug = UserGroup.obj(ug.name)
+            print 1111111111
+            print ug.id
+            print ug.name
+            print ug.pms
 
             return u'修改用户组成功'
 

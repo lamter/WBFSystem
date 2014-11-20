@@ -1,9 +1,9 @@
-$def with (user, UserGroup, CreateUserGroup)
+$def with (user, UserGroup, ModifUserGroup)
 
-<!-- 创建用户组 -->
-$if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
+<!-- 修改用户组信息界面 -->
+$if user.isHavePms(UserGroup.PERMISSION_MODIF_USER_GROUP):
     <table border="1">
-        <form name="input" action=$CreateUserGroup.URL method="POST">
+        <form name="input" action=$ModifUserGroup.URL method="POST">
         <caption>创建用户组</caption>
         <tr>
             <th>组名</th>
@@ -12,8 +12,9 @@ $if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
         <tr>
             <td>
                 <table>
-                <tr><td><input type="text" name=$CreateUserGroup.ugname /></td></tr>
-                <tr><td><input type="submit" value="创建用户组" /></td></tr>
+                <tr><td>用户组名: <input type="text" name=$ModifUserGroup.oname /></td></tr>
+                <tr><td>新组名: <input type="text" name=$ModifUserGroup.name /></td></tr>
+                <tr><td><input type="submit" value="修改用户" /></td></tr>
                 </table>
             </td>
             <td>

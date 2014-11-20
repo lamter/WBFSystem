@@ -52,7 +52,7 @@ def absolute(path):
 
 
 # import os
-# ''' 将skeleton/www/app加入import 路径 '''
-# # print absolute('app')
-# if absolute('app') not in sys.path:
-#     sys.path.insert(0, absolute('app'))
+''' 将skeleton/www/app加入import 路径 '''
+# print absolute('app')
+if absolute('app') not in sys.path:
+    sys.path.insert(0, absolute('app'))

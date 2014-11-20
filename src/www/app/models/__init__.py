@@ -33,7 +33,7 @@ class Init(object):
         :return:
         '''
 
-        root = User.obj(User.rootAccount)
+        root = User.obj(username=User.rootAccount)
 
         if root:
             ''' 如果已经存在root 用户，那么删除掉 '''

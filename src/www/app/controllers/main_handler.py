@@ -25,7 +25,7 @@ class Main(BaseHandler):
 
     def GET(self):
         try:
-            user = User.obj(app.session.username)
+            user = User.obj(username=app.session.username)
             if not user:
                 return render.login(u'登录超时，请重新登录')
 

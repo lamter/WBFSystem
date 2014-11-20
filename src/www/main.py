@@ -33,6 +33,8 @@ app.session = web.session.Session(appM, web.session.DiskStore('sessions'), initi
                                                                                                       User=models.user.User,
                                                                                                       UserGroup=models.usergroup.UserGroup,
                                                                                                       BanLogin=controllers.login_handler.BanLogin,
+                                                                                                      settings=settings,
+                                                                                                      app=app,
                                                                                                       ))
 
 web.config.session_parameters['cookie_name'] = 'webpy_session_id'

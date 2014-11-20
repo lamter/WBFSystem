@@ -8,9 +8,6 @@ Created on 2014-10-31
 
 import web
 
-# from www import settings
-# import app
-
 class Initializer(object):
     def __init__(self, *args, **kwargs):
         '''

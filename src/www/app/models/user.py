@@ -255,7 +255,7 @@ class User(orm.RediscoModle):
 
         if rootUg:
             ''' 如果用户组存在，删除掉 '''
-            rootUg.delete()
+            rootUg.delete(User)
 
         rootUg = UserGroup.createRootGroup()
         rootUg.save()

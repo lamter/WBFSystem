@@ -33,7 +33,7 @@ class Login(BaseHandler):
         if not username:
             errInfo = u'请输入账号!!'
             return render.login(errInfo, Login)
-        user = User.obj(username)
+        user = User.obj(username=username)
 
         if user is None:
             errInfo = u'未注册的账号!!'

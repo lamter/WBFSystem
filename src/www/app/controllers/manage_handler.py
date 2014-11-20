@@ -80,7 +80,7 @@ class CreateUserGroup(BaseHandler):
             if not app.session.login and not settings.DEBUG:
                 return render.login(u'登录超时，请重新登录')
 
-            user = User.obj(app.session.username)
+            user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
                 return u'没有创建用户组的权限...'
 
@@ -121,7 +121,7 @@ class CreateUser(BaseHandler):
                 return render.login(u'登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(app.session.username)
+            user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_CREATE_USER):
                 return u'没有创建用户的权限...'
 
@@ -163,7 +163,7 @@ class ModifUser(BaseHandler):
                 return render.login(u'登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(app.session.username)
+            user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                 return u'没有修改用户信息的权限...'
 
@@ -173,7 +173,7 @@ class ModifUser(BaseHandler):
             print 'modifU->', modifU
 
             ''' 获得待修改的用户实例 '''
-            modfUser = User.obj(modifU.username)
+            modfUser = User.obj(username=modifU.username)
             if modfUser is None:
                 raise ValueError(u'指定的用户%s不存在...' % modifU.username)
 
@@ -202,14 +202,14 @@ class ModifUserN(BaseHandler):
                 return render.login(u'登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(app.session.username)
+            user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                 return u'没有修改用户信息的权限...'
 
             modifU = web.input()
             print 'modifU->', modifU
             ''' 获得用户实例 '''
-            u = User.obj(modifU.uname)
+            u = User.obj(username=modifU.uname)
             if u is None:
                 raise ValueError(u'指定的用户%s不存在...' % modifU.uname)
 
@@ -243,7 +243,7 @@ class ModifUserPW(BaseHandler):
                 return render.login(u'登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(app.session.username)
+            user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                 return u'没有修改用户信息的权限...'
 
@@ -251,7 +251,7 @@ class ModifUserPW(BaseHandler):
             # print 'modfU->', modifU
 
             ''' 获得用户实例 '''
-            u = User.obj(modifU.username)
+            u = User.obj(username=modifU.username)
             if u is None:
                 raise ValueError(u'指定的用户%s不存在...' % modifU.username)
 
@@ -286,7 +286,7 @@ class AddUG(BaseHandler):
                 return render.login(u'登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(app.session.username)
+            user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                 return u'没有修改用户信息的权限...'
 
@@ -294,7 +294,7 @@ class AddUG(BaseHandler):
             # print 'modfU->', modifU
 
             ''' 获得待修改的用户实例 '''
-            u = User.obj(modifU.uname)
+            u = User.obj(username=modifU.uname)
             if u is None:
                 raise ValueError(u'指定的用户%s不存在...' % modifU.uname)
 
@@ -337,7 +337,7 @@ class RemoveUG(BaseHandler):
                 return render.login(u'登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(app.session.username)
+            user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                 return u'没有修改用户信息的权限...'
 
@@ -345,7 +345,7 @@ class RemoveUG(BaseHandler):
             # print 'modfU->', modifU
 
             ''' 获得用户实例 '''
-            u = User.obj(modifU.uname)
+            u = User.obj(username=modifU.uname)
             if u is None:
                 raise ValueError(u'指定的用户%s不存在...' % modifU.uname)
 

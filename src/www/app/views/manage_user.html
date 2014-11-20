@@ -1,4 +1,4 @@
-$def with (user, UserGroup, views, users, userGroups, ManageUser, CreateUserGroup, CreateUser, ModifUser)
+$def with (user, UserGroup, views, User, userGroups, ManageUser, CreateUserGroup, CreateUser, ModifUser)
 
 <html>
 <body>
@@ -11,33 +11,12 @@ $if views.isHasAttr("manage_user_option"):
         $:views.manage_user_option
     </td></tr>
 
-<!-- 用户列表 -->
-$if user.isHavePms(UserGroup.PERMISSION_USER_LIST):
+$if views.isHasAttr("user_list"):
     <tr><td>
         <br/>
-        <table border="1">
-            <caption>用户列表</caption>
-            <tr>
-                <!-- 表头 -->
-                <th>操作</th>
-                <th>用户名</th>
-                <th>用户组</th>
-            </tr>
-            <form name="input" action=$ModifUser.URL method="POST">
-            $for u in users:
-                <tr>
-                    <td>
-                        <!-- 指定跳转到修改用户信息的页面的信息 -->
-                        <input type="radio" name=$ModifUser.uname value=$u.username />
-                    </td>
-                    <td>$u.username</td>
-                    <td>$','.join(u.getUGNames())</td>
-                </tr>
-            <!-- 提交按钮 -->
-            <tr><td><input type="submit" value="修改" /></td></tr>
-            </form>
-        </table>
+        $:views.user_list
     </td></tr>
+
 
 <!-- 用户组列表 -->
 $if user.isHavePms(UserGroup.PERMISSION_USER_GROUP_LIST):
@@ -57,8 +36,7 @@ $if user.isHavePms(UserGroup.PERMISSION_USER_GROUP_LIST):
                         <table>
                             <tr>
                             $for i,pmn in enumerate(ug.getPmsName()):
-                                <td>$pmn;</td>
-                                $if (i+1) % 5 == 0:</tr><tr>
+                                <td>$pmn</td><br/>
                             </tr>
 
                         </table>
@@ -79,7 +57,12 @@ $if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
                 <th>权限</th>
             </tr>
             <tr>
-                <td><input type="text" name=$CreateUserGroup.ugname /></td>
+                <td>
+                    <table>
+                    <tr><td><input type="text" name=$CreateUserGroup.ugname /></td></tr>
+                    <tr><td><input type="submit" value="创建用户组" /></td></tr>
+                    </table>
+                </td>
                 <td>
                     <table>
                         <tr>
@@ -89,9 +72,6 @@ $if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
                         </tr>
                     </table>
                 </td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="创建用户组" /></td>
             </tr>
             </form>
         </table>

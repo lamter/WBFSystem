@@ -11,10 +11,9 @@ import web
 import redis
 import redisco
 
-from src.www import settings
-from src.www import main
+import src.www.settings as settings
+import src.www.main as main
 
-from src.www import (session)
 from src.www.app.models.counter import Counter
 from src.www.app.models.user import User
 from src.www.app.models.usergroup import UserGroup
@@ -104,6 +103,21 @@ class TestManageUser(unittest.TestCase):
         views.render_modif_user(user, ModifUserN, ModifUserPW, AddUG, RemoveUG)
         views.html('modif_user')
 
+
+
+    def test_render_user_list(self):
+        '''
+        渲染 用户列表
+        :return:
+        '''
+        user = User.obj(User.rootAccount)
+        if not user:
+            User.createRoot()
+            user = User.obj(User.rootAccount)
+
+        views = Views(user)
+        views.render_user_list(ModifUser)
+        views.html('user_list')
 
 
 

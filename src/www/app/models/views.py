@@ -77,13 +77,10 @@ class Views(object):
         ''' 管理用户选项 '''
         # self.render_manage_user_option()
 
-        ''' 所有用户 '''
-        users = User.all()
-
         ''' 所有用户组 '''
         userGroups = UserGroup.all()
 
-        self.manage_user = render.manage_user(self.user, UserGroup, self, users, userGroups, ManageUser, CreateUserGroup, CreateUser, ModifUser)
+        self.manage_user = render.manage_user(self.user, UserGroup, self, User, userGroups, ManageUser, CreateUserGroup, CreateUser, ModifUser)
 
 
     def render_modif_user(self, modifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG):
@@ -99,3 +96,21 @@ class Views(object):
 
         ''' 渲染用户信息 '''
         self.modif_user = render.modif_user(self.user, UserGroup, modifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
+
+
+
+    def render_user_list(self, ModifUser):
+        '''
+        渲染 用户信息列表
+        :param args:
+        :return:
+        '''
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_USER_LIST
+
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染用户信息 '''
+        self.user_list = render.user_list(self.user, UserGroup, self, ModifUser, User)
+

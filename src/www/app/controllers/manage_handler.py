@@ -34,7 +34,13 @@ class ManageUser(base_handler.BaseHandler):
             ''' 渲染管理用户选项 '''
             # views.render_manage_user_option()
 
-            ''' 渲染用户列表 '''
+            ''' 渲染 用户信息列表 '''
+            views.render_user_list(ModifUser)
+
+            '''  '''
+
+
+            ''' 渲染用户管理界面列表 '''
             views.render_manage_user(ManageUser, CreateUserGroup, CreateUser, ModifUser)
 
             ''' 用户管理选择 '''

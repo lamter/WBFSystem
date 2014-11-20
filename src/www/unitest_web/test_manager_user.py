@@ -11,9 +11,12 @@ import web
 import redis
 import redisco
 
-import src.www.settings as settings
-import src.www.main as main
-
+from src.www import settings
+from src.www import app
+from src.www.app.tools.web_session import Initializer
+from src.www.app import (models, controllers)
+from urls import (URLS, HANDLER)
+from src.www.app.tools.app_processor import (header_html, notfound, internalerror)
 from src.www.app.models.counter import Counter
 from src.www.app.models.user import User
 from src.www.app.models.usergroup import UserGroup
@@ -49,12 +52,44 @@ class TestManageUser(unittest.TestCase):
         ''' 额外的redis连接 '''
         self.redis = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
 
+        ''' 启动服务 '''
+        web.config.debug = settings.DEBUG
+
+        self.appM = web.application(URLS, HANDLER, autoreload=False)
+        application = self.appM.wsgifunc()
+
+        self.appM.notfound = notfound
+        self.appM.internalerror = internalerror
+        self.appM.add_processor(web.loadhook(header_html))
+
+        app.session = web.session.Session(self.appM, web.session.DiskStore('sessions'), initializer=Initializer(
+                                                                                                              User=models.user.User,
+                                                                                                              UserGroup=models.usergroup.UserGroup,
+                                                                                                              BanLogin=controllers.login_handler.BanLogin,
+                                                                                                              settings=settings,
+                                                                                                              app=app,
+                                                                                                              ))
+
+        web.config.session_parameters['cookie_name'] = 'webpy_session_id'
+        web.config.session_parameters['cookie_domain'] = None
+        web.config.session_parameters['timeout'] = 10
+        web.config.session_parameters['ignore_expiry'] = True
+        web.config.session_parameters['ignore_change_ip'] = False
+        web.config.session_parameters['secret_key'] = 'akdnA0FJsdJFLSlvno92'
+        web.config.session_parameters['expired_message'] = 'Session expired'
+
+
+
+    def tearDown(self):
+        # return
+        self.redis.flushdb()
 
     def test_render_manage_user_option(self):
         '''
         渲染 管理用户选项
         :return:
         '''
+        User.createRoot()
         user = User.obj(User.rootAccount)
         v = Views(user)
         # v.render_manage_user_option(None)
@@ -66,6 +101,7 @@ class TestManageUser(unittest.TestCase):
         渲染 manage_user页面
         :return:
         '''
+        User.createRoot()
         user = User.obj(User.rootAccount)
         views = Views(user)
         views.render_manage_user(ManageUser,CreateUserGroup,CreateUser,ModifUser)
@@ -86,7 +122,7 @@ class TestManageUser(unittest.TestCase):
             user = User.obj(settings.debug_username)
 
         v = Views(user)
-        v.html(main.application.request(ManageUser.url).data)
+        v.html(self.appM.request(ManageUser.url).data)
 
 
     def test_render_modif_user(self):
@@ -110,10 +146,16 @@ class TestManageUser(unittest.TestCase):
         渲染 用户列表
         :return:
         '''
+        # self.redis.flushdb()
+
         user = User.obj(User.rootAccount)
         if not user:
             User.createRoot()
             user = User.obj(User.rootAccount)
+
+        un = 'test1'
+        pw = '123456'
+        User.createNewUser(un, pw)
 
         views = Views(user)
         views.render_user_list(ModifUser)

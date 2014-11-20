@@ -23,12 +23,13 @@ models.init()
 
 web.config.debug = settings.DEBUG
 
-application = web.application(URLS, HANDLER, autoreload=False)
-application.notfound = notfound
-application.internalerror = internalerror
-application.add_processor(web.loadhook(header_html))
+appM = web.application(URLS, HANDLER, autoreload=False)
+application = appM.wsgifunc()
+appM.notfound = notfound
+appM.internalerror = internalerror
+appM.add_processor(web.loadhook(header_html))
 
-app.session = web.session.Session(application, web.session.DiskStore('sessions'), initializer=Initializer(
+app.session = web.session.Session(appM, web.session.DiskStore('sessions'), initializer=Initializer(
                                                                                                       User=models.user.User,
                                                                                                       UserGroup=models.usergroup.UserGroup,
                                                                                                       BanLogin=controllers.login_handler.BanLogin,

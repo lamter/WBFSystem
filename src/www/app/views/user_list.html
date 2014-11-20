@@ -1,0 +1,26 @@
+$def with (user, UserGroup, ModifUser, User)
+
+<!-- 用户列表 -->
+$if user.isHavePms(UserGroup.PERMISSION_USER_LIST):
+    <table border="1">
+        <caption>用户列表</caption>
+        <tr>
+            <!-- 表头 -->
+            <th>操作</th>
+            <th>用户名</th>
+            <th>用户组</th>
+        </tr>
+        <form name="input" action=$ModifUser.URL method="POST">
+        $for u in User.all():
+            <tr>
+                <td>
+                    <!-- 指定跳转到修改用户信息的页面的信息 -->
+                    <input type="radio" name=$ModifUser.uname value=$u.username />
+                </td>
+                <td>$u.username</td>
+                <td>$','.join(u.getUGNames())</td>
+            </tr>
+        <!-- 提交按钮 -->
+        <tr><td><input type="submit" value="修改" /></td></tr>
+        </form>
+    </table>

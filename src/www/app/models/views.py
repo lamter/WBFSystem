@@ -57,33 +57,23 @@ class Views(object):
 
 
 
-    def render_manage_user(self, *args):
+    def render_manage_user(self):
         '''
         :return:
         '''
-        ManageUser = args[0]
-        CreateUserGroup = args[1]
-        CreateUser = args[2]
-        ModifUser = args[3]
-
 
         ''' 设置这个模块相关的权限 '''
-        pms = UserGroup.PERMISSION_USER_GROUP_LIST
+        pms = UserGroup.PERMISSION_MANAGER_USER
 
         ''' 拥有权限才能渲染模板 '''
         if not self.user.isHavePms(pms):
+            print u'没有权限!!!'
             return
 
         ''' 管理用户选项 '''
         # self.render_manage_user_option()
 
-        ''' 所有用户 '''
-        users = User.all()
-
-        ''' 所有用户组 '''
-        userGroups = UserGroup.all()
-
-        self.manage_user = render.manage_user(self.user, UserGroup, self, users, userGroups, ManageUser, CreateUserGroup, CreateUser, ModifUser)
+        self.manage_user = render.manage_user(self.user, UserGroup, self)
 
 
     def render_modif_user(self, modifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG):
@@ -99,3 +89,85 @@ class Views(object):
 
         ''' 渲染用户信息 '''
         self.modif_user = render.modif_user(self.user, UserGroup, modifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
+
+
+
+    def render_user_list(self, ModifUser):
+        '''
+        渲染 用户信息列表
+        :param args:
+        :return:
+        '''
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_USER_LIST
+
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染用户信息 '''
+        self.user_list = render.user_list(self.user, UserGroup, ModifUser, User)
+
+
+    def render_user_group_list(self):
+        '''
+        渲染 用户组信息 列表
+        :return:
+        '''
+
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_USER_GROUP_LIST
+
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染用户信息 '''
+        self.user_group_list = render.user_group_list(self.user, UserGroup)
+
+
+
+    def render_create_user_group(self, CreateUserGroup):
+        '''
+        渲染 创建用户组界面
+        :return:
+        '''
+
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_CREATE_USER_GROUP
+
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染 '''
+        self.create_user_group = render.create_user_group(self.user, UserGroup, CreateUserGroup)
+
+
+    def render_create_user(self, CreateUser):
+        '''
+        渲染 创建用户 界面
+        :return:
+        '''
+
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_CREATE_USER
+
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染用户信息 '''
+        self.create_user = render.create_user(self.user, UserGroup, CreateUser)
+
+
+    def render_modif_user_group(self, ModifUserGroup):
+        '''
+        渲染 修改用户组信息 界面
+        :return:
+        '''
+
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_MODIF_USER_GROUP
+
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染用户信息 '''
+        self.modif_user_group = render.modif_user_group(self.user, UserGroup, ModifUserGroup)

@@ -43,6 +43,13 @@ class UserGroup(orm.RediscoModle):
     ''' 修改用户信息 '''
     PERMISSION_MODIF_USER = 1 << 5
 
+    ''' 修改 用户组 信息 '''
+    PERMISSION_MODIF_USER_GROUP = 1 << 6
+
+    ''' 管理用户信息页面 '''
+    PERMISSION_MANAGER_USER = 1 << 7
+
+
     ''' 以 PERMISSION_* 的形式来命名变量 '''
 
     ''' <=用户权限枚举 '''
@@ -55,16 +62,6 @@ class UserGroup(orm.RediscoModle):
     permissions = models.IntegerField(default=0)
     # users = models.ListField(target_type=baseuser.User)
 
-
-    @classmethod
-    def obj(cls, *args):
-        '''
-        根据用户组名生成实例
-        :param args:
-        :return:
-        '''
-        ugname = args[0]
-        return cls.objects.filter().first()
 
     @classmethod
     def all(cls):
@@ -162,7 +159,7 @@ class UserGroup(orm.RediscoModle):
         return dic
 
 
-    def addPermissions(self, permissions):
+    def addPms(self, pms):
         '''
         给用户组添加权限
         :param permission: 必须以 UserGroup.PERMISSION_* 来传递
@@ -172,21 +169,19 @@ class UserGroup(orm.RediscoModle):
         #     if not permissions & pm:
         #         effInfo = u'用户组: %s设定权限失败!!非法的权限 %d !!!' % (self.name, permissions)
         #         raise ValueError(effInfo)
-        self.permissions |= permissions
+        self.permissions |= pms
 
 
-    def setPermissions(self, permissions):
+    def setPms(self, pms):
         '''
         直接将用户组的权限置为指定的权限
         :param permissions:
         :return:
         '''
-        self.permissions = permissions
+        self.permissions = pms
 
 
-
-
-    def removePermissions(self, permissions):
+    def removePms(self, pms):
         '''
         给用户组减少权限
         :param permission:
@@ -197,8 +192,8 @@ class UserGroup(orm.RediscoModle):
         #     raise ValueError(effInfo)
 
         ''' 先授权，在卸权。因为计算算法的原因，所以这么做 '''
-        self.addPermissions(permissions)
-        self.permissions -= permissions
+        self.addPms(pms)
+        self.permissions -= pms
         self.save()
 
 
@@ -240,3 +235,25 @@ class UserGroup(orm.RediscoModle):
         return names
 
 
+    def removeAllPms(self):
+        '''
+        移除 该用户组 所有权限
+        :return:
+        '''
+
+        self.removePms(self.pms)
+
+
+
+    def delete(self, User):
+        '''
+        重写 delete 方法，删除用户组需要同时将从用户身上删除用户组
+        :return:
+        '''
+        for u in User.all():
+            if self in u.userGroups:
+                u.removeUserGroup(self)
+                u.save()
+
+        ''' 从redis中删除实例 '''
+        orm.RediscoModle.delete(self)

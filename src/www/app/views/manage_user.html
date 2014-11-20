@@ -1,4 +1,4 @@
-$def with (user, UserGroup, views, users, userGroups, ManageUser, CreateUserGroup, CreateUser, ModifUser)
+$def with (user, UserGroup, views)
 
 <html>
 <body>
@@ -12,121 +12,38 @@ $if views.isHasAttr("manage_user_option"):
     </td></tr>
 
 <!-- 用户列表 -->
-$if user.isHavePms(UserGroup.PERMISSION_USER_LIST):
+$if views.isHasAttr("user_list"):
     <tr><td>
         <br/>
-        <table border="1">
-            <caption>用户列表</caption>
-            <tr>
-                <!-- 表头 -->
-                <th>操作</th>
-                <th>用户名</th>
-                <th>用户组</th>
-            </tr>
-            <form name="input" action=$ModifUser.URL method="POST">
-            $for u in users:
-                <tr>
-                    <td>
-                        <!-- 指定跳转到修改用户信息的页面的信息 -->
-                        <input type="radio" name=$ModifUser.uname value=$u.username />
-                    </td>
-                    <td>$u.username</td>
-                    <td>$','.join(u.getUGNames())</td>
-                </tr>
-            <!-- 提交按钮 -->
-            <tr><td><input type="submit" value="修改" /></td></tr>
-            </form>
-        </table>
-    </td></tr>
-
-<!-- 用户组列表 -->
-$if user.isHavePms(UserGroup.PERMISSION_USER_GROUP_LIST):
-    <tr><td>
-        <br/>
-        <table border="1">
-            <caption>用户组列表</caption>
-            <tr>
-                <th>用户组</th>
-                <th>权限</th>
-            </tr>
-            $for ug in userGroups:
-                <tr>
-                    <td>$ug.name</td>
-                    <!-- 用户组权限列表 -->
-                    <td>
-                        <table>
-                            <tr>
-                            $for i,pmn in enumerate(ug.getPmsName()):
-                                <td>$pmn;</td>
-                                $if (i+1) % 5 == 0:</tr><tr>
-                            </tr>
-
-                        </table>
-                    </td>
-                </tr>
-        </table>
-    </td></tr>
-
-<!-- 创建用户组 -->
-$if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
-    <tr><td>
-        <br/>
-        <table border="1">
-            <form name="input" action=$CreateUserGroup.URL method="POST">
-            <caption>创建用户组</caption>
-            <tr>
-                <th>组名</th>
-                <th>权限</th>
-            </tr>
-            <tr>
-                <td><input type="text" name=$CreateUserGroup.ugname /></td>
-                <td>
-                    <table>
-                        <tr>
-                            $for i, pm in enumerate(UserGroup.getPmNames()):
-                                <td><input type="checkbox" name=$pm />$pm</td>
-                                $if (i+1) % 5 == 0:</tr><tr>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="创建用户组" /></td>
-            </tr>
-            </form>
-        </table>
+        $:views.user_list
     </td></tr>
 
 <!-- 创建用户 -->
-$if user.isHavePms(UserGroup.PERMISSION_CREATE_USER):
+$if views.isHasAttr("create_user"):
     <tr><td>
         <br/>
-        <table border="1">
-            <form name="input" action=$CreateUser.URL method="POST">
-            <caption>创建用户</caption>
-            <tr>
-                <th>用户名名</th>
-                <th>密码</th>
-                <th>权限</th>
-            </tr>
-            <tr>
-                <td><input type="text" name=$CreateUser.name /></td>
-                <td><input type="text" name=$CreateUser.passwd /></td>
-                <td>
-                    <table>
-                        <tr>
-                            $for i, ug in enumerate(UserGroup.all()):
-                                <td><input type="checkbox" name=$ug.name />$ug.name</td>
-                                $if (i+1) % 5 == 0:</tr><tr>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="创建用户" /></td>
-            </tr>
-            </form>
-        </table>
+        $:views.create_user
+    </td></tr>
+
+<!-- 用户组列表 -->
+$if views.isHasAttr("user_group_list"):
+    <tr><td>
+        <br/>
+        $:views.user_group_list
+    </td></tr>
+
+<!-- 创建用户组 -->
+$if views.isHasAttr("create_user_group"):
+    <tr><td>
+        <br/>
+        $:views.create_user_group
+    </td></tr>
+
+<!-- 修改用户组信息 -->
+$if views.isHasAttr("modif_user_group"):
+    <tr><td>
+        <br/>
+        $:views.modif_user_group
     </td></tr>
 
 </table>

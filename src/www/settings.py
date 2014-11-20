@@ -51,8 +51,8 @@ def absolute(path):
   return os.path.normpath(os.path.join(PROJECT_DIR, path))
 
 
-import os
-''' 将skeleton/www/app加入import 路径 '''
-# print absolute('app')
-if absolute('app') not in sys.path:
-    sys.path.insert(0, absolute('app'))
+# import os
+# ''' 将skeleton/www/app加入import 路径 '''
+# # print absolute('app')
+# if absolute('app') not in sys.path:
+#     sys.path.insert(0, absolute('app'))

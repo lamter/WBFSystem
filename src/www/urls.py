@@ -7,7 +7,7 @@ class handlers.
 from app.controllers.login_handler import Login
 from app.controllers.index_handler import Index
 from app.controllers.main_handler import Main
-from app.controllers.manage_handler import (ManageUser, CreateUserGroup, CreateUser, ModifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
+from app.controllers.manage_handler import (ManageUser, CreateUserGroup, CreateUser, ModifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG, ModifUserGroup)
 
 
 URLS = (
@@ -22,6 +22,7 @@ URLS = (
     ModifUserPW.url,            ModifUserPW.__name__,
     AddUG.url,                  AddUG.__name__,
     RemoveUG.url,               RemoveUG.__name__,
+    ModifUserGroup.url,         ModifUserGroup.__name__,
 )
 # for i,u in enumerate(URLS):
 #     print u, u'\t',

@@ -12,7 +12,7 @@ import traceback
 
 import web
 
-import app
+import src.www.app as app
 from . import render
 from base_handler import BaseHandler
 from main_handler import Main

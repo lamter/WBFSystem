@@ -10,8 +10,9 @@ import json
 from redisco import models
 
 from counter import Counter
-import orm
 from usergroup import UserGroup
+import orm
+
 
 
 Encoder = json.JSONEncoder()
@@ -70,7 +71,7 @@ class User(orm.RediscoModle):
     last_login_time = models.DateTimeField(auto_now=True)
 
     ''' 所属的用户组 '''
-    userGroups = models.ListField(target_type=UserGroup)
+    _userGroups = models.ListField(target_type=str)
 
     ''' 是否注销 '''
     is_cancel = models.BooleanField(default=True)
@@ -94,15 +95,15 @@ class User(orm.RediscoModle):
         return errss
 
 
-    @classmethod
-    def obj(cls, *args):
-        '''
-        根据用户名获取玩家
-        :param args: [username]
-        :return:
-        '''
-        username = args[0]
-        return cls.objects.filter(username=username).first()
+    # @classmethod
+    # def obj(cls, ):
+    #     '''
+    #     根据用户名获取玩家
+    #     :param args: [username]
+    #     :return:
+    #     '''
+    #     username = args[0]
+    #     return cls.objects.filter(username=username).first()
 
 
     @classmethod
@@ -131,7 +132,7 @@ class User(orm.RediscoModle):
         ''' 检查账号是否生成成功 '''
         if not user.is_valid():
             ''' 生成失败，直接报错退出 '''
-            raise ValueError(user._errors)
+            raise ValueError(user.errStr)
             # if NEW_ACCOUNT_ERR_NOT_UNIQUE in user.validate():
             #     raise ValueError(u'用户名重复!!!')
 
@@ -145,6 +146,19 @@ class User(orm.RediscoModle):
 
         return user
 
+    @property
+    def userGroups(self):
+        '''
+        根据 userGroup.id索引回用户组实例
+        :return:
+        '''
+        ugs = []
+        for ugid in [ugid for ugid in self._userGroups]:
+            ug = UserGroup.obj(id=ugid)
+            ''' 如果该id已经作废，则移除 '''
+            self._userGroups.remove(ugid) if ug is None else ugs.append(ug)
+
+        return ugs
 
 
     @property
@@ -191,7 +205,7 @@ class User(orm.RediscoModle):
             errInfo = u'用户已经在用户组 uid:%d %s 中了' % (userGroup.id, userGroup.name)
             raise ValueError(errInfo)
 
-        self.userGroups.append(userGroup)
+        self._userGroups.append(userGroup.id)
         self.save()
 
 
@@ -209,7 +223,7 @@ class User(orm.RediscoModle):
             errInfo = u'用户不在用户组 id:%d %s 中了' % (userGroup.id, userGroup.name)
             raise ValueError(errInfo)
 
-        self.userGroups.remove(userGroup)
+        self._userGroups.remove(userGroup.id)
 
 
     @classmethod
@@ -237,7 +251,7 @@ class User(orm.RediscoModle):
             raise ValueError(u'该用户不是root用户!!!')
 
         ''' 检查用户组 '''
-        rootUg = UserGroup.obj(UserGroup.rootGroup)
+        rootUg = UserGroup.obj(name=UserGroup.rootGroup)
 
         if rootUg:
             ''' 如果用户组存在，删除掉 '''
@@ -248,20 +262,19 @@ class User(orm.RediscoModle):
 
         ''' 清空root的用户组 '''
         while len(self.userGroups) > 0:
-            self.userGroups.pop(0)
+            self._userGroups.pop(0)
         ''' 添加root用户组 '''
-        self.userGroups.append(rootUg)
+        self._userGroups.append(rootUg.id)
 
 
-
-    def getPermissions(self):
+    def getPms(self):
         '''
         从所有用户组获得权限
         :return:
         '''
         p = 0
         for userGroup in self.userGroups:
-            p |= userGroup.permissions
+            p |= userGroup.pms
 
         return p
 
@@ -272,7 +285,8 @@ class User(orm.RediscoModle):
         :param permission: 只能传递 UserGroup.PERMISSION_*进来
         :return:
         '''
-        return permissions & self.getPermissions()
+        return permissions & self.getPms()
+
 
     def isInUg(self, ug):
         '''
@@ -302,22 +316,13 @@ class User(orm.RediscoModle):
         return self.password == pw
 
 
-    def getUserGroups(self):
-        '''
-        获得加入的用户组
-        :return:
-        '''
-        groups = [ug for ug in self.userGroups]
-        return groups
-
-
     def getUGNames(self):
         '''
         获得所有组名的数组
         :return:
         '''
         ns = []
-        for ug in self.getUserGroups():
+        for ug in self.userGroups:
             ns.append(ug.name)
         return ns
 

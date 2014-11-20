@@ -1,0 +1,31 @@
+$def with (user, UserGroup, ModifUserGroup)
+
+<!-- 修改用户组信息界面 -->
+$if user.isHavePms(UserGroup.PERMISSION_MODIF_USER_GROUP):
+    <table border="1">
+        <form name="input" action=$ModifUserGroup.URL method="POST">
+        <caption>创建用户组</caption>
+        <tr>
+            <th>组名</th>
+            <th>权限</th>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                <tr><td>用户组名: <input type="text" name=$ModifUserGroup.oname /></td></tr>
+                <tr><td>新组名: <input type="text" name=$ModifUserGroup.name /></td></tr>
+                <tr><td><input type="submit" value="修改用户" /></td></tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        $for i, pm in enumerate(UserGroup.getPmNames()):
+                            <td><input type="checkbox" name=$pm />$pm</td>
+                            $if (i+1) % 5 == 0:</tr><tr>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        </form>
+    </table>

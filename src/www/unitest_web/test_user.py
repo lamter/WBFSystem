@@ -8,15 +8,24 @@ Created on 2014-10-27
 import unittest
 import traceback
 
+import web
 import redis
 import redisco
 
 from src.www import settings
+from src.www import app
+from src.www.app.tools.web_session import Initializer
+from src.www.app import (models, controllers)
+from urls import (URLS, HANDLER)
+from src.www.app.tools.app_processor import (header_html, notfound, internalerror)
+from src.www.app.models.counter import Counter
 from src.www.app.models.user import User
 from src.www.app.models import user
-from src.www.app.models import init
-
 from src.www.app.models.usergroup import UserGroup
+from src.www.app.models.views import Views
+from src.www.app.controllers.manage_handler import (ManageUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
+from src.www.app.controllers.login_handler import Login
+from src.www.app.controllers.manage_handler import (CreateUserGroup,CreateUser,ModifUser)
 
 
 def suite():
@@ -45,6 +54,32 @@ class TestUser(unittest.TestCase):
         self.redis = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
 
 
+        ''' 启动服务 '''
+        web.config.debug = settings.DEBUG
+
+        self.appM = web.application(URLS, HANDLER, autoreload=False)
+        application = self.appM.wsgifunc()
+
+        self.appM.notfound = notfound
+        self.appM.internalerror = internalerror
+        self.appM.add_processor(web.loadhook(header_html))
+
+        app.session = web.session.Session(self.appM, web.session.DiskStore('sessions'), initializer=Initializer(
+                                                                                                              User=models.user.User,
+                                                                                                              UserGroup=models.usergroup.UserGroup,
+                                                                                                              BanLogin=controllers.login_handler.BanLogin,
+                                                                                                              settings=settings,
+                                                                                                              app=app,
+                                                                                                              ))
+
+        web.config.session_parameters['cookie_name'] = 'webpy_session_id'
+        web.config.session_parameters['cookie_domain'] = None
+        web.config.session_parameters['timeout'] = 10
+        web.config.session_parameters['ignore_expiry'] = True
+        web.config.session_parameters['ignore_change_ip'] = False
+        web.config.session_parameters['secret_key'] = 'akdnA0FJsdJFLSlvno92'
+        web.config.session_parameters['expired_message'] = 'Session expired'
+
     def tearDown(self):
         # return
         print u'清空了数据库%s' % settings.REDIS_DB
@@ -61,10 +96,11 @@ class TestUser(unittest.TestCase):
         u = User.createNewUser(username, password)
 
         print u'生成用户完毕...'
-        u = User.obj(username)
-        if not u.is_valid:
+        nu = User.obj(username=username)
+        if not nu.is_valid:
             raise ValueError(u'生成玩家失败!!!')
         print u'生成用户成功...'
+
 
 
     def test_objNoUser(self):
@@ -75,7 +111,7 @@ class TestUser(unittest.TestCase):
         self.redis.flushdb()
 
         username = 'adfgagdsdfadsg'
-        u = User.obj(username)
+        u = User.obj(username=username)
         if u is not None:
             raise ValueError(u'不存在的用户不是None')
 
@@ -150,7 +186,7 @@ class TestUser(unittest.TestCase):
 
         root.save()
 
-        root = User.obj(User.rootAccount)
+        root = User.obj(username=User.rootAccount)
         rootUg = root.getUserGroupByName(UserGroup.rootGroup)
 
         print rootUg.pms
@@ -163,7 +199,7 @@ class TestUser(unittest.TestCase):
         实例化所有角色
         :return:
         '''
-        init()
+        models.Init()
         users = User.all()
         print len(users)
         for u in users:
@@ -191,7 +227,7 @@ class TestUser(unittest.TestCase):
 
         ''' 添加用户组 '''
         user.addUserGroup(ug)
-        ug = UserGroup.obj(ugn)
+        ug = UserGroup.obj(name=ugn)
         print 'ug->', id(ug), ug
 
         ''' 添加用户组 '''

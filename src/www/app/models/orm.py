@@ -27,13 +27,21 @@ class RediscoModle(models.Model):
             print k,':', v
         print u'%s====================' % self.__class__.__name__
 
+
     @classmethod
-    def obj(cls, *args):
+    def obj(cls, **kwargs):
         '''
-        实例化
+        实例化，属性名=属性值
+        如 id=1
+        这个属性必须是强制唯一的，即初始化时有参数unique=True
+        :param kwargs:
         :return:
         '''
-        c = cls.objects.filter().first()
+        if 'id' in kwargs:
+            # c = cls.objects.filter().get_by_id(kwargs.get('id'))
+            c = cls.objects.get_by_id(kwargs.get('id'))
+        else:
+            c = cls.objects.filter(**kwargs).first()
         return c
 
 

@@ -1,0 +1,31 @@
+$def with (user, UserGroup)
+
+<!-- 用户组列表 -->
+$if user.isHavePms(UserGroup.PERMISSION_USER_GROUP_LIST):
+    <tr><td>
+        <br/>
+        <table border="1">
+            <caption>用户组列表</caption>
+            <tr>
+                <th>用户组</th>
+                <th>权限</th>
+            </tr>
+            $for ug in UserGroup.all():
+                <tr>
+                    <td>$ug.name</td>
+                    <!-- 用户组权限列表 -->
+                    <td>
+                        <table>
+                            <tr>
+                            <td>
+                            $for i,pmn in enumerate(ug.getPmsName()):
+                                $pmn
+                                <br/>
+                           </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+        </table>
+    </td></tr>

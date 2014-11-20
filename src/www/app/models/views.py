@@ -112,5 +112,53 @@ class Views(object):
             return
 
         ''' 渲染用户信息 '''
-        self.user_list = render.user_list(self.user, UserGroup, self, ModifUser, User)
+        self.user_list = render.user_list(self.user, UserGroup, ModifUser, User)
 
+
+    def render_user_group_list(self):
+        '''
+        渲染 用户组信息 列表
+        :return:
+        '''
+
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_USER_GROUP_LIST
+
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染用户信息 '''
+        self.user_group_list = render.user_group_list(self.user, UserGroup)
+
+
+
+    def render_create_user_group(self, CreateUserGroup):
+        '''
+        渲染 创建用户组界面
+        :return:
+        '''
+
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_CREATE_USER_GROUP
+
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染 '''
+        self.create_user_group = render.create_user_group(self.user, UserGroup, CreateUserGroup)
+
+
+    def render_create_user(self, CreateUser):
+        '''
+        渲染 创建用户 界面
+        :return:
+        '''
+
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_CREATE_USER
+
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染用户信息 '''
+        self.create_user = render.create_user(self.user, UserGroup, CreateUser)

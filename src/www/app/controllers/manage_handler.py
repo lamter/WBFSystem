@@ -13,15 +13,15 @@ import web
 from . import render
 import app
 import settings
-import base_handler
+from base_handler import BaseHandler
 from ..models.views import Views
 from ..models.user import User
 from ..models.usergroup import UserGroup
 
-class ManageUser(base_handler.BaseHandler):
+class ManageUser(BaseHandler):
 
-    URL = base_handler.BaseHandler.URL + u'/manage_user'
-    url = base_handler.BaseHandler.url + r'/manage_user.*'
+    URL = BaseHandler.URL + u'/manage_user'
+    url = BaseHandler.url + r'/manage_user.*'
 
     def GET(self):
         try:
@@ -37,8 +37,11 @@ class ManageUser(base_handler.BaseHandler):
             ''' 渲染 用户信息列表 '''
             views.render_user_list(ModifUser)
 
-            '''  '''
+            ''' 渲染 用户组信息列表 '''
+            views.render_user_group_list()
 
+            ''' 渲染 创建用户组界面 '''
+            views.render_create_user_group(CreateUserGroup)
 
             ''' 渲染用户管理界面列表 '''
             views.render_manage_user(ManageUser, CreateUserGroup, CreateUser, ModifUser)
@@ -52,12 +55,12 @@ class ManageUser(base_handler.BaseHandler):
 
 
 
-class CreateUserGroup(base_handler.BaseHandler):
+class CreateUserGroup(BaseHandler):
     """
     创建用户组
     """
-    URL = base_handler.BaseHandler.URL +  u'/create_user_group'
-    url = base_handler.BaseHandler.url + r'/create_user_group.*'
+    URL = BaseHandler.URL +  u'/create_user_group'
+    url = BaseHandler.url + r'/create_user_group.*'
 
     ugname = u'ugname'
 
@@ -91,12 +94,12 @@ class CreateUserGroup(base_handler.BaseHandler):
 
 
 
-class CreateUser(base_handler.BaseHandler):
+class CreateUser(BaseHandler):
     """
     创建用户
     """
-    URL = base_handler.BaseHandler.URL +  u'/create_user'
-    url = base_handler.BaseHandler.url + r'/create_user.*'
+    URL = BaseHandler.URL +  u'/create_user'
+    url = BaseHandler.url + r'/create_user.*'
 
     name = u'username'
     passwd = u'userpasswd'
@@ -134,12 +137,12 @@ class CreateUser(base_handler.BaseHandler):
 
 
 
-class ModifUser(base_handler.BaseHandler):
+class ModifUser(BaseHandler):
     """
     修改用户信息界面
     """
-    URL = base_handler.BaseHandler.URL +  u'/modif_user_info'
-    url = base_handler.BaseHandler.url + r'/modif_user_info.*'
+    URL = BaseHandler.URL +  u'/modif_user_info'
+    url = BaseHandler.url + r'/modif_user_info.*'
 
     uname = u'username'
 
@@ -172,12 +175,12 @@ class ModifUser(base_handler.BaseHandler):
 
 
 
-class ModifUserN(base_handler.BaseHandler):
+class ModifUserN(BaseHandler):
     """
     修改用户名
     """
-    URL = base_handler.BaseHandler.URL +  u'/modif_user_name'
-    url = base_handler.BaseHandler.url + r'/modif_user_name.*'
+    URL = BaseHandler.URL +  u'/modif_user_name'
+    url = BaseHandler.url + r'/modif_user_name.*'
 
     uname = u'uname'
     newN = u'newN'
@@ -213,12 +216,12 @@ class ModifUserN(base_handler.BaseHandler):
 
 
 
-class ModifUserPW(base_handler.BaseHandler):
+class ModifUserPW(BaseHandler):
     """
     修改用户密码
     """
-    URL = base_handler.BaseHandler.URL +  u'/modif_user_pw'
-    url = base_handler.BaseHandler.url + r'/modif_user_pw.*'
+    URL = BaseHandler.URL +  u'/modif_user_pw'
+    url = BaseHandler.url + r'/modif_user_pw.*'
 
     name = u'username'
     pw = u'newpw'
@@ -257,12 +260,12 @@ class ModifUserPW(base_handler.BaseHandler):
 
 
 
-class AddUG(base_handler.BaseHandler):
+class AddUG(BaseHandler):
     """
     给用户添加用户组
     """
-    URL = base_handler.BaseHandler.URL +  u'/modif_user_add_ug'
-    url = base_handler.BaseHandler.url + r'/modif_user_add_ug.*'
+    URL = BaseHandler.URL +  u'/modif_user_add_ug'
+    url = BaseHandler.url + r'/modif_user_add_ug.*'
 
     uname = u'uname'
 
@@ -308,12 +311,12 @@ class AddUG(base_handler.BaseHandler):
             return self.errInfo()
 
 
-class RemoveUG(base_handler.BaseHandler):
+class RemoveUG(BaseHandler):
     """
     移除用户的用户组
     """
-    URL = base_handler.BaseHandler.URL +  u'/modif_user_remove_ug'
-    url = base_handler.BaseHandler.url + r'/modif_user_remove_ug.*'
+    URL = BaseHandler.URL +  u'/modif_user_remove_ug'
+    url = BaseHandler.url + r'/modif_user_remove_ug.*'
 
     uname = u'uname'
 
@@ -353,6 +356,58 @@ class RemoveUG(base_handler.BaseHandler):
             u.save()
 
             return u'为用户%s移除用户组成功' % u.username
+
+        except:
+            return self.errInfo()
+
+
+
+class ModifUserGroup(BaseHandler):
+    """
+    修改用户组信息
+    """
+    URL = BaseHandler.URL +  u'/modif_user_ug'
+    url = BaseHandler.url + r'/modif_user_ug.*'
+
+    def POST(self):
+        try:
+            if not app.session.login and not settings.DEBUG:
+                return render.login(u'登录超时，请重新登录')
+
+            ''' 检查权限 '''
+            user = User.obj(app.session.username)
+            if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER_GROUP):
+                return u'没有 修改 用户组 信息的权限...'
+
+            ''' 新用户组信息 '''
+            newUg = web.input()
+
+            ''' 实例化 '''
+            ug = UserGroup.obj(newUg.oname)
+
+            ''' 改名 '''
+            ug.name = newUg.name
+
+            ''' 获取设定的权限 '''
+            pms = 0
+            for pmn, pm in UserGroup.getPermissionDic().items():
+                if newUg.get(pmn) == u'on':
+                    pms |= pm
+
+            ''' 清空该用户组的权限 '''
+            ug.removeAllPms()
+
+            ''' 重设权限 '''
+            ug.addPms(pms)
+
+            ''' 保存 '''
+            ug.save()
+
+            ''' 是否有错误 '''
+            if ug.errStr:
+                raise ValueError(ug.errStr)
+
+            return u'修改用户组成功'
 
         except:
             return self.errInfo()

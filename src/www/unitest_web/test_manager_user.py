@@ -162,4 +162,64 @@ class TestManageUser(unittest.TestCase):
         views.html('user_list')
 
 
+    def test_render_user_group_list(self):
+        '''
+        渲染 用户组信息列表
+        :return:
+        '''
+        User.createRoot()
+        user = User.obj(User.rootAccount)
+        ugn = u'测试1'
+        pms = UserGroup.getAllPms()
+        UserGroup.createNewUserGroup(ugn, pms)
 
+        views = Views(user)
+        views.render_user_group_list()
+        views.html('user_group_list')
+
+
+    def test_render_create_user_group(self):
+        '''
+        渲染 用户组信息列表
+        :return:
+        '''
+        User.createRoot()
+        user = User.obj(User.rootAccount)
+        ugn = u'测试1'
+        pms = UserGroup.getAllPms()
+        UserGroup.createNewUserGroup(ugn, pms)
+
+        views = Views(user)
+        views.render_create_user_group(CreateUserGroup)
+        views.html('create_user_group')
+
+
+    def test_render_create_user(self):
+        '''
+        测试 渲染 创建用户 界面
+        :return:
+        '''
+
+        User.createRoot()
+        user = User.obj(User.rootAccount)
+
+        ugn = u'测试1'
+        pms = UserGroup.getAllPms()
+        UserGroup.createNewUserGroup(ugn, pms)
+
+        views = Views(user)
+        views.render_create_user(CreateUser)
+        views.html('create_user')
+
+
+    def test_ManageUser(self):
+        '''
+        :return:
+        '''
+        User.createRoot()
+        ''' 渲染 '''
+        settings.debug_username = User.rootAccount
+        user = User.obj(settings.debug_username)
+
+        v = Views(user)
+        v.html(self.appM.request(localpart=ManageUser.URL, method='GET').data)

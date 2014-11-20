@@ -1,0 +1,33 @@
+$def with (user, UserGroup, CreateUserGroup)
+
+<!-- 创建用户组 -->
+$if user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
+    <tr><td>
+        <br/>
+        <table border="1">
+            <form name="input" action=$CreateUserGroup.URL method="POST">
+            <caption>创建用户组</caption>
+            <tr>
+                <th>组名</th>
+                <th>权限</th>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                    <tr><td><input type="text" name=$CreateUserGroup.ugname /></td></tr>
+                    <tr><td><input type="submit" value="创建用户组" /></td></tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            $for i, pm in enumerate(UserGroup.getPmNames()):
+                                <td><input type="checkbox" name=$pm />$pm</td>
+                                $if (i+1) % 5 == 0:</tr><tr>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            </form>
+        </table>
+    </td></tr>

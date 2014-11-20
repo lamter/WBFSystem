@@ -43,6 +43,9 @@ class UserGroup(orm.RediscoModle):
     ''' 修改用户信息 '''
     PERMISSION_MODIF_USER = 1 << 5
 
+    ''' 修改 用户组 信息 '''
+    PERMISSION_MODIF_USER_GROUP = 1 << 6
+
     ''' 以 PERMISSION_* 的形式来命名变量 '''
 
     ''' <=用户权限枚举 '''
@@ -240,3 +243,10 @@ class UserGroup(orm.RediscoModle):
         return names
 
 
+    def removeAllPms(self):
+        '''
+        移除 该用户组 所有权限
+        :return:
+        '''
+
+        self.removePms(self.pms)

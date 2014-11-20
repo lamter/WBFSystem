@@ -28,7 +28,7 @@ class ManageUser(BaseHandler):
             if not settings.DEBUG and not app.session.login:
                 return render.login(u'登录超时，请重新登录')
 
-            user = User.obj(app.session.username)
+            user = User.obj(username=app.session.username)
             views = Views(user)
 
             ''' 渲染管理用户选项 '''
@@ -389,7 +389,7 @@ class ModifUserGroup(BaseHandler):
                 return render.login(u'登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(app.session.username)
+            user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER_GROUP):
                 return u'没有 修改 用户组 信息的权限...'
 
@@ -397,7 +397,7 @@ class ModifUserGroup(BaseHandler):
             newUg = web.input()
 
             ''' 实例化 '''
-            ug = UserGroup.obj(newUg.oname)
+            ug = UserGroup.obj(name=newUg.oname)
             if ug is None:
                 raise ValueError(u'用户组%s' % newUg.oname)
 
@@ -420,12 +420,6 @@ class ModifUserGroup(BaseHandler):
             ''' 是否有错误 '''
             if ug.errStr:
                 raise ValueError(ug.errStr)
-
-            ug = UserGroup.obj(ug.name)
-            print 1111111111
-            print ug.id
-            print ug.name
-            print ug.pms
 
             return u'修改用户组成功'
 

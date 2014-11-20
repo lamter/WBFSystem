@@ -64,16 +64,6 @@ class UserGroup(orm.RediscoModle):
 
 
     @classmethod
-    def obj(cls, *args):
-        '''
-        根据用户组名生成实例
-        :param args:
-        :return:
-        '''
-        ugname = args[0]
-        return cls.objects.filter().first()
-
-    @classmethod
     def all(cls):
         '''
         获取所有用户组
@@ -252,3 +242,18 @@ class UserGroup(orm.RediscoModle):
         '''
 
         self.removePms(self.pms)
+
+
+
+    def delete(self, User):
+        '''
+        重写 delete 方法，删除用户组需要同时将从用户身上删除用户组
+        :return:
+        '''
+        for u in User.all():
+            if self in u.userGroups:
+                u.removeUserGroup(self)
+                u.save()
+
+        ''' 从redis中删除实例 '''
+        orm.RediscoModle.delete(self)

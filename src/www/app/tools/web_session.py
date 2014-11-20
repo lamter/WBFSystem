@@ -50,7 +50,7 @@ class Initializer(object):
             #     ''' 测试环境需要在其他地方将预设的debug_login传进来作为seesion.login的值 '''
             #     setattr(self.session, 'login', self.settings.debug_login)
 
-        user = self.User.obj(self.session.username)
+        user = self.User.obj(username=self.session.username)
 
         # ''' 尚未注册的用户 '''
         # if self.session.user is None:

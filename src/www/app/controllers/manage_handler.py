@@ -11,8 +11,8 @@ This module contains the main handler of the application.
 import web
 
 from . import render
-import src.www.app as app
-import src.www.settings as settings
+import app
+import settings
 from base_handler import BaseHandler
 from ..models.views import Views
 from ..models.user import User

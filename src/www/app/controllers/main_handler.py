@@ -10,7 +10,7 @@ This module contains the main handler of the application.
 
 import traceback
 
-import src.www.app as app
+import app
 from base_handler import *
 from manage_handler import (ManageUser)
 from ..models.views import Views

@@ -77,7 +77,7 @@ $if user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                         <tr>
                             <td>
                                 <!-- 已经加入的用户组 -->
-                                $for ug in modifUser.getUserGroups():
+                                $for ug in modifUser.userGroups:
                                     <input type="checkbox" name=$ug.name />$ug.name
                             </td>
                         </tr>

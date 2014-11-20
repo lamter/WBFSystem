@@ -96,10 +96,11 @@ class TestUser(unittest.TestCase):
         u = User.createNewUser(username, password)
 
         print u'生成用户完毕...'
-        u = User.obj(username)
-        if not u.is_valid:
+        nu = User.obj(username=username)
+        if not nu.is_valid:
             raise ValueError(u'生成玩家失败!!!')
         print u'生成用户成功...'
+
 
 
     def test_objNoUser(self):
@@ -110,7 +111,7 @@ class TestUser(unittest.TestCase):
         self.redis.flushdb()
 
         username = 'adfgagdsdfadsg'
-        u = User.obj(username)
+        u = User.obj(username=username)
         if u is not None:
             raise ValueError(u'不存在的用户不是None')
 
@@ -185,7 +186,7 @@ class TestUser(unittest.TestCase):
 
         root.save()
 
-        root = User.obj(User.rootAccount)
+        root = User.obj(username=User.rootAccount)
         rootUg = root.getUserGroupByName(UserGroup.rootGroup)
 
         print rootUg.pms
@@ -226,7 +227,7 @@ class TestUser(unittest.TestCase):
 
         ''' 添加用户组 '''
         user.addUserGroup(ug)
-        ug = UserGroup.obj(ugn)
+        ug = UserGroup.obj(name=ugn)
         print 'ug->', id(ug), ug
 
         ''' 添加用户组 '''

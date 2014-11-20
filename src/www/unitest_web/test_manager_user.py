@@ -91,7 +91,7 @@ class TestManageUser(unittest.TestCase):
         :return:
         '''
         User.createRoot()
-        user = User.obj(User.rootAccount)
+        user = User.obj(username=User.rootAccount)
         v = Views(user)
         # v.render_manage_user_option(None)
         # v.html('manage_user_option')
@@ -103,7 +103,7 @@ class TestManageUser(unittest.TestCase):
         :return:
         '''
         User.createRoot()
-        user = User.obj(User.rootAccount)
+        user = User.obj(username=User.rootAccount)
         views = Views(user)
         views.render_manage_user()
         views.html('manage_user')
@@ -117,10 +117,10 @@ class TestManageUser(unittest.TestCase):
 
         settings.debug_username = User.rootAccount
 
-        user = User.obj(settings.debug_username)
+        user = User.obj(username=settings.debug_username)
         if not user:
             User.createRoot()
-            user = User.obj(settings.debug_username)
+            user = User.obj(username=settings.debug_username)
 
         v = Views(user)
         v.html(self.appM.request(ManageUser.url).data)
@@ -131,10 +131,10 @@ class TestManageUser(unittest.TestCase):
         测试 修改用户信息界面
         :return:
         '''
-        user = User.obj(User.rootAccount)
+        user = User.obj(username=User.rootAccount)
         if not user:
             User.createRoot()
-            user = User.obj(User.rootAccount)
+            user = User.obj(username=User.rootAccount)
 
         views = Views(user)
         views.render_modif_user(user, ModifUserN, ModifUserPW, AddUG, RemoveUG)
@@ -149,10 +149,10 @@ class TestManageUser(unittest.TestCase):
         '''
         # self.redis.flushdb()
 
-        user = User.obj(User.rootAccount)
+        user = User.obj(username=User.rootAccount)
         if not user:
             User.createRoot()
-            user = User.obj(User.rootAccount)
+            user = User.obj(username=User.rootAccount)
 
         un = 'test1'
         pw = '123456'
@@ -169,7 +169,7 @@ class TestManageUser(unittest.TestCase):
         :return:
         '''
         User.createRoot()
-        user = User.obj(User.rootAccount)
+        user = User.obj(username=User.rootAccount)
         ugn = u'测试1'
         pms = UserGroup.getAllPms()
         UserGroup.createNewUserGroup(ugn, pms)
@@ -185,7 +185,7 @@ class TestManageUser(unittest.TestCase):
         :return:
         '''
         User.createRoot()
-        user = User.obj(User.rootAccount)
+        user = User.obj(username=User.rootAccount)
         ugn = u'测试1'
         pms = UserGroup.getAllPms()
         UserGroup.createNewUserGroup(ugn, pms)
@@ -202,7 +202,7 @@ class TestManageUser(unittest.TestCase):
         '''
 
         User.createRoot()
-        user = User.obj(User.rootAccount)
+        user = User.obj(username=User.rootAccount)
 
         ugn = u'测试1'
         pms = UserGroup.getAllPms()
@@ -221,7 +221,7 @@ class TestManageUser(unittest.TestCase):
         User.createRoot()
         ''' 渲染 '''
         settings.debug_username = User.rootAccount
-        user = User.obj(settings.debug_username)
+        user = User.obj(username=settings.debug_username)
 
         v = Views(user)
         v.html(self.appM.request(localpart=ManageUser.URL, method='GET').data)
@@ -241,7 +241,7 @@ class TestManageUser(unittest.TestCase):
 
         ''' 渲染 '''
         settings.debug_username = User.rootAccount
-        user = User.obj(settings.debug_username)
+        user = User.obj(username=settings.debug_username)
         data = {
             'oname': u'测试1',
             'name': u'原测试1',

@@ -97,10 +97,11 @@ class TestUser(unittest.TestCase):
         ug = UserGroup.createNewUserGroup(ugname, UserGroup.getAllPms())
 
         print u'生成用户组完毕...'
-        ug = UserGroup.obj(ugname)
+        ug = UserGroup.obj(name=ugname)
         if not ug.is_valid:
             raise ValueError(u'生成用户组失败!!!')
         print u'生成用户组成功...'
+
 
 
     def test_UserGroupAll(self):

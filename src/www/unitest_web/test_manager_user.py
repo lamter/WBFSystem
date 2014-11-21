@@ -170,7 +170,7 @@ class TestManageUser(unittest.TestCase):
         '''
         User.createRoot()
         user = User.obj(username=User.rootAccount)
-        ugn = u'测试1'
+        ugn = '测试1'
         pms = UserGroup.getAllPms()
         UserGroup.createNewUserGroup(ugn, pms)
 
@@ -186,7 +186,7 @@ class TestManageUser(unittest.TestCase):
         '''
         User.createRoot()
         user = User.obj(username=User.rootAccount)
-        ugn = u'测试1'
+        ugn = '测试1'
         pms = UserGroup.getAllPms()
         UserGroup.createNewUserGroup(ugn, pms)
 
@@ -201,10 +201,11 @@ class TestManageUser(unittest.TestCase):
         :return:
         '''
 
+        self.redis.flushdb()
         User.createRoot()
         user = User.obj(username=User.rootAccount)
 
-        ugn = u'测试1'
+        ugn = '测试1'
         pms = UserGroup.getAllPms()
         UserGroup.createNewUserGroup(ugn, pms)
 
@@ -233,7 +234,7 @@ class TestManageUser(unittest.TestCase):
         :return:
         '''
 
-        ugn = u'测试1'
+        ugn = '测试1'
         pms = UserGroup.getAllPms()
         UserGroup.createNewUserGroup(ugn, pms)
 
@@ -243,8 +244,8 @@ class TestManageUser(unittest.TestCase):
         settings.debug_username = User.rootAccount
         user = User.obj(username=settings.debug_username)
         data = {
-            'oname': u'测试1',
-            'name': u'原测试1',
+            'oname': '测试1',
+            'name': '原测试1',
         }
 
         for pmn in UserGroup.getPmNames():

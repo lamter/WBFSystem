@@ -11,8 +11,8 @@ This module contains the main handler of the application.
 import web
 
 from . import render
-import src.www.app as app
-import src.www.settings as settings
+import app
+import settings
 from base_handler import BaseHandler
 from ..models.views import Views
 from ..models.user import User
@@ -20,13 +20,13 @@ from ..models.usergroup import UserGroup
 
 class ManageUser(BaseHandler):
 
-    URL = BaseHandler.URL + u'/manage_user'
+    URL = BaseHandler.URL + '/manage_user'
     url = BaseHandler.url + r'/manage_user.*'
 
     def GET(self):
         try:
             if not settings.DEBUG and not app.session.login:
-                return render.login(u'登录超时，请重新登录')
+                return render.login('登录超时，请重新登录')
 
             user = User.obj(username=app.session.username)
             views = Views(user)
@@ -52,12 +52,6 @@ class ManageUser(BaseHandler):
             ''' 渲染用户管理界面列表 '''
             views.render_manage_user()
 
-            print 'user->',
-            print user.userGroups
-
-            print 'ug->',
-            print UserGroup.all()
-
             ''' 用户管理选择 '''
             return views.manage_user
 
@@ -70,35 +64,35 @@ class CreateUserGroup(BaseHandler):
     """
     创建用户组
     """
-    URL = BaseHandler.URL +  u'/create_user_group'
+    URL = BaseHandler.URL +  '/create_user_group'
     url = BaseHandler.url + r'/create_user_group.*'
 
-    ugname = u'ugname'
+    ugname = 'ugname'
 
     def POST(self):
         try:
             if not app.session.login and not settings.DEBUG:
-                return render.login(u'登录超时，请重新登录')
+                return render.login('登录超时，请重新登录')
 
             user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
-                return u'没有创建用户组的权限...'
+                return '没有创建用户组的权限...'
 
-            # print u'创建用户中...'
+            # print '创建用户中...'
             newUg = web.input()
             # print 'newUg->', newUg
 
             ''' 获取设定的权限 '''
             pms = 0
             for pmn, pm in UserGroup.getPermissionDic().items():
-                if newUg.get(pmn) == u'on':
+                if newUg.get(pmn) == 'on':
                     pms |= pm
             # print 'pms->', pms
 
             ''' 创建用户组 '''
             UserGroup.createNewUserGroup(newUg.ugname, pms)
 
-            return u'创建用户组%s成功' % newUg.ugname
+            return '创建用户组%s成功' % newUg.ugname
 
         except:
             return self.errInfo()
@@ -109,39 +103,48 @@ class CreateUser(BaseHandler):
     """
     创建用户
     """
-    URL = BaseHandler.URL +  u'/create_user'
+    URL = BaseHandler.URL +  '/create_user'
     url = BaseHandler.url + r'/create_user.*'
 
-    name = u'username'
-    passwd = u'userpasswd'
+    name = 'username'
+    passwd = 'userpasswd'
+
+    ugsign = 'ugid_'            # 返回的用户组的值为 ugid_1
 
     def POST(self):
         try:
             if not app.session.login and not settings.DEBUG:
-                return render.login(u'登录超时，请重新登录')
+                return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_CREATE_USER):
-                return u'没有创建用户的权限...'
+                return '没有创建用户的权限...'
 
-            # print u'创建用户中...'
+            # print '创建用户中...'
             newU = web.input()
 
             # print 'newU->', newU
+            # for k,v in newU.items():
+            #     print type(k), k,':',v
 
             ''' 创建用户 '''
             u = User.createNewUser(newU.username, newU.userpasswd)
 
             ''' 设定用户组 '''
             try:
-                for ug in UserGroup.all():
-                    if getattr(newU, ug.name) == u'on':
+                for k,v in newU.items():
+                    if v != 'on':
+                        ''' on 才是属于被勾选的 '''
+                        continue
+                    ugid = k.split(self.ugsign)[1]
+                    ug = UserGroup.obj(id=ugid)
+                    if ug:
                         u.addUserGroup(ug)
             except:
-                raise ValueError(u'创建用户成功, 但是添加用户组失败')
+                raise ValueError('创建用户成功, 但是添加用户组失败')
 
-            return u'创建用户%s成功' % u.username
+            return '创建用户%s成功' % u.username
 
         except:
             return self.errInfo()
@@ -152,30 +155,29 @@ class ModifUser(BaseHandler):
     """
     修改用户信息界面
     """
-    URL = BaseHandler.URL +  u'/modif_user_info'
+    URL = BaseHandler.URL +  '/modif_user_info'
     url = BaseHandler.url + r'/modif_user_info.*'
 
-    uname = u'username'
+    uname = 'username'
 
     def POST(self):
         try:
             if not app.session.login and not settings.DEBUG:
-                return render.login(u'登录超时，请重新登录')
+                return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
-                return u'没有修改用户信息的权限...'
+                return '没有修改用户信息的权限...'
 
             views = Views(user)
 
             modifU = web.input()
-            print 'modifU->', modifU
 
             ''' 获得待修改的用户实例 '''
             modfUser = User.obj(username=modifU.username)
             if modfUser is None:
-                raise ValueError(u'指定的用户%s不存在...' % modifU.username)
+                raise ValueError('指定的用户%s不存在...' % modifU.username)
 
             views.render_modif_user(modfUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
 
@@ -190,37 +192,37 @@ class ModifUserN(BaseHandler):
     """
     修改用户名
     """
-    URL = BaseHandler.URL +  u'/modif_user_name'
+    URL = BaseHandler.URL + '/modif_user_name'
     url = BaseHandler.url + r'/modif_user_name.*'
 
-    uname = u'uname'
-    newN = u'newN'
+    uname = 'uname'
+    newN = 'newN'
 
     def POST(self):
         try:
             if not app.session.login and not settings.DEBUG:
-                return render.login(u'登录超时，请重新登录')
+                return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
-                return u'没有修改用户信息的权限...'
+                return '没有修改用户信息的权限...'
 
             modifU = web.input()
             print 'modifU->', modifU
             ''' 获得用户实例 '''
             u = User.obj(username=modifU.uname)
             if u is None:
-                raise ValueError(u'指定的用户%s不存在...' % modifU.uname)
+                raise ValueError('指定的用户%s不存在...' % modifU.uname)
 
             ''' 修改密码 '''
-            u.username = u'%s' % modifU.newN
+            u.username = '%s' % modifU.newN
             if u.errors:
                 raise ValueError(u.errStr)
 
             ''' 修改后存库 '''
             u.save()
-            return u'修改用户%s的用户名%s为成功' % (modifU.uname, modifU.newN)
+            return '修改用户%s的用户名%s为成功' % (modifU.uname, modifU.newN)
 
         except:
             return self.errInfo()
@@ -231,21 +233,21 @@ class ModifUserPW(BaseHandler):
     """
     修改用户密码
     """
-    URL = BaseHandler.URL +  u'/modif_user_pw'
+    URL = BaseHandler.URL +  '/modif_user_pw'
     url = BaseHandler.url + r'/modif_user_pw.*'
 
-    name = u'username'
-    pw = u'newpw'
+    name = 'username'
+    pw = 'newpw'
 
     def POST(self):
         try:
             if not app.session.login and not settings.DEBUG:
-                return render.login(u'登录超时，请重新登录')
+                return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
-                return u'没有修改用户信息的权限...'
+                return '没有修改用户信息的权限...'
 
             modifU = web.input()
             # print 'modfU->', modifU
@@ -253,10 +255,10 @@ class ModifUserPW(BaseHandler):
             ''' 获得用户实例 '''
             u = User.obj(username=modifU.username)
             if u is None:
-                raise ValueError(u'指定的用户%s不存在...' % modifU.username)
+                raise ValueError('指定的用户%s不存在...' % modifU.username)
 
             ''' 修改密码 '''
-            u.password = u'%s' % modifU.newpw
+            u.password = '%s' % modifU.newpw
 
             if u.errors:
                 raise ValueError(u.errStr)
@@ -264,7 +266,7 @@ class ModifUserPW(BaseHandler):
             ''' 修改后存库 '''
             u.save()
 
-            return u'修改用户%s的密码成功' % u.username
+            return '修改用户%s的密码成功' % u.username
 
         except:
             return self.errInfo()
@@ -275,20 +277,22 @@ class AddUG(BaseHandler):
     """
     给用户添加用户组
     """
-    URL = BaseHandler.URL +  u'/modif_user_add_ug'
+    URL = BaseHandler.URL +  '/modif_user_add_ug'
     url = BaseHandler.url + r'/modif_user_add_ug.*'
 
-    uname = u'uname'
+    uname = 'uname'
+
+    ugsign = 'ugid_'
 
     def POST(self):
         try:
             if not app.session.login and not settings.DEBUG:
-                return render.login(u'登录超时，请重新登录')
+                return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
-                return u'没有修改用户信息的权限...'
+                return '没有修改用户信息的权限...'
 
             modifU = web.input()
             # print 'modfU->', modifU
@@ -296,18 +300,20 @@ class AddUG(BaseHandler):
             ''' 获得待修改的用户实例 '''
             u = User.obj(username=modifU.uname)
             if u is None:
-                raise ValueError(u'指定的用户%s不存在...' % modifU.uname)
+                raise ValueError('指定的用户%s不存在...' % modifU.uname)
 
             ''' 添加用户组 '''
-            joinUGNames = u.getUGNames()
-            for ug in UserGroup.all():
-                if modifU.get(ug.name) != u'on':
+            for k,v in modifU.items():
+                if v != 'on':
                     continue
-                if u.isInUg(ug):
-                    ''' 已经加入的组忽略 '''
+                try:
+                    ugid = k.split(self.ugsign)[1]
+                except:
                     continue
-                ''' 符合条件则添加 '''
-                u.addUserGroup(ug)
+                ug = UserGroup.obj(id=ugid)
+                if ug and not u.isInUg(ug):
+                    ''' 没有加入的用户才添加 '''
+                    u.addUserGroup(ug)
 
             ''' 没有错误则可以存库 '''
             if u.errors:
@@ -316,7 +322,7 @@ class AddUG(BaseHandler):
             ''' 修改后存库 '''
             u.save()
 
-            return u'为用户%s添加用户组成功' % u.username
+            return '为用户%s添加用户组成功' % u.username
 
         except:
             return self.errInfo()
@@ -326,20 +332,22 @@ class RemoveUG(BaseHandler):
     """
     移除用户的用户组
     """
-    URL = BaseHandler.URL +  u'/modif_user_remove_ug'
+    URL = BaseHandler.URL +  '/modif_user_remove_ug'
     url = BaseHandler.url + r'/modif_user_remove_ug.*'
 
-    uname = u'uname'
+    uname = 'uname'
+
+    ugsign = 'ugid_'
 
     def POST(self):
         try:
             if not app.session.login and not settings.DEBUG:
-                return render.login(u'登录超时，请重新登录')
+                return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
-                return u'没有修改用户信息的权限...'
+                return '没有修改用户信息的权限...'
 
             modifU = web.input()
             # print 'modfU->', modifU
@@ -347,17 +355,17 @@ class RemoveUG(BaseHandler):
             ''' 获得用户实例 '''
             u = User.obj(username=modifU.uname)
             if u is None:
-                raise ValueError(u'指定的用户%s不存在...' % modifU.uname)
+                raise ValueError('指定的用户%s不存在...' % modifU.uname)
 
-            ''' 移除用户组 '''
-            for ug in UserGroup.all():
-                if modifU.get(ug.name) != u'on':
+            ''' 添加用户组 '''
+            for k,v in modifU.items():
+                if v != 'on':
                     continue
-                if not u.isInUg(ug):
-                    ''' 不在用户组中的忽略 '''
-                    continue
-                ''' 符合条件的移除 '''
-                u.removeUserGroup(ug)
+                ugid = k.split(self.ugsign)[1]
+                ug = UserGroup.obj(id=ugid)
+                if ug and u.isInUg(ug):
+                    ''' 没有加入的用户才添加 '''
+                    u.removeUserGroup(ug)
 
             ''' 没有错误则可以存库 '''
             if u.errors:
@@ -366,7 +374,7 @@ class RemoveUG(BaseHandler):
             ''' 修改后存库 '''
             u.save()
 
-            return u'为用户%s移除用户组成功' % u.username
+            return '为用户%s移除用户组成功' % u.username
 
         except:
             return self.errInfo()
@@ -377,21 +385,21 @@ class ModifUserGroup(BaseHandler):
     """
     修改用户组信息
     """
-    URL = BaseHandler.URL +  u'/modif_user_group'
+    URL = BaseHandler.URL +  '/modif_user_group'
     url = BaseHandler.url + r'/modif_user_group.*'
 
-    oname = u'oname'
-    name = u'name'
+    oname = 'oname'
+    name = 'name'
 
     def POST(self):
         try:
             if not app.session.login and not settings.DEBUG:
-                return render.login(u'登录超时，请重新登录')
+                return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=app.session.username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER_GROUP):
-                return u'没有 修改 用户组 信息的权限...'
+                return '没有 修改 用户组 信息的权限...'
 
             ''' 新用户组信息 '''
             newUg = web.input()
@@ -399,7 +407,7 @@ class ModifUserGroup(BaseHandler):
             ''' 实例化 '''
             ug = UserGroup.obj(name=newUg.oname)
             if ug is None:
-                raise ValueError(u'用户组%s' % newUg.oname)
+                raise ValueError('用户组%s' % newUg.oname)
 
             ''' 改名 '''
             if newUg.name:
@@ -408,7 +416,7 @@ class ModifUserGroup(BaseHandler):
             ''' 获取设定的权限 '''
             pms = 0
             for pmn, pm in UserGroup.getPermissionDic().items():
-                if newUg.get(pmn) == u'on':
+                if newUg.get(pmn) == 'on':
                     pms |= pm
 
             ''' 重设权限 '''
@@ -421,7 +429,7 @@ class ModifUserGroup(BaseHandler):
             if ug.errStr:
                 raise ValueError(ug.errStr)
 
-            return u'修改用户组成功'
+            return '修改用户组成功'
 
         except:
             return self.errInfo()

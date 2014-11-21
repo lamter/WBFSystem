@@ -10,16 +10,20 @@ file.
 
 """
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 import web
-from src.www import app
+import app
 import settings
 from app.tools.web_session import Initializer
-from app import (models, controllers)
+# from app import (models, controllers)
 from urls import (URLS, HANDLER)
 from app.tools.app_processor import (header_html, notfound, internalerror)
 
 ''' 初始化orm '''
-models.init()
+app.models.init()
 
 web.config.debug = settings.DEBUG
 
@@ -30,9 +34,9 @@ appM.internalerror = internalerror
 appM.add_processor(web.loadhook(header_html))
 
 app.session = web.session.Session(appM, web.session.DiskStore('sessions'), initializer=Initializer(
-                                                                                                      User=models.user.User,
-                                                                                                      UserGroup=models.usergroup.UserGroup,
-                                                                                                      BanLogin=controllers.login_handler.BanLogin,
+                                                                                                      User=app.models.user.User,
+                                                                                                      UserGroup=app.models.usergroup.UserGroup,
+                                                                                                      BanLogin=app.controllers.login_handler.BanLogin,
                                                                                                       settings=settings,
                                                                                                       app=app,
                                                                                                       ))

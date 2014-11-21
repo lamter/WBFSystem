@@ -51,7 +51,7 @@ class Initializer(object):
 
         # ''' 尚未注册的用户 '''
         # if self.session.user is None:
-        #     errInfo = u'未注册的账户...'
+        #     errInfo = '未注册的账户...'
         #     print errInfo
         #     web.redirect(Login.URL)
         #     return

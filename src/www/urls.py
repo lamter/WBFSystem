@@ -25,7 +25,7 @@ URLS = (
     ModifUserGroup.url,         ModifUserGroup.__name__,
 )
 # for i,u in enumerate(URLS):
-#     print u, u'\t',
+#     print u, '\t',
 #     if (i+1) % 2 == 0:
 #         print
 

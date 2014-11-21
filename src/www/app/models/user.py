@@ -28,7 +28,7 @@ ACCOUNT_MIN_SIZE = 3
 PW_MAX_SIZE = 50
 PW_MIN_SIZE = 6
 
-NEW_ACCOUNT_ERR_NOT_UNIQUE = u'not unique'
+NEW_ACCOUNT_ERR_NOT_UNIQUE = 'not unique'
 
 
 def validateAccount(field_name, value):
@@ -36,9 +36,9 @@ def validateAccount(field_name, value):
     :return:
     '''
     if len(value) > ACCOUNT_MAX_SIZE:
-        return ((field_name, u'不能超过%d个字符!!!' % ACCOUNT_MAX_SIZE),)
+        return ((field_name, '不能超过%d个字符!!!' % ACCOUNT_MAX_SIZE),)
     if len(value) < ACCOUNT_MIN_SIZE:
-        return ((field_name, u'用户名不能少于%d个字符!!!' % ACCOUNT_MIN_SIZE),)
+        return ((field_name, '用户名不能少于%d个字符!!!' % ACCOUNT_MIN_SIZE),)
 
 
 
@@ -50,9 +50,9 @@ def validatePassword(field_name, value):
     :return:
     '''
     if len(value) > ACCOUNT_MAX_SIZE:
-        return ((field_name, u'不能超过%d个字符!!!' % PW_MAX_SIZE),)
+        return ((field_name, '不能超过%d个字符!!!' % PW_MAX_SIZE),)
     if len(value) < ACCOUNT_MIN_SIZE:
-        return ((field_name, u'用户名不能少于%d个字符!!!' %PW_MIN_SIZE),)
+        return ((field_name, '用户名不能少于%d个字符!!!' %PW_MIN_SIZE),)
 
 
 
@@ -77,21 +77,21 @@ class User(orm.RediscoModle):
     is_cancel = models.BooleanField(default=True)
 
     ''' root用户的账号和密码 '''
-    rootAccount = u'root'
-    rootPassword = u'123456'
+    rootAccount = 'root'
+    rootPassword = '123456'
 
 
     def validate(self):
         '''
         :return:
         '''
-        errss = u''
+        errss = ''
         for errs in self._errors:
-            err = u" ".join(errs)
+            err = " ".join(errs)
             print err
             errss += err
         if self._errors:
-            print u'are the reasons to '
+            print 'are the reasons to '
         return errss
 
 
@@ -134,7 +134,7 @@ class User(orm.RediscoModle):
             ''' 生成失败，直接报错退出 '''
             raise ValueError(user.errStr)
             # if NEW_ACCOUNT_ERR_NOT_UNIQUE in user.validate():
-            #     raise ValueError(u'用户名重复!!!')
+            #     raise ValueError('用户名重复!!!')
 
         ''' 生成新的用户的id '''
         counter = Counter.obj()
@@ -198,11 +198,11 @@ class User(orm.RediscoModle):
         :return:
         '''
         if not isinstance(userGroup, UserGroup):
-            errInfo = u'分配用户组失败!!!\nclass:%s不是指定的用户组类型%s!!!' % type(userGroup), UserGroup.__name__
+            errInfo = '分配用户组失败!!!\nclass:%s不是指定的用户组类型%s!!!' % type(userGroup), UserGroup.__name__
             raise TypeError(errInfo)
 
         if userGroup in self.userGroups:
-            errInfo = u'用户已经在用户组 uid:%d %s 中了' % (userGroup.id, userGroup.name)
+            errInfo = '用户已经在用户组 uid:%d %s 中了' % (userGroup.id, userGroup.name)
             raise ValueError(errInfo)
 
         self._userGroups.append(userGroup.id)
@@ -216,11 +216,11 @@ class User(orm.RediscoModle):
         :return:
         '''
         if not isinstance(userGroup, UserGroup):
-            errInfo = u'分配用户组失败!!!\nclass:%s不是指定的用户组类型%s!!!' % type(userGroup), UserGroup.__name__
+            errInfo = '分配用户组失败!!!\nclass:%s不是指定的用户组类型%s!!!' % type(userGroup), UserGroup.__name__
             raise TypeError(errInfo)
 
         if userGroup not in self.userGroups:
-            errInfo = u'用户不在用户组 id:%d %s 中了' % (userGroup.id, userGroup.name)
+            errInfo = '用户不在用户组 id:%d %s 中了' % (userGroup.id, userGroup.name)
             raise ValueError(errInfo)
 
         self._userGroups.remove(userGroup.id)
@@ -248,7 +248,7 @@ class User(orm.RediscoModle):
         :return:
         '''
         if self.username != self.__class__.rootAccount:
-            raise ValueError(u'该用户不是root用户!!!')
+            raise ValueError('该用户不是root用户!!!')
 
         ''' 检查用户组 '''
         rootUg = UserGroup.obj(name=UserGroup.rootGroup)
@@ -295,7 +295,7 @@ class User(orm.RediscoModle):
         :return:
         '''
         if not isinstance(ug, UserGroup):
-            raise ValueError(u'错误的用户组类型: %s' % ug.__class__.__name__)
+            raise ValueError('错误的用户组类型: %s' % ug.__class__.__name__)
         return ug in self.userGroups
 
 

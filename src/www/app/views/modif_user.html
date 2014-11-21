@@ -55,7 +55,7 @@ $if user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                             <td>
                                 <!-- 列出未加入的用户组 -->
                                 $for ug in modifUser.getUnjoinGroups():
-                                    <input type="checkbox" name=$ug.name />$ug.name
+                                    <input type="checkbox" name=$AddUG.ugsign$ug.id />$ug.name
                             </td>
                         </tr>
                         <tr>
@@ -78,7 +78,7 @@ $if user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                             <td>
                                 <!-- 已经加入的用户组 -->
                                 $for ug in modifUser.userGroups:
-                                    <input type="checkbox" name=$ug.name />$ug.name
+                                    <input type="checkbox" name=$RemoveUG.ugsign$ug.id />$ug.name
                             </td>
                         </tr>
                         <tr>

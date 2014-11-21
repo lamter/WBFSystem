@@ -12,7 +12,7 @@ import traceback
 
 import web
 
-import src.www.app as app
+import app
 from . import render
 from base_handler import BaseHandler
 from main_handler import Main
@@ -23,7 +23,7 @@ from ..models.usergroup import UserGroup
 
 class Login(BaseHandler):
 
-    URL = BaseHandler.URL + u'/login'
+    URL = BaseHandler.URL + '/login'
     url = BaseHandler.url + r'/login.*'
 
     def POST(self):
@@ -31,37 +31,37 @@ class Login(BaseHandler):
         username = web.input().get("username")
         password = str(web.input().get("password"))
         if not username:
-            errInfo = u'请输入账号!!'
+            errInfo = '请输入账号!!'
             return render.login(errInfo, Login)
         user = User.obj(username=username)
 
         if user is None:
-            errInfo = u'未注册的账号!!'
+            errInfo = '未注册的账号!!'
             return render.login(errInfo, Login)
 
         elif not user.isPW(password):
             ''' 密码错误 '''
-            errInfo = u'密码错误!!'
+            errInfo = '密码错误!!'
             return render.login(errInfo, Login)
 
         elif user.isPW(password):
             ''' 通过验证 '''
-            app.session.username = u'%s' % username
+            app.session.username = '%s' % username
             app.session.login = True
             return web.redirect(Main.URL)
 
         else:
-            errInfo = u''
+            errInfo = ''
             return render.login(errInfo, Login)
 
-        return render.login(u'', Login)
+        return render.login('', Login)
 
 
 class BanLogin(BaseHandler):
     '''
     禁止登录
     '''
-    URL = BaseHandler.URL + u'/ban_login'
+    URL = BaseHandler.URL + '/ban_login'
     url = BaseHandler.url + r'/ban_login'
 
     def GET(self):

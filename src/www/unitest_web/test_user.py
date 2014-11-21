@@ -82,7 +82,7 @@ class TestUser(unittest.TestCase):
 
     def tearDown(self):
         # return
-        print u'清空了数据库%s' % settings.REDIS_DB
+        print '清空了数据库%s' % settings.REDIS_DB
         self.redis.flushdb()
 
 
@@ -95,11 +95,11 @@ class TestUser(unittest.TestCase):
         username, password = 'shawn', '123456'
         u = User.createNewUser(username, password)
 
-        print u'生成用户完毕...'
+        print '生成用户完毕...'
         nu = User.obj(username=username)
         if not nu.is_valid:
-            raise ValueError(u'生成玩家失败!!!')
-        print u'生成用户成功...'
+            raise ValueError('生成玩家失败!!!')
+        print '生成用户成功...'
 
 
 
@@ -113,7 +113,7 @@ class TestUser(unittest.TestCase):
         username = 'adfgagdsdfadsg'
         u = User.obj(username=username)
         if u is not None:
-            raise ValueError(u'不存在的用户不是None')
+            raise ValueError('不存在的用户不是None')
 
 
 
@@ -130,7 +130,7 @@ class TestUser(unittest.TestCase):
         except:
             errInfo = traceback.format_exc()
             if user.NEW_ACCOUNT_ERR_NOT_UNIQUE in errInfo:
-                print u'不能创建重名账户...'
+                print '不能创建重名账户...'
             else:
                 raise errInfo
 
@@ -147,7 +147,7 @@ class TestUser(unittest.TestCase):
         un = 'Shawn'
         pw = ''.join(['1' for i in range(user.ACCOUNT_MAX_SIZE+1)])
         try:
-            err = u'能够生成过 长 的密码!!'
+            err = '能够生成过 长 的密码!!'
             u = User.createNewUser(un, pw)
             raise ValueError(err)
         except :
@@ -159,7 +159,7 @@ class TestUser(unittest.TestCase):
         un = 'Shawn'
         pw = ''.join(['1' for i in range(user.ACCOUNT_MIN_SIZE-1)])
         try:
-            err = u'能够生成过 短 的密码!!'
+            err = '能够生成过 短 的密码!!'
             u = User.createNewUser(un, pw)
             raise ValueError(err)
         except:
@@ -216,14 +216,14 @@ class TestUser(unittest.TestCase):
         self.redis.flushdb()
 
         ''' 生成测试用户 '''
-        un = u'test01'
-        pw = u'123456'
+        un = 'test01'
+        pw = '123456'
         user = User.createNewUser(un, pw)
 
         ''' 生成测试用户组 '''
-        ugn = u'testUG01'
+        ugn = 'testUG01'
         ug = UserGroup.createNewUserGroup(ugn)
-        print u'ug->', id(ug), ug
+        print 'ug->', id(ug), ug
 
         ''' 添加用户组 '''
         user.addUserGroup(ug)
@@ -232,9 +232,12 @@ class TestUser(unittest.TestCase):
 
         ''' 添加用户组 '''
         if ug not in user.userGroups:
-            raise ValueError(u'添加  用户组失败')
+            raise ValueError('添加  用户组失败')
 
         ''' 移除用户组 '''
         user.removeUserGroup(ug)
         if ug in user.userGroups:
-            raise ValueError(u'移除 用户组失败')
+            raise ValueError('移除 用户组失败')
+
+
+

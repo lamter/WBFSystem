@@ -55,7 +55,7 @@ class UserGroup(orm.RediscoModle):
     ''' <=用户权限枚举 '''
 
     ''' 超级用户组 '''
-    rootGroup = u'root'
+    rootGroup = 'root'
 
     # uid = models.IntegerField(required=True, unique=True)
     name =models.Attribute(required=True, unique=True)
@@ -105,13 +105,13 @@ class UserGroup(orm.RediscoModle):
         '''
         :return:
         '''
-        errss = u''
+        errss = ''
         for errs in self._errors:
-            err = u" ".join(errs)
+            err = " ".join(errs)
             print err
             errss += err
         if self._errors:
-            print u'are the reasons to '
+            print 'are the reasons to '
         return errss
 
 
@@ -167,7 +167,7 @@ class UserGroup(orm.RediscoModle):
         '''
         # for pm in self.__class__.getPermissionDic().values():
         #     if not permissions & pm:
-        #         effInfo = u'用户组: %s设定权限失败!!非法的权限 %d !!!' % (self.name, permissions)
+        #         effInfo = '用户组: %s设定权限失败!!非法的权限 %d !!!' % (self.name, permissions)
         #         raise ValueError(effInfo)
         self.permissions |= pms
 
@@ -188,7 +188,7 @@ class UserGroup(orm.RediscoModle):
         :return:
         '''
         # if permissions not in self.__class__.getPermissionDic().values():
-        #     effInfo = u'用户组: %s设定权限失败!!非法的权限 %d !!!' % (self.name, permissions)
+        #     effInfo = '用户组: %s设定权限失败!!非法的权限 %d !!!' % (self.name, permissions)
         #     raise ValueError(effInfo)
 
         ''' 先授权，在卸权。因为计算算法的原因，所以这么做 '''

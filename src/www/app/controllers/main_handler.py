@@ -20,14 +20,14 @@ from ..models.usergroup import UserGroup
 
 class Main(BaseHandler):
 
-    URL = BaseHandler.URL + u'/main'
+    URL = BaseHandler.URL + '/main'
     url = BaseHandler.url + r'/main'
 
     def GET(self):
         try:
             user = User.obj(username=app.session.username)
             if not user:
-                return render.login(u'登录超时，请重新登录')
+                return render.login('登录超时，请重新登录')
 
             views = Views(user)
 

@@ -19,9 +19,9 @@ class Counter(orm.RediscoModle):
 
     ''' 计数项 '''
     count_user = models.Counter(unique=True)
-    user = u'count_user'
+    user = 'count_user'
     count_userGroup = models.Counter(unique=True)
-    userGroup = u'count_userGroup'
+    userGroup = 'count_userGroup'
 
     def __init__(self, **kwargs):
         orm.RediscoModle.__init__(self, **kwargs)
@@ -29,9 +29,9 @@ class Counter(orm.RediscoModle):
 
     def validate(self):
         for errs in self._errors:
-            print u" ".join(errs)
+            print " ".join(errs)
         if self._errors:
-            print u'are the reasons to '
+            print 'are the reasons to '
 
 
     @classmethod

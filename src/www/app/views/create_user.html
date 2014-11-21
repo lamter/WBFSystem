@@ -17,7 +17,7 @@ $if user.isHavePms(UserGroup.PERMISSION_CREATE_USER):
                 <table>
                     <tr>
                         $for i, ug in enumerate(UserGroup.all()):
-                            <td><input type="checkbox" name=$ug.name />$ug.name</td>
+                            <td><input type="checkbox" name=$CreateUser.ugsign$ug.id />$ug.name</td>
                             $if (i+1) % 5 == 0:</tr><tr>
                     </tr>
                 </table>

@@ -60,7 +60,7 @@ class RedisConnection(unittest.TestCase):
         try:
             redisco.connection.ping()
         except ConnectionError:
-            print u'错误连接，正常断开...'
+            print '错误连接，正常断开...'
 
 
 

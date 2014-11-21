@@ -81,7 +81,7 @@ class TestUser(unittest.TestCase):
         web.config.session_parameters['expired_message'] = 'Session expired'
     def tearDown(self):
         # return
-        print u'清空了数据库%s' % settings.REDIS_DB
+        print '清空了数据库%s' % settings.REDIS_DB
         self.redis.flushdb()
 
 
@@ -93,21 +93,24 @@ class TestUser(unittest.TestCase):
 
         self.redis.flushdb()
 
-        ugname = 'GM'
+        ugname = 'enName'
         ug = UserGroup.createNewUserGroup(ugname, UserGroup.getAllPms())
+        print 1111111111
+        print type(ug.name), ug.name
 
-        print u'生成用户组完毕...'
+        print '生成用户组完毕...'
         ug = UserGroup.obj(name=ugname)
+        print type(ug.name), ug.name
         if not ug.is_valid:
-            raise ValueError(u'生成用户组失败!!!')
-        print u'生成用户组成功...'
+            raise ValueError('生成用户组失败!!!')
+        print '生成用户组成功...'
 
 
 
     def test_UserGroupAll(self):
         ugs = UserGroup.all()
         UserGroup.createRootGroup()
-        print u'查询到用户组%d个' % len(ugs)
+        print '查询到用户组%d个' % len(ugs)
         for ug in ugs:
             print ug.name
 

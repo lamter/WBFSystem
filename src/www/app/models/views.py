@@ -18,7 +18,7 @@ class Views(object):
     def __init__(self, user=None):
         self.user = user
         if self.user == None:
-            raise ValueError(u'模板需要一个用户对象self.user')
+            raise ValueError('模板需要一个用户对象self.user')
 
     def isHasAttr(self, attr):
         return hasattr(self, attr)
@@ -30,10 +30,10 @@ class Views(object):
         :param attr:
         :return:
         '''
-        print u'查看生成的文件: %s ' % settings.absolute('tmp/test.html')
+        print '查看生成的文件: %s ' % settings.absolute('tmp/test.html')
         if self.isHasAttr(attr):
             with open(settings.absolute('test/test.html'), 'wb') as h:
-                a = u'%s' % getattr(self, attr)
+                a = '%s' % getattr(self, attr)
                 h.write(a)
         else:
             with open(settings.absolute('test/test.html'), 'wb') as h:
@@ -67,7 +67,7 @@ class Views(object):
 
         ''' 拥有权限才能渲染模板 '''
         if not self.user.isHavePms(pms):
-            print u'没有权限!!!'
+            print '没有权限!!!'
             return
 
         ''' 管理用户选项 '''

@@ -12,9 +12,7 @@ import time
 Encoder = json.JSONEncoder()
 Decoder = json.JSONDecoder()
 
-import traceback
 from redisco import models
-
 
 
 class RediscoModle(models.Model):
@@ -22,10 +20,10 @@ class RediscoModle(models.Model):
         '''
         :return:
         '''
-        print u'%s====================' % self.__class__.__name__
+        print '%s====================' % self.__class__.__name__
         for k,v in self.__dict__.items():
             print k,':', v
-        print u'%s====================' % self.__class__.__name__
+        print '%s====================' % self.__class__.__name__
 
 
     @classmethod
@@ -54,9 +52,9 @@ class RediscoModle(models.Model):
         _errs = []
         if self.errors:
             for errs in self.errors:
-                _errs.append(u' '.join(errs))
+                _errs.append(' '.join(errs))
 
-        return u'. '.join(_errs)
+        return '. '.join(_errs)
 
 
     @classmethod

@@ -42,7 +42,7 @@ class TestCounter(unittest.TestCase):
 
     def tearDown(self):
         return
-        print u'清空了数据库%s' % settings.REDIS_DB
+        print '清空了数据库%s' % settings.REDIS_DB
         self.redis.flushdb()
 
 
@@ -61,7 +61,7 @@ class TestCounter(unittest.TestCase):
         print "c.uuid->", c.uid
         print "c.uguid->", c.ugid
 
-        print u'\n重新生成实例...'
+        print '\n重新生成实例...'
         c = Counter.obj()
         print 'id(c)->', id(c)
         c.incr(Counter.user)
@@ -93,7 +93,7 @@ class TestCounter(unittest.TestCase):
 
         # ''' 添加计数项 test_item1'''
         # Counter.count_test_item1 = models.Counter(unique=True)
-        # Counter.test_item1 = u'count_test_item1'
+        # Counter.test_item1 = 'count_test_item1'
 
         # ''' 重新生成实例 '''
         # c = Counter.obj()

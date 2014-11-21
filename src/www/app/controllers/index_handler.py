@@ -14,17 +14,17 @@ import web
 
 from . import render
 import app
-import base_handler
+from base_handler import BaseHandler
 from main_handler import Main
 import login_handler
 
 
-class Index(base_handler.BaseHandler):
+class Index(BaseHandler):
     """
     主页
     """
-    URL = base_handler.BaseHandler.URL + u''
-    url = base_handler.BaseHandler.url + u'/'
+    URL = BaseHandler.URL + ''
+    url = BaseHandler.url + r'/'
 
     def GET(self):
         try:
@@ -32,9 +32,9 @@ class Index(base_handler.BaseHandler):
             if app.session.login:
                 return web.redirect(Main.URL)
             else:
-                return render.login(u'未登录', login_handler.Login)
+                return render.login('未登录', login_handler.Login)
 
         except AttributeError:
             traceback.print_exc()
-            return render.login(u'登录请输入密码', login_handler.Login)
+            return render.login('登录请输入密码', login_handler.Login)
 

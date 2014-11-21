@@ -4,14 +4,14 @@
 """
 
 import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 import traceback
 
 import web
 import redis.exceptions
 import redisco
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 DEBUG = False
 DEBUG = True
@@ -35,9 +35,9 @@ REDIS_DB = 1
 redisco.connection_setup(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
 try:
     if not redisco.connection.ping():
-        raise redis.exceptions.ConnectionError(u'redisco 链接失败!!!')
+        raise redis.exceptions.ConnectionError('redisco 链接失败!!!')
 except redis.exceptions:
-    raise redis.exceptions.ConnectionError(u'redisco 链接失败!!!')
+    raise redis.exceptions.ConnectionError('redisco 链接失败!!!')
 
 
 

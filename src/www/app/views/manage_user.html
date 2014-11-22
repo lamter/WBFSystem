@@ -1,0 +1,51 @@
+$def with (user, UserGroup, views)
+
+<html>
+<body>
+<table >
+<h1>管理用户</h1>
+
+<!-- 管理用户选项 -->
+$if views.isHasAttr("manage_user_option"):
+    <tr><td>
+        $:views.manage_user_option
+    </td></tr>
+
+<!-- 用户列表 -->
+$if views.isHasAttr("user_list"):
+    <tr><td>
+        <br/>
+        $:views.user_list
+    </td></tr>
+
+<!-- 创建用户 -->
+$if views.isHasAttr("create_user"):
+    <tr><td>
+        <br/>
+        $:views.create_user
+    </td></tr>
+
+<!-- 用户组列表 -->
+$if views.isHasAttr("user_group_list"):
+    <tr><td>
+        <br/>
+        $:views.user_group_list
+    </td></tr>
+
+<!-- 创建用户组 -->
+$if views.isHasAttr("create_user_group"):
+    <tr><td>
+        <br/>
+        $:views.create_user_group
+    </td></tr>
+
+<!-- 修改用户组信息 -->
+$if views.isHasAttr("modif_user_group"):
+    <tr><td>
+        <br/>
+        $:views.modif_user_group
+    </td></tr>
+
+</table>
+</body>
+</html>

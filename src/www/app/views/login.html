@@ -1,0 +1,19 @@
+$def with (errInfo, Login)
+<html>
+<head><title>login</title></head>
+<body>
+
+<table>
+    <h1>某种管理系系统</h1>
+    <form  action=$Login.URL method="POST">
+        <tr>
+            <td>user name:<input type="text" name="username"></td>
+            <td>password:<input type="password" name="password"></td>
+            <td><input type="submit" value="登录"></td>
+        </tr>
+    </form>
+    $if errInfo:<tr><td>$errInfo</td></tr>
+</table>
+
+</body>
+</html>

@@ -12,13 +12,11 @@ import web
 import redis
 import redisco
 
-from src.www import settings
-import src.www.app as app
+from src.www.app.controllers import session
 from src.www.app.tools.web_session import Initializer
-from src.www.app import (models, controllers)
-from urls import (URLS, HANDLER)
+from src.www.app import (models, controllers, settings)
+from src.www.app.urls import (URLS, HANDLER)
 from src.www.app.tools.app_processor import (header_html, notfound, internalerror)
-from src.www.app.models.counter import Counter
 from src.www.app.models.user import User
 from src.www.app.models.usergroup import UserGroup
 from src.www.app.models.views import Views
@@ -63,13 +61,14 @@ class TestManageUser(unittest.TestCase):
         self.appM.internalerror = internalerror
         self.appM.add_processor(web.loadhook(header_html))
 
-        app.session = web.session.Session(self.appM, web.session.DiskStore('sessions'), initializer=Initializer(
+        session.init(web.session.Session(self.appM, web.session.DiskStore('sessions'), initializer=Initializer(
                                                                                                               User=models.user.User,
                                                                                                               UserGroup=models.usergroup.UserGroup,
                                                                                                               BanLogin=controllers.login_handler.BanLogin,
                                                                                                               settings=settings,
-                                                                                                              app=app,
+                                                                                                              session=session,
                                                                                                               ))
+        )
 
         web.config.session_parameters['cookie_name'] = 'webpy_session_id'
         web.config.session_parameters['cookie_domain'] = None

@@ -10,7 +10,7 @@ import unittest
 import redis
 import redisco
 
-from src.www import settings
+from src.www.app import settings
 from src.www.app.models.counter import Counter
 
 def suite():

@@ -12,7 +12,7 @@ import traceback
 
 import web
 
-import app
+from . import session
 from . import render
 from base_handler import BaseHandler
 from main_handler import Main
@@ -46,8 +46,8 @@ class Login(BaseHandler):
 
         elif user.isPW(password):
             ''' 通过验证 '''
-            app.session.username = '%s' % username
-            app.session.login = True
+            session().username = '%s' % username
+            session().login = True
             return web.redirect(Main.URL)
 
         else:
@@ -65,9 +65,9 @@ class BanLogin(BaseHandler):
     url = BaseHandler.url + r'/ban_login'
 
     def GET(self):
-        if app.session.user.isHavePms(UserGroup.PERMISSION_BAN_LOGIN):
+        if session().user.isHavePms(UserGroup.PERMISSION_BAN_LOGIN):
             ''' 没有登录权限 '''
-            app.session.kill()
+            session().kill()
             return render.ban_login()
         else:
             ''' 不是被禁止登录，跳转回/index '''

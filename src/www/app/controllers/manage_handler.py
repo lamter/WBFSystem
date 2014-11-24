@@ -28,6 +28,9 @@ class ManageUser(BaseHandler):
                 return render.login('登录超时，请重新登录')
 
             user = User.obj(username=session().username)
+            if not user.isHavePms(UserGroup.PERMISSION_MANAGER_USER):
+                return '没有 打开 用户管理页面 的权限...'
+
             views = Views(user)
 
             ''' 渲染管理用户选项 '''

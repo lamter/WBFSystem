@@ -12,8 +12,7 @@ import traceback
 
 import web
 
-from . import render
-import app
+from . import (render, session)
 from base_handler import BaseHandler
 from main_handler import Main
 import login_handler
@@ -28,8 +27,8 @@ class Index(BaseHandler):
 
     def GET(self):
         try:
-            # print "app.session.login->", app.session.login
-            if app.session.login:
+            # print "session().login->", session().login
+            if session().login:
                 return web.redirect(Main.URL)
             else:
                 return render.login('未登录', login_handler.Login)

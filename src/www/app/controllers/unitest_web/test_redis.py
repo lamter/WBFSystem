@@ -4,20 +4,16 @@ Created on 2014-09-21
 
 @author: Shawn
 '''
+from src.www.app import settings
 
 __author__ = 'Shawn'
 
 import unittest
-import traceback
 
-import redis
 import redisco
 
 import redis
 from redis.exceptions import *
-from redisco.containers import *
-from src.www import settings
-
 
 
 def suite():

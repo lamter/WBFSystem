@@ -11,7 +11,7 @@ __author__ = 'Shawn'
 
 import traceback
 
-import settings
+from .. import settings
 from . import render
 
 

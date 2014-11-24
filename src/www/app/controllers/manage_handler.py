@@ -10,9 +10,8 @@ This module contains the main handler of the application.
 
 import web
 
-from . import render
-import app
-import settings
+from . import (render, session)
+from .. import settings
 from base_handler import BaseHandler
 from ..models.views import Views
 from ..models.user import User
@@ -25,10 +24,10 @@ class ManageUser(BaseHandler):
 
     def GET(self):
         try:
-            if not settings.DEBUG and not app.session.login:
+            if not settings.DEBUG and not session().login:
                 return render.login('登录超时，请重新登录')
 
-            user = User.obj(username=app.session.username)
+            user = User.obj(username=session().username)
             views = Views(user)
 
             ''' 渲染管理用户选项 '''
@@ -71,10 +70,10 @@ class CreateUserGroup(BaseHandler):
 
     def POST(self):
         try:
-            if not app.session.login and not settings.DEBUG:
+            if not session().login and not settings.DEBUG:
                 return render.login('登录超时，请重新登录')
 
-            user = User.obj(username=app.session.username)
+            user = User.obj(username=session().username)
             if not user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
                 return '没有创建用户组的权限...'
 
@@ -113,11 +112,11 @@ class CreateUser(BaseHandler):
 
     def POST(self):
         try:
-            if not app.session.login and not settings.DEBUG:
+            if not session().login and not settings.DEBUG:
                 return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(username=app.session.username)
+            user = User.obj(username=session().username)
             if not user.isHavePms(UserGroup.PERMISSION_CREATE_USER):
                 return '没有创建用户的权限...'
 
@@ -162,11 +161,11 @@ class ModifUser(BaseHandler):
 
     def POST(self):
         try:
-            if not app.session.login and not settings.DEBUG:
+            if not session().login and not settings.DEBUG:
                 return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(username=app.session.username)
+            user = User.obj(username=session().username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                 return '没有修改用户信息的权限...'
 
@@ -200,11 +199,11 @@ class ModifUserN(BaseHandler):
 
     def POST(self):
         try:
-            if not app.session.login and not settings.DEBUG:
+            if not session().login and not settings.DEBUG:
                 return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(username=app.session.username)
+            user = User.obj(username=session().username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                 return '没有修改用户信息的权限...'
 
@@ -241,11 +240,11 @@ class ModifUserPW(BaseHandler):
 
     def POST(self):
         try:
-            if not app.session.login and not settings.DEBUG:
+            if not session().login and not settings.DEBUG:
                 return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(username=app.session.username)
+            user = User.obj(username=session().username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                 return '没有修改用户信息的权限...'
 
@@ -286,11 +285,11 @@ class AddUG(BaseHandler):
 
     def POST(self):
         try:
-            if not app.session.login and not settings.DEBUG:
+            if not session().login and not settings.DEBUG:
                 return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(username=app.session.username)
+            user = User.obj(username=session().username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                 return '没有修改用户信息的权限...'
 
@@ -341,11 +340,11 @@ class RemoveUG(BaseHandler):
 
     def POST(self):
         try:
-            if not app.session.login and not settings.DEBUG:
+            if not session().login and not settings.DEBUG:
                 return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(username=app.session.username)
+            user = User.obj(username=session().username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER):
                 return '没有修改用户信息的权限...'
 
@@ -393,11 +392,11 @@ class ModifUserGroup(BaseHandler):
 
     def POST(self):
         try:
-            if not app.session.login and not settings.DEBUG:
+            if not session().login and not settings.DEBUG:
                 return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
-            user = User.obj(username=app.session.username)
+            user = User.obj(username=session().username)
             if not user.isHavePms(UserGroup.PERMISSION_MODIF_USER_GROUP):
                 return '没有 修改 用户组 信息的权限...'
 

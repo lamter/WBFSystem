@@ -4,10 +4,10 @@
 class handlers.
 """
 
-from app.controllers.login_handler import Login
-from app.controllers.index_handler import Index
-from app.controllers.main_handler import Main
-from app.controllers.manage_handler import (ManageUser, CreateUserGroup, CreateUser, ModifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG, ModifUserGroup)
+from controllers.login_handler import Login
+from controllers.index_handler import Index
+from controllers.main_handler import Main
+from controllers.manage_handler import (ManageUser, CreateUserGroup, CreateUser, ModifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG, ModifUserGroup)
 
 
 URLS = (

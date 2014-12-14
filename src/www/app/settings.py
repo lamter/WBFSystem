@@ -36,7 +36,7 @@ redisco.connection_setup(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
 try:
     if not redisco.connection.ping():
         raise redis.exceptions.ConnectionError('redisco 链接失败!!!')
-except redis.exceptions:
+except redis.exceptions.ConnectionError:
     raise redis.exceptions.ConnectionError('redisco 链接失败!!!')
 
 

@@ -32,12 +32,12 @@ REDIS_PW = ''
 REDIS_PORT = 8911
 REDIS_DB = 1
 
-redisco.connection_setup(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
 try:
+    redisco.connection_setup(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
     if not redisco.connection.ping():
-        raise redis.exceptions.ConnectionError('redisco 链接失败!!!')
+        raise redis.exceptions.ConnectionError('redisco 链接失败!!\n请检查 redis 服务是否启动')
 except redis.exceptions.ConnectionError:
-    raise redis.exceptions.ConnectionError('redisco 链接失败!!!')
+    raise redis.exceptions.ConnectionError('redisco 链接失败!!\n请检查 redis 服务是否启动')
 
 
 

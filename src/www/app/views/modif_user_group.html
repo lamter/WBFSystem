@@ -4,7 +4,7 @@ $def with (user, UserGroup, ModifUserGroup)
 $if user.isHavePms(UserGroup.PERMISSION_MODIF_USER_GROUP):
     <table border="1">
         <form name="input" action=$ModifUserGroup.URL method="POST">
-        <caption>创建用户组</caption>
+        <caption>修改用户组</caption>
         <tr>
             <th>组名</th>
             <th>权限</th>

@@ -14,7 +14,7 @@ import redisco
 from src.www import app
 from src.www.app.tools.web_session import Initializer
 from src.www.app import (models, controllers, settings)
-from urls import (URLS, HANDLER)
+from src.www.app.urls import (URLS, HANDLER)
 from src.www.app.tools.app_processor import (header_html, notfound, internalerror)
 from src.www.app.models import user
 from src.www.app.models.usergroup import UserGroup

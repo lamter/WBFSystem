@@ -38,7 +38,7 @@ class TestUser(unittest.TestCase):
         ''' 配置测试用的redis配置信息  '''
         settings.REDIS_HOST = "localhost"
         settings.REDIS_PORT = 8911
-        settings.REDIS_DB_NUM = 0
+        settings.REDIS_DB = 0
 
         ''' redisco连接 '''
         settings.rd = redisco.connection_setup(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)

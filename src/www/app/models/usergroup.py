@@ -11,48 +11,17 @@ from redisco import models
 
 from counter import Counter
 import orm
+from pm import PM
 
 
 Encoder = json.JSONEncoder()
 Decoder = json.JSONDecoder()
 
 
-class UserGroup(orm.RediscoModle):
+class UserGroup(orm.RediscoModle, PM):
     '''
     要存库的数据类型
     '''
-    ''' 用户权限枚举=> '''
-
-    ''' 登录权限比较特殊 '''
-    PERMISSION_BAN_LOGIN = 1 << 0
-
-    ''' 其他权限 '''
-
-    ''' 创建用户组 '''
-    PERMISSION_CREATE_USER_GROUP = 1 << 1
-
-    ''' 创建用户 '''
-    PERMISSION_CREATE_USER = 1 << 2
-
-    ''' 查看用户列表 '''
-    PERMISSION_USER_LIST = 1 << 3
-
-    ''' 创建用户组 '''
-    PERMISSION_USER_GROUP_LIST = 1 << 4
-
-    ''' 修改用户信息 '''
-    PERMISSION_MODIF_USER = 1 << 5
-
-    ''' 修改 用户组 信息 '''
-    PERMISSION_MODIF_USER_GROUP = 1 << 6
-
-    ''' 管理用户信息页面 '''
-    PERMISSION_MANAGER_USER = 1 << 7
-
-
-    ''' 以 PERMISSION_* 的形式来命名变量 '''
-
-    ''' <=用户权限枚举 '''
 
     ''' 超级用户组 '''
     rootGroup = 'root'
@@ -145,18 +114,18 @@ class UserGroup(orm.RediscoModle):
         return userGroup
 
 
-    @classmethod
-    def getPermissionDic(cls):
-        '''
-        获得权限的字典{属性名: 权限}
-        :return:
-        '''
-        dic = {}
-        for PM in dir(cls):
-            if "PERMISSION_" == PM[:len("PERMISSION_")]:
-                dic[PM] = getattr(cls, PM)
-
-        return dic
+    # @classmethod
+    # def getPermissionDic(cls):
+    #     '''
+    #     获得权限的字典{属性名: 权限}
+    #     :return:
+    #     '''
+    #     dic = {}
+    #     for PM in dir(cls):
+    #         if "PERMISSION_" == PM[:len("PERMISSION_")]:
+    #             dic[PM] = getattr(cls, PM)
+    #
+    #     return dic
 
 
     def addPms(self, pms):

@@ -7,7 +7,8 @@ import web
 from ..controllers import (render, session)
 from ..controllers.login_handler import Login
 from ..controllers.main_handler import Main
-
+from ..controllers.index_handler import Index
+from .. import settings
 
 def header_html():
   """Global header setter for `text/html` documents.
@@ -46,11 +47,15 @@ def verify_session():
     :return:
     """
     ''' 这个session还没有初始化过 username 和 login 的属性 '''
+
     if not hasattr(session, 'username') and not hasattr(session, 'login'):
-        if Login.isMatch(web.ctx.path) or Main.isMatch(web.ctx.path):
-            print ''' 如果访问的是登录界面, 通过验证 '''
-            pass
+        if Login.isMatch(web.ctx.path) or Main.isMatch(web.ctx.path) or Index.isMatch(web.ctx.path):
+            ''' 如果访问的是登录界面, 通过验证 '''
+            return
         else:
+            ''' 需要前往登录页面 '''
             raise web.redirect(Main.URL)
-    #
-    # ''' login 属性是 false，要求其重新登录 '''
+
+    ''' 验证是否登录 '''
+    if not settings.DEBUG and not session().login:
+        return render.login('登录超时，请重新登录', Login)

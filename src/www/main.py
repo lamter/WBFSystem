@@ -12,15 +12,13 @@ file.
 
 import sys
 
-from src.www.app import settings
-
-
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 import web
 import app
 from app.controllers import session
+from app import settings
 from app.tools.web_session import Initializer
 from app.urls import (URLS, HANDLER)
 from app.tools.app_processor import (notfound, internalerror, befor_handler)

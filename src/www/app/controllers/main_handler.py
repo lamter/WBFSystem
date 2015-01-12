@@ -12,7 +12,6 @@ import traceback
 
 from . import session
 from base_handler import *
-from login_handler import Login
 from manage_handler import (ManageUser)
 from ..models.views import Views
 from ..models.user import User
@@ -26,6 +25,8 @@ class Main(BaseHandler):
 
     def GET(self):
         try:
+            from login_handler import Login
+
             user = User.obj(username=session().username)
             if not user:
                 return render.login('登录超时，请重新登录', Login)

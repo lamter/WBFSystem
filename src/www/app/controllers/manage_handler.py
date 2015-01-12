@@ -24,8 +24,8 @@ class ManageUser(BaseHandler):
 
     def GET(self):
         try:
-            if not settings.DEBUG and not session().login:
-                return render.login('登录超时，请重新登录')
+            # if not settings.DEBUG and not session().login:
+            #     return render.login('登录超时，请重新登录')
 
             user = User.obj(username=session().username)
             if not user.isHavePms(UserGroup.PERMISSION_MANAGER_USER):
@@ -73,8 +73,8 @@ class CreateUserGroup(BaseHandler):
 
     def POST(self):
         try:
-            if not session().login and not settings.DEBUG:
-                return render.login('登录超时，请重新登录')
+            # if not session().login and not settings.DEBUG:
+            #     return render.login('登录超时，请重新登录')
 
             user = User.obj(username=session().username)
             if not user.isHavePms(UserGroup.PERMISSION_CREATE_USER_GROUP):
@@ -115,8 +115,8 @@ class CreateUser(BaseHandler):
 
     def POST(self):
         try:
-            if not session().login and not settings.DEBUG:
-                return render.login('登录超时，请重新登录')
+            # if not session().login and not settings.DEBUG:
+            #     return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=session().username)
@@ -164,8 +164,8 @@ class ModifUser(BaseHandler):
 
     def POST(self):
         try:
-            if not session().login and not settings.DEBUG:
-                return render.login('登录超时，请重新登录')
+            # if not session().login and not settings.DEBUG:
+            #     return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=session().username)
@@ -202,8 +202,8 @@ class ModifUserN(BaseHandler):
 
     def POST(self):
         try:
-            if not session().login and not settings.DEBUG:
-                return render.login('登录超时，请重新登录')
+            # if not session().login and not settings.DEBUG:
+            #     return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=session().username)
@@ -243,8 +243,8 @@ class ModifUserPW(BaseHandler):
 
     def POST(self):
         try:
-            if not session().login and not settings.DEBUG:
-                return render.login('登录超时，请重新登录')
+            # if not session().login and not settings.DEBUG:
+            #     return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=session().username)
@@ -288,8 +288,8 @@ class AddUG(BaseHandler):
 
     def POST(self):
         try:
-            if not session().login and not settings.DEBUG:
-                return render.login('登录超时，请重新登录')
+            # if not session().login and not settings.DEBUG:
+            #     return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=session().username)
@@ -343,8 +343,8 @@ class RemoveUG(BaseHandler):
 
     def POST(self):
         try:
-            if not session().login and not settings.DEBUG:
-                return render.login('登录超时，请重新登录')
+            # if not session().login and not settings.DEBUG:
+            #     return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=session().username)
@@ -395,8 +395,8 @@ class ModifUserGroup(BaseHandler):
 
     def POST(self):
         try:
-            if not session().login and not settings.DEBUG:
-                return render.login('登录超时，请重新登录')
+            # if not session().login and not settings.DEBUG:
+            #     return render.login('登录超时，请重新登录')
 
             ''' 检查权限 '''
             user = User.obj(username=session().username)

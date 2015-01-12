@@ -23,7 +23,7 @@ import app
 from app.controllers import session
 from app.tools.web_session import Initializer
 from app.urls import (URLS, HANDLER)
-from app.tools.app_processor import (header_html, notfound, internalerror)
+from app.tools.app_processor import (notfound, internalerror, befor_handler)
 
 web.config.debug = settings.DEBUG
 
@@ -31,7 +31,8 @@ appM = web.application(URLS, HANDLER, autoreload=False)
 application = appM.wsgifunc()
 appM.notfound = notfound
 appM.internalerror = internalerror
-appM.add_processor(web.loadhook(header_html))
+''' 验证 session '''
+appM.add_processor(web.loadhook(befor_handler))
 
 ''' 会话数据结构 '''
 session.init(web.session.Session(appM, web.session.DiskStore('sessions'), initializer=Initializer(

@@ -4,12 +4,16 @@
 """
 
 import web
-from ..controllers import render
+from ..controllers import (render, session)
+from ..controllers.login_handler import Login
+from ..controllers.main_handler import Main
+
 
 def header_html():
   """Global header setter for `text/html` documents.
   """
   web.header('Content-Type', 'text/html; charset=UTF-8')
+
 
 def notfound():
   """Customized 404 Not Found message.
@@ -23,3 +27,30 @@ def internalerror():
   web.ctx.status = '500 Internal Server Error'
   return web.internalerror(str(render._500()))
 
+
+def befor_handler():
+    """
+    之前要做的事情
+    :return:
+    """
+    ''' 验证 session '''
+    verify_session()
+
+    ''' 设置 http 头 '''
+    header_html()
+
+
+def verify_session():
+    """
+    每次提交 http 请求都要经过这个 session验证
+    :return:
+    """
+    ''' 这个session还没有初始化过 username 和 login 的属性 '''
+    if not hasattr(session, 'username') and not hasattr(session, 'login'):
+        if Login.isMatch(web.ctx.path) or Main.isMatch(web.ctx.path):
+            print ''' 如果访问的是登录界面, 通过验证 '''
+            pass
+        else:
+            raise web.redirect(Main.URL)
+    #
+    # ''' login 属性是 false，要求其重新登录 '''

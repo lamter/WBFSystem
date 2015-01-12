@@ -36,12 +36,12 @@ class Login(BaseHandler):
         user = User.obj(username=username)
 
         if user is None:
-            errInfo = '未注册的账号!!'
+            errInfo = '账号密码不匹配!!!'
             return render.login(errInfo, Login)
 
         elif not user.isPW(password):
             ''' 密码错误 '''
-            errInfo = '密码错误!!'
+            errInfo = '账号密码不匹配!!'
             return render.login(errInfo, Login)
 
         elif user.isPW(password):

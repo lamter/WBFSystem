@@ -45,9 +45,11 @@ class Login(BaseHandler):
             return render.login(errInfo, Login)
 
         elif user.isPW(password):
-            ''' 通过验证 '''
+            print ''' 通过验证 '''
             session().username = '%s' % username
             session().login = True
+            session().user = user
+            print 'id(session())->', id(session())
             return web.redirect(Main.URL)
 
         else:

@@ -29,7 +29,6 @@ appM = web.application(URLS, HANDLER, autoreload=False)
 application = appM.wsgifunc()
 appM.notfound = notfound
 appM.internalerror = internalerror
-''' 验证 session '''
 appM.add_processor(web.loadhook(befor_handler))
 
 ''' 会话数据结构 '''
@@ -51,7 +50,7 @@ web.config.session_parameters['ignore_change_ip'] = False
 web.config.session_parameters['secret_key'] = 'akdnA0FJsdJFLSlvno92'
 web.config.session_parameters['expired_message'] = 'Session expired'
 
-''' 初始化orm '''
+''' 初始化orm，包括初始化 root 用户 '''
 app.models.init()
 
 

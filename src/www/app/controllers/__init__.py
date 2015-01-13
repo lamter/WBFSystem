@@ -4,6 +4,7 @@
 controllers of the app.
 """
 
+
 # from web.contrib.template import render_mako
 import web.template
 from ..settings import (absolute, DEBUG)
@@ -25,19 +26,39 @@ from . import *
 
 render = web.template.render(absolute('views'))
 
-class Session():
+class Session(object):
     def __init__(self):
-        self.__session = None
+        self._session = None
 
     def init(self, session):
         '''
         :param session: web.session()
         :return:
         '''
-        self.__session = session
+        self._session = session
 
     def __call__(self, *args, **kwargs):
-        return self.__session
+        return self._session
+
+
+    def __getattr__(self, item):
+        """
+        :param item:
+        :return:
+        """
+        if item == '_session':
+            return object.__getattribute__(self, item)
+        elif self._session is None:
+            raise AttributeError(u'Session did not init property _session ')
+        else:
+            return getattr(self._session, item)
+
+
+    def __setattr__(self, key, value):
+        if key == '_session':
+            object.__setattr__(self, key, value)
+        else:
+            setattr(self._session, key, value)
 
 
 session = Session()

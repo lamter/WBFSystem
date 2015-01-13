@@ -21,7 +21,8 @@ class BaseHandler(object):
     URL = ""
     url = r''
 
-    def errInfo(self):
+    @staticmethod
+    def errInfo():
         '''
         将Traceback的错误组织好后返回
         :return:
@@ -30,7 +31,8 @@ class BaseHandler(object):
         if settings.DEBUG:
             traceback.print_exc()
         errStr = errStr.replace('\n', "<br/>")
-        return render.traceback(errStr)
+        return errStr
+        # return render.traceback(errStr)
 
 
     @classmethod

@@ -44,6 +44,7 @@ class Initializer(object):
 
         user = self.User.obj(username=self.session().username)
 
+
         # ''' 尚未注册的用户 '''
         # if self.session().user is None:
         #     errInfo = '未注册的账户...'
@@ -55,3 +56,9 @@ class Initializer(object):
         if user and user.isHavePms(self.UserGroup.PERMISSION_BAN_LOGIN):
             web.redirect(self.BanLogin.URL)
             return
+
+        # print 2222222222222
+        # print 'id(session())->', id(self.session())
+        #
+        # ''' 将用户实例绑定到 session上 '''
+        # setattr(self.session(), 'user', user)

@@ -87,5 +87,6 @@ class TestAppSession(unittest.TestCase):
         """
         user = User.obj(username='root')
         print user
-        controllers.session.user = user
-        print controllers.session.user
+        controllers.session().user = user
+        print controllers.session().user
+

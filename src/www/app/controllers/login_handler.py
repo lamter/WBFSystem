@@ -49,7 +49,6 @@ class Login(BaseHandler):
             session().username = '%s' % username
             session().login = True
             session().user = user
-            print 'id(session())->', id(session())
             return web.redirect(Main.URL)
 
         else:

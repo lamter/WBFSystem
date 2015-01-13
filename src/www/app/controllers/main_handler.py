@@ -30,11 +30,7 @@ class Main(BaseHandler):
         :return:
         """
 
-        print 333333333333
-        print 'id(session())->', id(session())
-
         user = session().user
-
 
         views = Views(user)
 

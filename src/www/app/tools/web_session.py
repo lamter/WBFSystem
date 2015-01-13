@@ -14,9 +14,9 @@ class Initializer(object):
         :param app:
         :return:
         '''
-        self.User = kwargs.get('User')
-        self.UserGroup = kwargs.get('UserGroup')
-        self.BanLogin = kwargs.get('BanLogin')
+        self.class_User = kwargs.get('User')
+        self.class_UserGroup = kwargs.get('UserGroup')
+        self.class_BanLogin = kwargs.get('BanLogin')
         self.settings = kwargs.get('settings')
         self.session = kwargs.get('session')
 
@@ -42,7 +42,7 @@ class Initializer(object):
             #     ''' 测试环境需要在其他地方将预设的debug_login传进来作为seesion.login的值 '''
             #     setattr(self.session(), 'login', self.settings.debug_login)
 
-        user = self.User.obj(username=self.session().username)
+        user = self.class_User.obj(username=self.session().username)
 
 
         # ''' 尚未注册的用户 '''
@@ -53,8 +53,8 @@ class Initializer(object):
         #     return
 
         ''' 禁止登录 '''
-        if user and user.isHavePms(self.UserGroup.PERMISSION_BAN_LOGIN):
-            web.redirect(self.BanLogin.URL)
+        if user and user.isHavePms(self.class_UserGroup.PERMISSION_BAN_LOGIN):
+            web.redirect(self.class_BanLogin.URL)
             return
 
         # print 2222222222222

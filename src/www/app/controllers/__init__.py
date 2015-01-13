@@ -41,24 +41,6 @@ class Session(object):
         return self._session
 
 
-    def __getattr__(self, item):
-        """
-        :param item:
-        :return:
-        """
-        if item == '_session':
-            return object.__getattribute__(self, item)
-        elif self._session is None:
-            raise AttributeError(u'Session did not init property _session ')
-        else:
-            return getattr(self._session, item)
-
-
-    def __setattr__(self, key, value):
-        if key == '_session':
-            object.__setattr__(self, key, value)
-        else:
-            setattr(self._session, key, value)
 
 
 session = Session()

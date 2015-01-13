@@ -10,11 +10,12 @@ This module contains the main handler of the application.
 
 import traceback
 
+import web
+
 from . import session
 from base_handler import *
 from manage_handler import (ManageUser)
 from ..models.views import Views
-from ..models.user import User
 from ..models.usergroup import UserGroup
 
 
@@ -24,20 +25,19 @@ class Main(BaseHandler):
     url = BaseHandler.url + r'/main'
 
     def GET(self):
-        try:
-            user = User.obj(username=session().username)
-            if not user:
-                return render.login('登录超时，请重新登录')
+        """
+        主页面
+        :return:
+        """
 
-            views = Views(user)
+        user = session().user
 
-            ''' 渲染管理用户选项 '''
-            views.render_manage_user_option(ManageUser)
+        views = Views(user)
 
-            ''' 用户管理选择 '''
-            return render.main(user, UserGroup, views, ManageUser)
+        ''' 渲染管理用户选项 '''
+        views.render_manage_user_option(ManageUser)
 
-        except:
-            return self.errInfo()
+        ''' 用户管理选择 '''
+        return render.main(user, UserGroup, views, ManageUser)
 
 

@@ -4,6 +4,7 @@
 controllers of the app.
 """
 
+
 # from web.contrib.template import render_mako
 import web.template
 from ..settings import (absolute, DEBUG)
@@ -25,19 +26,21 @@ from . import *
 
 render = web.template.render(absolute('views'))
 
-class Session():
+class Session(object):
     def __init__(self):
-        self.__session = None
+        self._session = None
 
     def init(self, session):
         '''
         :param session: web.session()
         :return:
         '''
-        self.__session = session
+        self._session = session
 
     def __call__(self, *args, **kwargs):
-        return self.__session
+        return self._session
+
+
 
 
 session = Session()

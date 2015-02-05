@@ -8,6 +8,7 @@ from controllers.login_handler import Login
 from controllers.index_handler import Index
 from controllers.main_handler import Main
 from controllers.manage_handler import (ManageUser, CreateUserGroup, CreateUser, ModifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG, ModifUserGroup)
+from controllers.sim-terminal_handler import SimTerminal
 
 
 URLS = (
@@ -23,6 +24,7 @@ URLS = (
     AddUG.url,                  AddUG.__name__,
     RemoveUG.url,               RemoveUG.__name__,
     ModifUserGroup.url,         ModifUserGroup.__name__,
+    SimTerminal.url,            SimTerminal.__name__,
 )
 # for i,u in enumerate(URLS):
 #     print u, '\t',

@@ -171,3 +171,21 @@ class Views(object):
 
         ''' 渲染用户信息 '''
         self.modif_user_group = render.modif_user_group(self.user, UserGroup, ModifUserGroup)
+
+
+
+    def render_sim_terminal_page(self):
+        """
+        渲染 伪终端的页面
+        :return:
+        """
+        # ''' 设置这个模块相关的权限 '''
+        # pms = UserGroup.PERMISSION_MODIF_USER_GROUP
+        #
+        # if not self.user.isHavePms(pms):
+        #     return
+        #
+        # ''' 渲染用户信息 '''
+        # self.modif_user_group = render.modif_user_group(self.user, UserGroup, ModifUserGroup)
+        #
+        #

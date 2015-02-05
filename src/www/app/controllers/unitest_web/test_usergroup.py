@@ -72,8 +72,9 @@ class TestUser(unittest.TestCase):
         web.config.session_parameters['ignore_change_ip'] = False
         web.config.session_parameters['secret_key'] = 'akdnA0FJsdJFLSlvno92'
         web.config.session_parameters['expired_message'] = 'Session expired'
+
     def tearDown(self):
-        # return
+        return
         print '清空了数据库%s' % settings.REDIS_DB
         self.redis.flushdb()
 
@@ -99,7 +100,6 @@ class TestUser(unittest.TestCase):
         print '生成用户组成功...'
 
 
-
     def test_UserGroupAll(self):
         ugs = UserGroup.all()
         UserGroup.createRootGroup()
@@ -107,3 +107,15 @@ class TestUser(unittest.TestCase):
         for ug in ugs:
             print ug.name
 
+
+    def test_UserGroupModle(self):
+        """
+        测试 UserGroup 实例的性质
+        :return:
+        """
+        ug = UserGroup(name='testUserGroup')
+        print type(ug.permissions)
+        # print type(ug.pmss)
+
+        # ug.pmss = [2, 1]
+        ug.save()

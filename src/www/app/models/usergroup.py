@@ -28,7 +28,8 @@ class UserGroup(orm.RediscoModle, PM):
 
     # uid = models.IntegerField(required=True, unique=True)
     name =models.Attribute(required=True, unique=True)
-    permissions = models.IntegerField(default=0)
+    # permissions = models.IntegerField(default=0)
+    permissions = models.ListField(str)
     # users = models.ListField(target_type=baseuser.User)
 
 
@@ -43,7 +44,11 @@ class UserGroup(orm.RediscoModle, PM):
 
     @property
     def pms(self):
-        return self.permissions
+        """
+        权限是以英文字符来表示
+        :return: set([str, ...])
+        """
+        return set(self.permissions)
 
 
     @classmethod
@@ -52,7 +57,7 @@ class UserGroup(orm.RediscoModle, PM):
         获得全权限
         :return:
         '''
-        allPms = 0
+        allPms = set()
         for pm in cls.getPermissionDic().values():
             allPms |= pm
         return allPms
@@ -95,10 +100,9 @@ class UserGroup(orm.RediscoModle, PM):
 
         ''' 配置用户组权限 '''
         if permissions is None:
-            # userGroup.permissions = cls.PERMISSION_LOG_IN
-            userGroup.permissions = 0
+            userGroup.permissions = PM.defaultPms()
         else:
-            userGroup.permissions = permissions
+            userGroup.setPms(permissions)
 
         if not userGroup.is_valid():
             raise ValueError(userGroup.errors)
@@ -114,31 +118,13 @@ class UserGroup(orm.RediscoModle, PM):
         return userGroup
 
 
-    # @classmethod
-    # def getPermissionDic(cls):
-    #     '''
-    #     获得权限的字典{属性名: 权限}
-    #     :return:
-    #     '''
-    #     dic = {}
-    #     for PM in dir(cls):
-    #         if "PERMISSION_" == PM[:len("PERMISSION_")]:
-    #             dic[PM] = getattr(cls, PM)
-    #
-    #     return dic
-
-
     def addPms(self, pms):
         '''
         给用户组添加权限
         :param permission: 必须以 UserGroup.PERMISSION_* 来传递
         :return:
         '''
-        # for pm in self.__class__.getPermissionDic().values():
-        #     if not permissions & pm:
-        #         effInfo = '用户组: %s设定权限失败!!非法的权限 %d !!!' % (self.name, permissions)
-        #         raise ValueError(effInfo)
-        self.permissions |= pms
+        self.permissions = list(self.pms | pms)
 
 
     def setPms(self, pms):
@@ -147,7 +133,7 @@ class UserGroup(orm.RediscoModle, PM):
         :param permissions:
         :return:
         '''
-        self.permissions = pms
+        self.permissions = list(pms)
 
 
     def removePms(self, pms):

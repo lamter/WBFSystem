@@ -272,7 +272,7 @@ class User(orm.RediscoModle):
         从所有用户组获得权限
         :return:
         '''
-        p = 0
+        p = set()
         for userGroup in self.userGroups:
             p |= userGroup.pms
 

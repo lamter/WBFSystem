@@ -189,7 +189,7 @@ class Views(object):
         self.sim_terminal_page = render.sim_terminal_page(self.user, UserGroup, SimTermLocalServer)
 
 
-    def render_sim_term_local_server(self, SimTermLocalServer):
+    def render_sim_term_local_server(self, SimTermLocalServer, termLocalServer):
         """
         渲染 本地进程的终端页面
         :return:
@@ -201,7 +201,7 @@ class Views(object):
             return
 
         ''' 渲染用户信息 '''
-        self.sim_term_local_server = render.sim_term_local_server(self.user, UserGroup, SimTermLocalServer)
+        self.sim_term_local_server = render.sim_term_local_server(self.user, UserGroup, self, SimTermLocalServer, termLocalServer)
 
 
     def render_terminal_output(self, term_output):
@@ -216,6 +216,17 @@ class Views(object):
 
         ''' 渲染用户信息 '''
         self.terminal_output = render.terminal_output(self.user, UserGroup, term_output)
+
+
+
+    def render_terminal_input(self):
+        """
+        虚拟终端 输入界面
+        :return:
+        """
+
+        ''' 渲染用户信息 '''
+        self.terminal_input = render.terminal_input(self.user, UserGroup)
 
 
 

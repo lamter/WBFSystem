@@ -9,10 +9,12 @@ Created on 2014-10-28
 
 """
 
+import web
 
 from . import session
 from base_handler import *
 from ..models.views import Views
+from ..models.term_server import TerminalServer
 
 
 class SimTerminalPage(BaseHandler):
@@ -52,11 +54,53 @@ class SimTermLocalServer(BaseHandler):
         :return:
         """
 
-        user = session().user
+        views = Views(session().user)
 
-        ''' 获得日志内容 '''
+        ''' 终端 '''
+        host = 'localhost'
+        title = '本地服务进程'
+        termLocalServer = TerminalServer(host, title)
 
-        return '未完成'
+        # TODO ''' 获得日志内容 '''
+
+        ''' 生成用于显示的界面 '''
+        term_output = [termLocalServer]
+        views.render_terminal_output(term_output)
+
+        views.render_terminal_input()
+
+        views.render_sim_term_local_server(SimTermLocalServer, termLocalServer)
+
+        return views.sim_term_local_server
+
+    python_code = 'python_code'
+
+    def POST(self):
+        """
+        提交 python 代码到本地进程执行，并放回Log结果
+        :return:
+        """
+        exe = web.input(_unicode=True)
+
+        ''' 终端 '''
+        host = 'localhost'
+        title = '本地服务进程'
+        termLocalServer = TerminalServer(host, title)
+
+        ''' 执行 python 代码 '''
+        exec exe.python_code
+        termLocalServer.term_output = None
+
+
+        # TODO ''' 获得日志内容 '''
+
+        ''' 生成用于显示的界面 '''
+        term_output = [termLocalServer]
+        views = Views(session().user)
+        views.render_terminal_output(term_output)
+        views.render_terminal_input()
+        views.render_sim_term_local_server(SimTermLocalServer, termLocalServer)
+        return views.sim_term_local_server
 
 
 

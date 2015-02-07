@@ -14,6 +14,7 @@ import redis.exceptions
 import redisco
 
 DEBUG = False
+DEBUG = True
 
 
 # global session

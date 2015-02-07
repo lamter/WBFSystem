@@ -1,0 +1,13 @@
+$def with (user, UserGroup, output)
+
+<table>
+<h1>日志输出</h1>
+    <!-- 日志输出 -->
+    $for server in output:
+        <table  border="1">
+            <tr><td>TAG：$server.term_title</td></tr>
+            <tr><td>$:server.term_output</td></tr>
+        </table>
+        </br>
+
+</table>

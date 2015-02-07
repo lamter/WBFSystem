@@ -45,7 +45,7 @@ class Login(BaseHandler):
             return render.login(errInfo, Login)
 
         elif user.isPW(password):
-            print ''' 通过验证 '''
+            ''' 通过验证 '''
             session().username = '%s' % username
             session().login = True
             session().user = user

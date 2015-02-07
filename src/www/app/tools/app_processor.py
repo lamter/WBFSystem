@@ -40,13 +40,9 @@ def verify_session():
     """
     ''' 这个session还没有初始化过 username 和 login 的属性 '''
 
-    # print 'web.ctx.path->', web.ctx.path
-    #
-    # print 'id(session())->', id(session())
-    # print 'session().session_id->', session().session_id
-    # print "hasattr(session(), 'username') ->", hasattr(session(), 'username')
-    # print "hasattr(session(), 'login')->", hasattr(session(), 'login')
-    # print "hasattr(session(), 'user')->", hasattr(session(), 'user')
+    if settings.DEBUG:
+        session().user = settings.debug_user
+        return
 
     if not hasattr(session(), 'username') and not hasattr(session(), 'login'):
         if Login.isMatch(web.ctx.path) or Index.isMatch(web.ctx.path):

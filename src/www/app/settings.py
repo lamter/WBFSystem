@@ -6,7 +6,7 @@
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
-
+import os
 import traceback
 
 import web
@@ -14,7 +14,7 @@ import redis.exceptions
 import redisco
 
 DEBUG = False
-DEBUG = True
+# DEBUG = True
 
 
 # global session
@@ -56,3 +56,9 @@ def absolute(path):
 # print absolute('app')
 if absolute('app') not in sys.path:
     sys.path.insert(0, absolute('app'))
+
+def logfile():
+    appPath = os.path.split(__file__)[0]
+    wwwPath = os.path.split(appPath)[0]
+    logfile = os.path.join(wwwPath, 'log/wbfs.log')
+    return logfile

@@ -8,6 +8,7 @@ Created on 2014-10-28
     伪终端，用于直接直接使用代码同服务进程交互
 
 """
+import os
 
 import web
 
@@ -15,6 +16,7 @@ from . import session
 from base_handler import *
 from ..models.views import Views
 from ..models.term_server import TerminalServer
+
 
 
 class SimTerminalPage(BaseHandler):
@@ -48,32 +50,30 @@ class SimTermLocalServer(BaseHandler):
     URL = BaseHandler.URL + '/sim_term_local_server'
     url = BaseHandler.url + r'/sim_term_local_server.*'
 
+    python_code = 'python_code'
+
     def GET(self):
         """
         打开本地进程的伪终端页面
         :return:
         """
 
-        views = Views(session().user)
-
         ''' 终端 '''
-        host = 'localhost'
-        title = '本地服务进程'
-        termLocalServer = TerminalServer(host, title)
+        termLocalServer = TerminalServer()
+        termLocalServer.term_title = '本地服务进程'
+        termLocalServer.logfile = settings.logfile()
 
-        # TODO ''' 获得日志内容 '''
+        ''' 获得日志内容 '''
+        termLocalServer.getLogText()
 
         ''' 生成用于显示的界面 '''
         term_output = [termLocalServer]
+        views = Views(session().user)
         views.render_terminal_output(term_output)
-
         views.render_terminal_input()
-
         views.render_sim_term_local_server(SimTermLocalServer, termLocalServer)
-
         return views.sim_term_local_server
 
-    python_code = 'python_code'
 
     def POST(self):
         """
@@ -83,16 +83,15 @@ class SimTermLocalServer(BaseHandler):
         exe = web.input(_unicode=True)
 
         ''' 终端 '''
-        host = 'localhost'
-        title = '本地服务进程'
-        termLocalServer = TerminalServer(host, title)
+        termLocalServer = TerminalServer()
+        termLocalServer.term_title = '本地服务进程'
+        termLocalServer.logfile = settings.logfile()
 
         ''' 执行 python 代码 '''
-        exec exe.python_code
-        termLocalServer.term_output = None
+        termLocalServer.execPythonCode(exe.python_code)
 
-
-        # TODO ''' 获得日志内容 '''
+        # ''' 获得日志内容 '''
+        # termLocalServer.getLogText()
 
         ''' 生成用于显示的界面 '''
         term_output = [termLocalServer]
@@ -101,9 +100,3 @@ class SimTermLocalServer(BaseHandler):
         views.render_terminal_input()
         views.render_sim_term_local_server(SimTermLocalServer, termLocalServer)
         return views.sim_term_local_server
-
-
-
-
-
-

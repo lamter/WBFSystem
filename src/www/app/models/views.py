@@ -201,7 +201,7 @@ class Views(object):
             return
 
         ''' 渲染用户信息 '''
-        self.sim_term_local_server = render.sim_term_local_server(self.user, UserGroup, self, SimTermLocalServer, termLocalServer)
+        self.sim_term_local_server = render.sim_term_local_server(self.user, UserGroup, self, SimTermLocalServer)
 
 
     def render_terminal_output(self, term_output):

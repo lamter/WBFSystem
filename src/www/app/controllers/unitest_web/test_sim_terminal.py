@@ -6,7 +6,7 @@ Created on 2015-02-05
 '''
 
 import unittest
-import random
+import os
 
 import web
 import redis
@@ -40,7 +40,7 @@ class TestSimTerminal(unittest.TestCase):
         '''
         :return:
         '''
-
+        settings.DEBUG = True
         ''' 配置测试用的redis配置信息  '''
         settings.REDIS_HOST = "localhost"
         settings.REDIS_PORT = 8911
@@ -159,6 +159,7 @@ class TestSimTerminal(unittest.TestCase):
         v.html(self.appM.request(localpart=SimTermLocalServer.URL, method='GET').data)
 
 
+
     def test_SimTermLocalServer_POST(self):
         """
         测试 打开本地服务交互终端
@@ -171,7 +172,7 @@ class TestSimTerminal(unittest.TestCase):
 
         settings.debug_user = user
         data = {
-            SimTermLocalServer.python_code: "非unicode中文: 逗比，unicode中文：u'这是unicode'",
+            SimTermLocalServer.python_code: "a = u'aaa'\nprint a"
         }
 
         ''' 渲染 '''
@@ -179,9 +180,3 @@ class TestSimTerminal(unittest.TestCase):
         v.html(self.appM.request(localpart=SimTermLocalServer.URL, data=data, method='POST').data)
 
 
-
-    def execuPython(self):
-        """
-
-        :return:
-        """

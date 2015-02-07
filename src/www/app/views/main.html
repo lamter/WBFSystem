@@ -1,4 +1,4 @@
-$def with (user, UserGroup, views, ManageUser)
+$def with (user, UserGroup, views, ManageUser, SimTerminalPage)
 
 $ title = "某种管理系统"
 
@@ -21,6 +21,12 @@ $ title = "某种管理系统"
                 <!--$:views.manage_user_option-->
             </td>
         </tr>
+    <!-- 伪终端页面 -->
+    <tr>
+        <td>
+            <p>进入<a href=$SimTerminalPage.URL>伪终端</a></p>
+        </td>
+    </tr>
 </table>
 
 </body>

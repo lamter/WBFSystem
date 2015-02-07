@@ -11,19 +11,19 @@ file.
 """
 
 import sys
+
+from src.www.app import settings
+
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 import web
 import app
-import settings
+from app.controllers import session
 from app.tools.web_session import Initializer
-# from app import (models, controllers)
-from urls import (URLS, HANDLER)
+from app.urls import (URLS, HANDLER)
 from app.tools.app_processor import (header_html, notfound, internalerror)
-
-''' 初始化orm '''
-app.models.init()
 
 web.config.debug = settings.DEBUG
 
@@ -33,13 +33,16 @@ appM.notfound = notfound
 appM.internalerror = internalerror
 appM.add_processor(web.loadhook(header_html))
 
-app.session = web.session.Session(appM, web.session.DiskStore('sessions'), initializer=Initializer(
-                                                                                                      User=app.models.user.User,
-                                                                                                      UserGroup=app.models.usergroup.UserGroup,
-                                                                                                      BanLogin=app.controllers.login_handler.BanLogin,
-                                                                                                      settings=settings,
-                                                                                                      app=app,
-                                                                                                      ))
+''' 会话数据结构 '''
+session.init(web.session.Session(appM, web.session.DiskStore('sessions'), initializer=Initializer(
+                                                                                                  User=app.models.user.User,
+                                                                                                  UserGroup=app.models.usergroup.UserGroup,
+                                                                                                  BanLogin=app.controllers.login_handler.BanLogin,
+                                                                                                  settings=settings,
+                                                                                                  session=session,
+                                                                                                  )
+                                )
+            )
 
 web.config.session_parameters['cookie_name'] = 'webpy_session_id'
 web.config.session_parameters['cookie_domain'] = None
@@ -48,6 +51,9 @@ web.config.session_parameters['ignore_expiry'] = True
 web.config.session_parameters['ignore_change_ip'] = False
 web.config.session_parameters['secret_key'] = 'akdnA0FJsdJFLSlvno92'
 web.config.session_parameters['expired_message'] = 'Session expired'
+
+''' 初始化orm '''
+app.models.init()
 
 
 if __name__ == '__main__':

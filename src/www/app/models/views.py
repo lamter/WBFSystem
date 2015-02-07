@@ -5,7 +5,7 @@ Created on 2014-10-28
 @author: Shawn
 '''
 
-import settings
+from .. import settings
 from ..controllers import (render)
 from usergroup import UserGroup
 from user import User
@@ -30,13 +30,13 @@ class Views(object):
         :param attr:
         :return:
         '''
-        print '查看生成的文件: %s ' % settings.absolute('tmp/test.html')
+        print '查看生成的文件: %s ' % settings.absolute('../test/test.html')
         if self.isHasAttr(attr):
-            with open(settings.absolute('test/test.html'), 'wb') as h:
+            with open(settings.absolute('../test/test.html'), 'wb') as h:
                 a = '%s' % getattr(self, attr)
                 h.write(a)
         else:
-            with open(settings.absolute('test/test.html'), 'wb') as h:
+            with open(settings.absolute('../test/test.html'), 'wb') as h:
                 h.write(attr)
 
 

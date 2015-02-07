@@ -6,26 +6,19 @@ Created on 2014-10-27
 '''
 
 import unittest
-import traceback
 
 import web
 import redis
 import redisco
 
-from src.www import settings
 from src.www import app
 from src.www.app.tools.web_session import Initializer
-from src.www.app import (models, controllers)
-from urls import (URLS, HANDLER)
+from src.www.app import (models, controllers, settings)
+from src.www.app.urls import (URLS, HANDLER)
 from src.www.app.tools.app_processor import (header_html, notfound, internalerror)
-from src.www.app.models.counter import Counter
-from src.www.app.models.user import User
 from src.www.app.models import user
 from src.www.app.models.usergroup import UserGroup
-from src.www.app.models.views import Views
-from src.www.app.controllers.manage_handler import (ManageUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
 from src.www.app.controllers.login_handler import Login
-from src.www.app.controllers.manage_handler import (CreateUserGroup,CreateUser,ModifUser)
 
 
 def suite():
@@ -45,7 +38,7 @@ class TestUser(unittest.TestCase):
         ''' 配置测试用的redis配置信息  '''
         settings.REDIS_HOST = "localhost"
         settings.REDIS_PORT = 8911
-        settings.REDIS_DB_NUM = 0
+        settings.REDIS_DB = 0
 
         ''' redisco连接 '''
         settings.rd = redisco.connection_setup(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)

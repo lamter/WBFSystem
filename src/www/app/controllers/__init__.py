@@ -6,7 +6,7 @@ controllers of the app.
 
 # from web.contrib.template import render_mako
 import web.template
-from settings import (absolute, DEBUG)
+from ..settings import (absolute, DEBUG)
 from . import *
 
 # Mako Template options
@@ -23,4 +23,21 @@ from . import *
 # )
 
 
-render = web.template.render(absolute('app/views'))
+render = web.template.render(absolute('views'))
+
+class Session():
+    def __init__(self):
+        self.__session = None
+
+    def init(self, session):
+        '''
+        :param session: web.session()
+        :return:
+        '''
+        self.__session = session
+
+    def __call__(self, *args, **kwargs):
+        return self.__session
+
+
+session = Session()

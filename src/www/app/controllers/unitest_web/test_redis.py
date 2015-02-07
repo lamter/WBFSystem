@@ -4,20 +4,16 @@ Created on 2014-09-21
 
 @author: Shawn
 '''
+from src.www.app import settings
 
 __author__ = 'Shawn'
 
 import unittest
-import traceback
 
-import redis
 import redisco
 
 import redis
 from redis.exceptions import *
-from redisco.containers import *
-from src.www import settings
-
 
 
 def suite():
@@ -38,7 +34,7 @@ class RedisConnection(unittest.TestCase):
         ''' 配置测试用的redis配置信息  '''
         settings.REDIS_HOST = "localhost"
         settings.REDIS_PORT = 8911
-        settings.REDIS_DB_NUM = 0
+        settings.REDIS_DB = 0
 
         ''' redisco连接 '''
         # redisco.connection_setup(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)

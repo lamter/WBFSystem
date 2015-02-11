@@ -12,7 +12,7 @@ import traceback
 
 import web
 
-from . import session
+from . import session, render
 from base_handler import *
 from manage_handler import (ManageUser)
 from sim_terminal_handler import SimTerminalPage
@@ -39,6 +39,11 @@ class Main(BaseHandler):
         views.render_manage_user_option(ManageUser)
 
         ''' 用户管理选择 '''
-        return render.main(user, UserGroup, views, ManageUser, SimTerminalPage)
+        return render.main(user,
+                           UserGroup,
+                           views,
+                           ManageUser,
+                           SimTerminalPage
+        )
 
 

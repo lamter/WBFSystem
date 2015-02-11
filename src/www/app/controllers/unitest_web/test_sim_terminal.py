@@ -138,7 +138,7 @@ class TestSimTerminal(unittest.TestCase):
         views.render_terminal_output(term_output)
         views.render_terminal_input()
 
-        views.render_sim_term_local_server(SimTermLocalServer, term_server)
+        views.render_sim_term_local_server(SimTermLocalServer)
         views.html('sim_term_local_server')
 
 

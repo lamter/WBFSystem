@@ -23,7 +23,7 @@ class TerminalServer(object):
         self.term_title = '未设置终端标签'
         self.term_output = ''
         self.logfile = ''
-        self.loglines = 50      # 读取多少行日志
+        # self.loglines = 50      # 读取多少行日志
 
 
     def getLogText(self):
@@ -51,18 +51,17 @@ class TerminalServer(object):
         :param pythonCode:
         :return:
         """
-        @contextlib.contextmanager
-        def stdoutIO(stdout=None):
-            old = sys.stdout
-            if stdout is None:
-                stdout = StringIO.StringIO()
-            sys.stdout = stdout
-            yield stdout
-            sys.stdout = old
-
         with stdoutIO() as s:
             exec pythonCode
 
         self.term_output = s.getvalue()
 
 
+@contextlib.contextmanager
+def stdoutIO(stdout=None):
+    old = sys.stdout
+    if stdout is None:
+        stdout = StringIO.StringIO()
+    sys.stdout = stdout
+    yield stdout
+    sys.stdout = old

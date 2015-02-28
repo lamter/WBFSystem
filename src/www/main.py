@@ -46,13 +46,8 @@ appM.add_processor(web.loadhook(verify_session))
 ''' 初始化 html 头, 添加到app的 processor 流程中 '''
 appM.add_processor(web.loadhook(header_html))
 
-web.config.session_parameters['cookie_name'] = 'webpy_session_id'
-web.config.session_parameters['cookie_domain'] = None
-web.config.session_parameters['timeout'] = 10
-web.config.session_parameters['ignore_expiry'] = True
-web.config.session_parameters['ignore_change_ip'] = False
-web.config.session_parameters['secret_key'] = 'akdnA0FJsdJFLSlvno92'
-web.config.session_parameters['expired_message'] = 'Session expired'
+''' 设置session的参数 '''
+settings.setSessionParameters(web.config.session_parameters)
 
 ''' 初始化orm，包括初始化 root 用户 '''
 app.models.init()

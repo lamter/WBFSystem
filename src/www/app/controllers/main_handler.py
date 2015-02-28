@@ -12,8 +12,9 @@ import traceback
 
 import web
 
-from . import session, render
+from . import (render, session)
 from base_handler import *
+from logout_handler import Logout
 from manage_handler import (ManageUser)
 from sim_terminal_handler import SimTerminalPage
 from ..models.views import Views
@@ -43,7 +44,6 @@ class Main(BaseHandler):
                            UserGroup,
                            views,
                            ManageUser,
-                           SimTerminalPage
+                           SimTerminalPage,
+                           Logout,
         )
-
-

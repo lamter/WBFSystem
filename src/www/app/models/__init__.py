@@ -45,6 +45,10 @@ class Init(object):
             ug.setPms(UserGroup.getAllPms())
             ug.save()
 
+            ''' 更新密码 '''
+            root.password = root.rootPassword
+            root.save()
+
 
 init = Init()
 

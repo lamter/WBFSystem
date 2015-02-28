@@ -18,4 +18,4 @@ uwsgi.pid
 
 # log
 log/*.log
-
+p.py

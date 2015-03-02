@@ -28,4 +28,10 @@ class Logout(BaseHandler):
 
         ''' 清除这一次会话session '''
         session().kill()
-        return web.seeother('/')
+        jumpto = BaseHandler.URL
+        if not jumpto:
+            jumpto += '/'
+        else:
+            if jumpto[-1] != '/':
+                jumpto += '/'
+        return web.seeother(jumpto)

@@ -62,3 +62,18 @@ def logfile():
     wwwPath = os.path.split(appPath)[0]
     logfile = os.path.join(wwwPath, 'log/wbfs.log')
     return logfile
+
+
+def setSessionParameters(session_parameters):
+    """
+    设置 web.config.session_parameters 的参数
+    :param session_parameters:
+    :return:
+    """
+    session_parameters['cookie_name'] = 'webpy_session_id'
+    session_parameters['cookie_domain'] = None
+    session_parameters['timeout'] = SESSION_TIMEOUT
+    session_parameters['ignore_expiry'] = True
+    session_parameters['ignore_change_ip'] = False
+    session_parameters['secret_key'] = 'fLjUfxqXtfNoIldA0A0J'
+    session_parameters['expired_message'] = 'Session expired'

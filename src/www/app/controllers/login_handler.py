@@ -73,3 +73,5 @@ class BanLogin(BaseHandler):
         else:
             ''' 不是被禁止登录，跳转回/index '''
             web.redirect(Index.URL)
+
+

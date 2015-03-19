@@ -169,7 +169,7 @@ class Views(object):
         if not self.user.isHavePms(pms):
             return
 
-        ''' 渲染用户信息 '''
+        ''' 渲染用户组信息 '''
         self.modif_user_group = render.modif_user_group(self.user, UserGroup, ModifUserGroup)
 
 
@@ -189,7 +189,7 @@ class Views(object):
         self.sim_terminal_page = render.sim_terminal_page(self.user, UserGroup, SimTermLocalServer)
 
 
-    def render_sim_term_local_server(self, SimTermLocalServer, termLocalServer):
+    def render_sim_term_local_server(self, SimTermLocalServer):
         """
         渲染 本地进程的终端页面
         :return:
@@ -227,6 +227,4 @@ class Views(object):
 
         ''' 渲染用户信息 '''
         self.terminal_input = render.terminal_input(self.user, UserGroup)
-
-
 

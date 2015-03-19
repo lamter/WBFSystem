@@ -31,3 +31,4 @@ class Index(BaseHandler):
             return web.redirect(Main.URL)
         else:
             return render.login('未登录', login_handler.Login)
+

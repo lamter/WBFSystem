@@ -80,7 +80,7 @@ class CreateUserGroup(BaseHandler):
         # print 'newUg->', newUg
 
         ''' 获取设定的权限 '''
-        pms = 0
+        pms = set([])
         for pmn, pm in UserGroup.getPermissionDic().items():
             if newUg.get(pmn) == 'on':
                 pms |= pm
@@ -343,7 +343,7 @@ class ModifUserGroup(BaseHandler):
     """
     修改用户组信息
     """
-    URL = BaseHandler.URL +  '/modif_user_group'
+    URL = BaseHandler.URL + '/modif_user_group'
     url = BaseHandler.url + r'/modif_user_group.*'
 
     oname = 'oname'
@@ -369,7 +369,7 @@ class ModifUserGroup(BaseHandler):
             ug.name = newUg.name
 
         ''' 获取设定的权限 '''
-        pms = 0
+        pms = set([])
         for pmn, pm in UserGroup.getPermissionDic().items():
             if newUg.get(pmn) == 'on':
                 pms |= pm

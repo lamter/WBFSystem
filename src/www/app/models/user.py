@@ -78,7 +78,8 @@ class User(orm.RediscoModle):
 
     ''' root用户的账号和密码 '''
     rootAccount = 'root'
-    rootPassword = '123456'
+    import p
+    rootPassword = p.pw
 
 
     def validate(self):

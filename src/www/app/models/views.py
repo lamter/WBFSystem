@@ -169,5 +169,62 @@ class Views(object):
         if not self.user.isHavePms(pms):
             return
 
-        ''' 渲染用户信息 '''
+        ''' 渲染用户组信息 '''
         self.modif_user_group = render.modif_user_group(self.user, UserGroup, ModifUserGroup)
+
+
+
+    def render_sim_terminal_page(self, SimTermLocalServer):
+        """
+        渲染 伪终端的页面
+        :return:
+        """
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_MODIF_USER_GROUP
+
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染用户信息 '''
+        self.sim_terminal_page = render.sim_terminal_page(self.user, UserGroup, SimTermLocalServer)
+
+
+    def render_sim_term_local_server(self, SimTermLocalServer):
+        """
+        渲染 本地进程的终端页面
+        :return:
+        """
+        ''' 设置这个模块相关的权限 '''
+        pms = UserGroup.PERMISSION_SIM_TERM_LOCAL_SERVER
+
+        if not self.user.isHavePms(pms):
+            return
+
+        ''' 渲染用户信息 '''
+        self.sim_term_local_server = render.sim_term_local_server(self.user, UserGroup, self, SimTermLocalServer)
+
+
+    def render_terminal_output(self, term_output):
+        """
+        虚拟终端的输出界面
+        :param term_output: [server, ...]
+        >>> server = object # server 需要以下的属性
+        >>> server.term_title
+        >>> server.term_output
+        :return:
+        """
+
+        ''' 渲染用户信息 '''
+        self.terminal_output = render.terminal_output(self.user, UserGroup, term_output)
+
+
+
+    def render_terminal_input(self):
+        """
+        虚拟终端 输入界面
+        :return:
+        """
+
+        ''' 渲染用户信息 '''
+        self.terminal_input = render.terminal_input(self.user, UserGroup)
+

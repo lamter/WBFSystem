@@ -48,6 +48,7 @@ class Login(BaseHandler):
             ''' 通过验证 '''
             session().username = '%s' % username
             session().login = True
+            session().user = user
             return web.redirect(Main.URL)
 
         else:
@@ -72,3 +73,5 @@ class BanLogin(BaseHandler):
         else:
             ''' 不是被禁止登录，跳转回/index '''
             web.redirect(Index.URL)
+
+

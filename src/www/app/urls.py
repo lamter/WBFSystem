@@ -4,10 +4,13 @@
 class handlers.
 """
 
+from controllers.base_handler import BaseHandler
+from controllers.main_handler import (Main)
 from controllers.login_handler import Login
+from controllers.logout_handler import Logout
 from controllers.index_handler import Index
-from controllers.main_handler import Main
 from controllers.manage_handler import (ManageUser, CreateUserGroup, CreateUser, ModifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG, ModifUserGroup)
+from controllers.sim_terminal_handler import (SimTerminalPage, SimTermLocalServer)
 
 
 URLS = (
@@ -23,6 +26,9 @@ URLS = (
     AddUG.url,                  AddUG.__name__,
     RemoveUG.url,               RemoveUG.__name__,
     ModifUserGroup.url,         ModifUserGroup.__name__,
+    SimTerminalPage.url,        SimTerminalPage.__name__,
+    SimTermLocalServer.url,     SimTermLocalServer.__name__,
+    Logout.url,                 Logout.__name__,
 )
 # for i,u in enumerate(URLS):
 #     print u, '\t',

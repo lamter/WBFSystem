@@ -1,11 +1,12 @@
 #coding=utf-8
 '''
-Created on 2014-10-27
+Created on 2015-01-13
 
 @author: Shawn
 '''
 
 import unittest
+import traceback
 
 import web
 import redis
@@ -16,18 +17,19 @@ from src.www.app.tools.web_session import Initializer
 from src.www.app import (models, controllers, settings)
 from src.www.app.urls import (URLS, HANDLER)
 from src.www.app.tools.app_processor import (header_html, notfound, internalerror)
+from src.www.app.models.user import User
 from src.www.app.models import user
 from src.www.app.models.usergroup import UserGroup
 from src.www.app.controllers.login_handler import Login
 
-
 def suite():
-    testSuite1 = unittest.makeSuite(TestUser, "test")
+    testSuite1 = unittest.makeSuite(TestAppSession, "test")
     alltestCase = unittest.TestSuite([testSuite1, ])
     return alltestCase
 
 
-class TestUser(unittest.TestCase):
+
+class TestAppSession(unittest.TestCase):
     '''
     '''
     def setUp(self):
@@ -65,6 +67,7 @@ class TestUser(unittest.TestCase):
                                                                                                               app=app,
                                                                                                               )))
 
+
         web.config.session_parameters['cookie_name'] = 'webpy_session_id'
         web.config.session_parameters['cookie_domain'] = None
         web.config.session_parameters['timeout'] = 10
@@ -73,49 +76,17 @@ class TestUser(unittest.TestCase):
         web.config.session_parameters['secret_key'] = 'akdnA0FJsdJFLSlvno92'
         web.config.session_parameters['expired_message'] = 'Session expired'
 
-    def tearDown(self):
-        return
-        print '清空了数据库%s' % settings.REDIS_DB
-        self.redis.flushdb()
+        ''' 初始化orm，包括初始化 root 用户 '''
+        app.models.init()
 
 
-    def test_createUserGroup(self):
-        '''
-        测试生成用户组
-        :return:
-        '''
-
-        self.redis.flushdb()
-
-        ugname = 'enName'
-        ug = UserGroup.createNewUserGroup(ugname, UserGroup.getAllPms())
-        print 1111111111
-        print type(ug.name), ug.name
-
-        print '生成用户组完毕...'
-        ug = UserGroup.obj(name=ugname)
-        print type(ug.name), ug.name
-        if not ug.is_valid:
-            raise ValueError('生成用户组失败!!!')
-        print '生成用户组成功...'
-
-
-    def test_UserGroupAll(self):
-        ugs = UserGroup.all()
-        UserGroup.createRootGroup()
-        print '查询到用户组%d个' % len(ugs)
-        for ug in ugs:
-            print ug.name
-
-
-    def test_UserGroupModle(self):
+    def test_session(self):
         """
-        测试 UserGroup 实例的性质
+        测试是否生成session实例
         :return:
         """
-        ug = UserGroup(name='testUserGroup')
-        print type(ug.permissions)
-        # print type(ug.pmss)
+        user = User.obj(username='root')
+        print user
+        controllers.session().user = user
+        print controllers.session().user
 
-        # ug.pmss = [2, 1]
-        ug.save()

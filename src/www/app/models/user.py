@@ -78,7 +78,8 @@ class User(orm.RediscoModle):
 
     ''' root用户的账号和密码 '''
     rootAccount = 'root'
-    rootPassword = '123456'
+    import p
+    rootPassword = p.pw
 
 
     def validate(self):
@@ -272,7 +273,7 @@ class User(orm.RediscoModle):
         从所有用户组获得权限
         :return:
         '''
-        p = 0
+        p = set()
         for userGroup in self.userGroups:
             p |= userGroup.pms
 

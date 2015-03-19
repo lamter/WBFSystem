@@ -14,3 +14,8 @@ src/redis/bin/stdout
 sessions/
 src/www/tmp/
 src/www/test/
+uwsgi.pid
+
+# log
+log/*.log
+p.py

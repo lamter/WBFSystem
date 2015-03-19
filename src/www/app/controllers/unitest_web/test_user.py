@@ -59,7 +59,7 @@ class TestUser(unittest.TestCase):
         self.appM.internalerror = internalerror
         self.appM.add_processor(web.loadhook(header_html))
 
-        app.session = web.session.Session(self.appM, web.session.DiskStore('sessions'), initializer=Initializer(
+        controllers.session = web.session.Session(self.appM, web.session.DiskStore('sessions'), initializer=Initializer(
                                                                                                               User=models.user.User,
                                                                                                               UserGroup=models.usergroup.UserGroup,
                                                                                                               BanLogin=controllers.login_handler.BanLogin,

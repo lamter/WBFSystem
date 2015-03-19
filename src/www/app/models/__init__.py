@@ -35,12 +35,19 @@ class Init(object):
 
         root = User.obj(username=User.rootAccount)
 
-        if root:
-            ''' 如果已经存在root 用户，那么删除掉 '''
-            root.delete()
+        if root is None:
+            ''' 没有root用户，生成一个新的root用户 '''
+            root = User.createRoot()
+            root.save()
+        else:
+            ''' 已经有root用户了，直接赋予root用户组全部权限 '''
+            ug = UserGroup.obj(name=UserGroup.rootGroup)
+            ug.setPms(UserGroup.getAllPms())
+            ug.save()
 
-        root = User.createRoot()
-        root.save()
+            ''' 更新密码 '''
+            root.password = root.rootPassword
+            root.save()
 
 
 init = Init()

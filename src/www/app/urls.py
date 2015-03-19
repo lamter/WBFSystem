@@ -11,6 +11,7 @@ from controllers.logout_handler import Logout
 from controllers.index_handler import Index
 from controllers.manage_handler import (ManageUser, CreateUserGroup, CreateUser, ModifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG, ModifUserGroup)
 from controllers.sim_terminal_handler import (SimTerminalPage, SimTermLocalServer)
+from controllers.static_handler import JavaScripteHandler
 
 
 URLS = (
@@ -29,6 +30,7 @@ URLS = (
     SimTerminalPage.url,        SimTerminalPage.__name__,
     SimTermLocalServer.url,     SimTermLocalServer.__name__,
     Logout.url,                 Logout.__name__,
+    JavaScripteHandler.url,     JavaScripteHandler.__name__,
 )
 # for i,u in enumerate(URLS):
 #     print u, '\t',

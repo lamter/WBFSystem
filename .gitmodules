@@ -1,0 +1,6 @@
+[submodule "src/www/public/css"]
+	path = src/www/public/css
+	url = https://lamter@github.com/lamter/css.git
+[submodule "src/www/public/js"]
+	path = src/www/public/js
+	url = https://lamter@github.com/lamter/js.git

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Created on 2015-03-19
+Created on 2015-03-29
 
 @author: Shawn
 
@@ -15,23 +15,23 @@ import web
 from . import session
 from . import render
 from base_handler import BaseHandler
+from static_handler import BaseStaticHandler
 from ..models.user import User
 from ..models.usergroup import UserGroup
 
 
-class BaseStaticHandler(BaseHandler):
+class BasePublicHandler(BaseStaticHandler):
     """
-    静态文件下发
+    公共文件文件下发
     """
-    URL = BaseHandler.URL + '/static'
-    url = BaseHandler.url + r'/static.*'
-
+    URL = BaseHandler.URL + '/public'
+    url = BaseHandler.url + r'/public.*'
 
 
     def __init__(self):
 
         ''' 文件路径 '''
-        self.folder = self._wwwPath() + '/www/static'
+        self.folder = self._wwwPath() + '/www/public'
 
         self.suffix = ''
 
@@ -54,7 +54,7 @@ class BaseStaticHandler(BaseHandler):
 
         for fileName in os.listdir(self.folder):
             if not endWith(fileName, self.suffix):
-                ''' 后缀名见哈 '''
+                ''' 后缀名检查 '''
                 continue
 
             with open(os.path.join(self.folder, fileName)) as f:
@@ -82,15 +82,15 @@ class BaseStaticHandler(BaseHandler):
 
 
 
-class StaticJavaScripteHandler(BaseStaticHandler):
+class PublicJavaScripteHandler(BasePublicHandler):
     """
     js 脚本的发送句柄
     """
-    URL = BaseStaticHandler.URL + '/js'
-    url = BaseStaticHandler.url + '/js.*'
+    URL = BasePublicHandler.URL + '/js'
+    url = BasePublicHandler.url + '/js.*'
     def __init__(self):
 
-        self.folder = self._wwwPath() + '/www/static/js'
+        self.folder = self._wwwPath() + '/www/public/js'
 
         self.suffix = '.js'
 

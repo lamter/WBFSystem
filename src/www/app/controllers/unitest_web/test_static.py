@@ -25,7 +25,8 @@ from src.www.app.models.term_server import TerminalServer
 from src.www.app.controllers.manage_handler import (ManageUser, ModifUserN, ModifUserPW, AddUG, RemoveUG)
 from src.www.app.controllers.login_handler import Login
 from src.www.app.controllers.sim_terminal_handler import (SimTermLocalServer)
-from src.www.app.controllers.static_handler import (JavaScripteHandler)
+from src.www.app.controllers.static_handler import (StaticJavaScripteHandler, StaticCSSHandler)
+from src.www.app.controllers.test_handler import Test
 
 def suite():
     testSuite1 = unittest.makeSuite(TestStatic, "test")
@@ -41,6 +42,7 @@ class TestStatic(unittest.TestCase):
         '''
         :return:
         '''
+        settings.IS_UNITTEST = True
         settings.DEBUG = True
         ''' 配置测试用的redis配置信息  '''
         settings.REDIS_HOST = "localhost"
@@ -86,7 +88,7 @@ class TestStatic(unittest.TestCase):
         web.config.session_parameters['expired_message'] = 'Session expired'
 
 
-    def test_static(self):
+    def test_JavaHandler(self):
         """
 
         :return:
@@ -94,5 +96,28 @@ class TestStatic(unittest.TestCase):
         user = User.obj(username=User.rootAccount)
         settings.debug_user = user
         v = Views(user)
-        URL = JavaScripteHandler.URL + '/jquery.min.js'
-        v.html(self.appM.request(localpart=URL, method='GET').data)
+        v.html(self.appM.request(localpart=StaticJavaScripteHandler.load("jquery.min.js"), method='GET').data)
+
+
+    def test_css(self):
+        """
+        :return:
+        """
+        user = User.obj(username=User.rootAccount)
+        settings.debug_user = user
+        v = Views(user)
+        print 1212, StaticCSSHandler.load("button.css")
+        v.html(self.appM.request(localpart=StaticCSSHandler.load("button.css"), method='GET').data)
+
+
+    def test_test(self):
+        """
+
+        :return:
+        """
+
+        user = User.obj(username=User.rootAccount)
+        settings.debug_user = user
+        v = Views(user)
+
+        v.html(self.appM.request(localpart=Test.URL, method='GET').data)

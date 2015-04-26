@@ -16,6 +16,9 @@ import redisco
 DEBUG = False
 # DEBUG = True
 
+IS_UNITTEST = False
+# IS_UNITTEST = True
+
 
 # global session
 

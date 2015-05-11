@@ -1,0 +1,901 @@
+*** Starting uWSGI 2.0.9 (64bit) on [Mon May 11 11:42:54 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 05 February 2015 20:38:36
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/WEBFSystem/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8080).
+bind(): Address already in use [core/socket.c line 764]
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 11:53:09 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :8080 fd 15
+uwsgi socket 0 bound to TCP address 127.0.0.1:53407 (port auto-assigned) fd 3
+Python version: 2.7.6 (default, Sep  9 2014, 15:04:36)  [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39)]
+Python main interpreter initialized at 0x7fc46b8009e0
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 2184128 bytes (2132 KB) for 100 cores
+*** Operational MODE: async ***
+failed to open python file myapp.py
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 28768)
+spawned uWSGI worker 1 (pid: 28771, cores: 100)
+spawned uWSGI http 1 (pid: 28772)
+*** running gevent loop engine [addr:0x10c8410e0] ***
+gateway "uWSGI http 1" has been buried (pid: 28772)
+...brutally killing workers...
+Brutally killing worker 1 (pid: 28771)...
+Mon May 11 11:53:19 2015 - stopping gevent signals watchers for worker 1 (pid: 28771)...
+Mon May 11 11:53:19 2015 - stopping gevent sockets watchers for worker 1 (pid: 28771)...
+Mon May 11 11:53:19 2015 - main gevent watchers stopped for worker 1 (pid: 28771)...
+goodbye to the gevent Hub on worker 1 (pid: 28771)
+worker 1 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+closing all non-uwsgi socket fds > 2 (max_fd = 256)...
+found fd 3 mapped to socket 0 (127.0.0.1:53407)
+running /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 11:53:20 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :8080 fd 5
+uwsgi socket 0 bound to TCP address 127.0.0.1:53412 (port auto-assigned) fd 4
+Python version: 2.7.6 (default, Sep  9 2014, 15:04:36)  [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39)]
+Python main interpreter initialized at 0x7fe69a500db0
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 2184128 bytes (2132 KB) for 100 cores
+*** Operational MODE: async ***
+failed to open python file myapp.py
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 28768)
+spawned uWSGI worker 1 (pid: 28789, cores: 100)
+spawned uWSGI http 1 (pid: 28790)
+*** running gevent loop engine [addr:0x10862d0e0] ***
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 11:53:26 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8080).
+bind(): Address already in use [core/socket.c line 764]
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 11:54:05 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8080).
+bind(): Address already in use [core/socket.c line 764]
+gateway "uWSGI http 1" has been buried (pid: 28790)
+...brutally killing workers...
+Brutally killing worker 1 (pid: 28789)...
+Mon May 11 11:54:13 2015 - stopping gevent signals watchers for worker 1 (pid: 28789)...
+Mon May 11 11:54:13 2015 - stopping gevent sockets watchers for worker 1 (pid: 28789)...
+Mon May 11 11:54:13 2015 - main gevent watchers stopped for worker 1 (pid: 28789)...
+goodbye to the gevent Hub on worker 1 (pid: 28789)
+worker 1 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+closing all non-uwsgi socket fds > 2 (max_fd = 256)...
+found fd 4 mapped to socket 0 (127.0.0.1:53412)
+running /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 11:54:14 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :8080 fd 5
+uwsgi socket 0 bound to TCP address 127.0.0.1:53429 (port auto-assigned) fd 3
+Python version: 2.7.6 (default, Sep  9 2014, 15:04:36)  [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39)]
+Python main interpreter initialized at 0x7fabb2c0da90
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 2184128 bytes (2132 KB) for 100 cores
+*** Operational MODE: async ***
+failed to open python file myapp.py
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 28768)
+spawned uWSGI worker 1 (pid: 28865, cores: 100)
+spawned uWSGI http 1 (pid: 28866)
+*** running gevent loop engine [addr:0x10ecc00e0] ***
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 11:54:15 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8080).
+bind(): Address already in use [core/socket.c line 764]
+Mon May 11 11:54:31 2015 - uWSGI worker 1 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 11:55:52 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :8080 fd 15
+spawned uWSGI http 1 (pid: 28996)
+uwsgi socket 0 bound to TCP address 127.0.0.1:53451 (port auto-assigned) fd 3
+Python version: 2.7.6 (default, Sep  9 2014, 15:04:36)  [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39)]
+Python main interpreter initialized at 0x7f87b1e004d0
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 72760 bytes (71 KB) for 1 cores
+*** Operational MODE: single process ***
+Traceback (most recent call last):
+  File "./main.py", line 20, in <module>
+    from app.controllers import session
+  File "./app/controllers/__init__.py", line 10, in <module>
+    from ..settings import (absolute, DEBUG)
+  File "./app/settings.py", line 40, in <module>
+    raise redis.exceptions.ConnectionError('redisco 链接失败!!\n请检查 redis 服务是否启动')
+redis.exceptions.ConnectionError: redisco 链接失败!!
+请检查 redis 服务是否启动
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI worker 1 (and the only) (pid: 28993, cores: 1)
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 11:56:09 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8080).
+bind(): Address already in use [core/socket.c line 764]
+--- no python application found, check your startup logs for errors ---
+[pid: 28993|app: -1|req: -1/1] 127.0.0.1 () {34 vars in 594 bytes} [Mon May 11 11:56:23 2015] GET / => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (0 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 28993|app: -1|req: -1/2] 127.0.0.1 () {36 vars in 583 bytes} [Mon May 11 11:56:23 2015] GET /favicon.ico => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 0)
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 11:57:12 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8080).
+bind(): Address already in use [core/socket.c line 764]
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (0 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (1 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (2 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (3 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (0 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (1 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (2 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (3 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (0 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (1 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (2 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (3 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (0 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (1 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (2 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (3 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (0 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (1 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (2 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (3 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (0 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (1 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (2 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53451" (3 retries): Connection refused
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 11:57:49 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :8080 fd 15
+uwsgi socket 0 bound to TCP address 127.0.0.1:53569 (port auto-assigned) fd 3
+Python version: 2.7.6 (default, Sep  9 2014, 15:04:36)  [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39)]
+Python main interpreter initialized at 0x7f9302d00e60
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 2184128 bytes (2132 KB) for 100 cores
+*** Operational MODE: async ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x7f9302d00e60 pid: 29128 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 29128)
+spawned uWSGI worker 1 (pid: 29132, cores: 100)
+spawned uWSGI http 1 (pid: 29133)
+*** running gevent loop engine [addr:0x10d0e70e0] ***
+[pid: 29132|app: 0|req: 1/1] 127.0.0.1 () {36 vars in 625 bytes} [Mon May 11 11:57:51 2015] GET / => generated 424 bytes in 50 msecs (HTTP/1.1 200) 3 headers in 188 bytes (4 switches on core 99)
+[pid: 29132|app: 0|req: 2/2] 127.0.0.1 () {38 vars in 655 bytes} [Mon May 11 11:57:51 2015] GET /favicon.ico => generated 14 bytes in 11 msecs (HTTP/1.1 404) 4 headers in 220 bytes (4 switches on core 99)
+[pid: 29132|app: 0|req: 3/3] 127.0.0.1 () {38 vars in 697 bytes} [Mon May 11 11:57:54 2015] GET / => generated 424 bytes in 14 msecs (HTTP/1.1 200) 3 headers in 188 bytes (4 switches on core 99)
+gateway "uWSGI http 1" has been buried (pid: 29133)
+...brutally killing workers...
+Brutally killing worker 1 (pid: 29132)...
+Mon May 11 11:58:04 2015 - stopping gevent signals watchers for worker 1 (pid: 29132)...
+Mon May 11 11:58:04 2015 - stopping gevent sockets watchers for worker 1 (pid: 29132)...
+Mon May 11 11:58:04 2015 - main gevent watchers stopped for worker 1 (pid: 29132)...
+goodbye to the gevent Hub on worker 1 (pid: 29132)
+worker 1 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+closing all non-uwsgi socket fds > 2 (max_fd = 256)...
+found fd 3 mapped to socket 0 (127.0.0.1:53569)
+running /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 11:58:05 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :8080 fd 5
+uwsgi socket 0 bound to TCP address 127.0.0.1:53594 (port auto-assigned) fd 4
+Python version: 2.7.6 (default, Sep  9 2014, 15:04:36)  [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39)]
+Python main interpreter initialized at 0x7f97b2700770
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 2184128 bytes (2132 KB) for 100 cores
+*** Operational MODE: async ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x7f97b2700770 pid: 29128 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 29128)
+spawned uWSGI worker 1 (pid: 29151, cores: 100)
+spawned uWSGI http 1 (pid: 29152)
+*** running gevent loop engine [addr:0x106bbf0e0] ***
+Mon May 11 11:58:27 2015 - uWSGI worker 1 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 12:01:28 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :8080 fd 15
+uwsgi socket 0 bound to TCP address 127.0.0.1:53655 (port auto-assigned) fd 3
+Python version: 2.7.6 (default, Sep  9 2014, 15:04:36)  [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39)]
+Python main interpreter initialized at 0x7f9569600ae0
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 2184128 bytes (2132 KB) for 100 cores
+*** Operational MODE: async ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x7f9569600ae0 pid: 29258 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 29258)
+spawned uWSGI worker 1 (pid: 29262, cores: 100)
+spawned uWSGI http 1 (pid: 29263)
+*** running gevent loop engine [addr:0x107b620e0] ***
+[pid: 29262|app: 0|req: 1/1] 127.0.0.1 () {38 vars in 707 bytes} [Mon May 11 12:01:32 2015] GET /login => generated 4 bytes in 28 msecs (HTTP/1.1 405) 5 headers in 242 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 2/2] 127.0.0.1 () {38 vars in 707 bytes} [Mon May 11 12:01:33 2015] GET /login => generated 4 bytes in 9 msecs (HTTP/1.1 405) 5 headers in 242 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 3/3] 127.0.0.1 () {36 vars in 666 bytes} [Mon May 11 12:01:37 2015] GET / => generated 424 bytes in 15 msecs (HTTP/1.1 200) 3 headers in 188 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 4/4] 127.0.0.1 () {46 vars in 845 bytes} [Mon May 11 12:01:40 2015] POST /login => generated 439 bytes in 24 msecs (HTTP/1.1 200) 3 headers in 188 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 5/5] 127.0.0.1 () {46 vars in 850 bytes} [Mon May 11 12:01:44 2015] POST /login => generated 21 bytes in 11 msecs (HTTP/1.1 301) 5 headers in 266 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 6/6] 127.0.0.1 () {40 vars in 748 bytes} [Mon May 11 12:01:44 2015] GET /main => generated 1059 bytes in 31 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 7/7] 127.0.0.1 () {38 vars in 730 bytes} [Mon May 11 12:01:53 2015] GET /manage_user => generated 4793 bytes in 103 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 8/8] 127.0.0.1 () {46 vars in 880 bytes} [Mon May 11 12:03:29 2015] POST /create_user_group => generated 31 bytes in 9 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 9/9] 127.0.0.1 () {40 vars in 761 bytes} [Mon May 11 12:03:50 2015] GET /manage_user => generated 5114 bytes in 99 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 10/10] 127.0.0.1 () {46 vars in 879 bytes} [Mon May 11 12:04:04 2015] POST /modif_user_group => generated 21 bytes in 8 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 11/11] 127.0.0.1 () {40 vars in 761 bytes} [Mon May 11 12:04:06 2015] GET /manage_user => generated 5684 bytes in 94 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 12/12] 127.0.0.1 () {46 vars in 868 bytes} [Mon May 11 12:04:16 2015] POST /create_user => generated 23 bytes in 9 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 13/13] 127.0.0.1 () {40 vars in 761 bytes} [Mon May 11 12:04:18 2015] GET /manage_user => generated 5915 bytes in 93 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 14/14] 127.0.0.1 () {38 vars in 742 bytes} [Mon May 11 12:04:23 2015] GET /sim_terminal_page => generated 282 bytes in 10 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 15/15] 127.0.0.1 () {38 vars in 763 bytes} [Mon May 11 12:04:26 2015] GET /sim_term_local_server => generated 693 bytes in 19 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 16/16] 127.0.0.1 () {36 vars in 676 bytes} [Mon May 11 12:04:31 2015] GET / => generated 424 bytes in 14 msecs (HTTP/1.1 200) 3 headers in 188 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 17/17] 127.0.0.1 () {44 vars in 889 bytes} [Mon May 11 12:04:37 2015] POST /login => generated 21 bytes in 8 msecs (HTTP/1.1 301) 5 headers in 266 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 18/18] 127.0.0.1 () {40 vars in 817 bytes} [Mon May 11 12:04:37 2015] GET /main => generated 1059 bytes in 28 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29262|app: 0|req: 19/19] 127.0.0.1 () {36 vars in 767 bytes} [Mon May 11 12:04:39 2015] GET /sim_terminal_page => generated 282 bytes in 8 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 12:08:17 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :8080 fd 15
+uwsgi socket 0 bound to TCP address 127.0.0.1:53791 (port auto-assigned) fd 3
+Python version: 2.7.6 (default, Sep  9 2014, 15:04:36)  [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39)]
+Python main interpreter initialized at 0x7f96c2500730
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 2184128 bytes (2132 KB) for 100 cores
+*** Operational MODE: async ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x7f96c2500730 pid: 29401 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 29401)
+spawned uWSGI worker 1 (pid: 29405, cores: 100)
+spawned uWSGI http 1 (pid: 29406)
+*** running gevent loop engine [addr:0x108ccc0e0] ***
+Mon May 11 12:09:53 2015 - uWSGI worker 1 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 12:09:58 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+probably another instance of uWSGI is running on the same address (:8080).
+bind(): Address already in use [core/socket.c line 764]
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (0 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (1 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (2 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (3 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (0 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (1 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (2 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (3 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (0 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (1 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (2 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (3 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (0 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (1 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (2 retries): Connection refused
+[uwsgi-http] unable to connect() to node "127.0.0.1:53791" (3 retries): Connection refused
+*** Starting uWSGI 2.0.10 (64bit) on [Mon May 11 12:17:22 2015] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.79) on 26 April 2015 14:21:40
+os: Darwin-14.3.0 Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64
+nodename: lamter.local
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /Users/lamter/workspace/OpenSource/WBFSystem/src/www
+detected binary path: /Users/lamter/.virtualenvs/gevent@2.7.6/bin/uwsgi
+your processes number limit is 709
+your memory page size is 4096 bytes
+detected max file descriptor number: 256
+- async cores set to 100 - fd table size: 256
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :8080 fd 15
+uwsgi socket 0 bound to TCP address 127.0.0.1:53950 (port auto-assigned) fd 3
+Python version: 2.7.6 (default, Sep  9 2014, 15:04:36)  [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.39)]
+Python main interpreter initialized at 0x7fa36a500980
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 2184128 bytes (2132 KB) for 100 cores
+*** Operational MODE: async ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x7fa36a500980 pid: 29641 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 29641)
+spawned uWSGI worker 1 (pid: 29645, cores: 100)
+spawned uWSGI http 1 (pid: 29646)
+*** running gevent loop engine [addr:0x10f1930e0] ***
+[pid: 29645|app: 0|req: 3/1] 127.0.0.1 () {38 vars in 774 bytes} [Mon May 11 12:17:25 2015] GET /main => generated 1059 bytes in 5062 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 90, in _processor
+    self._save()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 137, in _save
+    self._setcookie(self.session_id)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 71, in __getattr__
+    return getattr(self._data, name)
+AttributeError: 'ThreadedDict' object has no attribute 'session_id'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 585, in processor
+    h()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 98, in _unload
+    web.ctx.app_stack = web.ctx.app_stack[:-1]
+AttributeError: 'ThreadedDict' object has no attribute 'app_stack'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 566, in processor
+    return handler()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in <lambda>
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 279, in wsgi
+    result = self.handle_with_processors()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 249, in handle_with_processors
+    return process(self.processors)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+[pid: 29645|app: 0|req: 3/2] 127.0.0.1 () {38 vars in 774 bytes} [Mon May 11 12:17:26 2015] GET /main => generated 0 bytes in 5055 msecs (HTTP/1.1 500) 0 headers in 0 bytes (1 switches on core 98)
+[pid: 29645|app: 0|req: 4/3] 127.0.0.1 () {38 vars in 774 bytes} [Mon May 11 12:17:28 2015] GET /main => generated 1059 bytes in 5030 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 97)
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 90, in _processor
+    self._save()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 137, in _save
+    self._setcookie(self.session_id)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 71, in __getattr__
+    return getattr(self._data, name)
+AttributeError: 'ThreadedDict' object has no attribute 'session_id'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 585, in processor
+    h()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 98, in _unload
+    web.ctx.app_stack = web.ctx.app_stack[:-1]
+AttributeError: 'ThreadedDict' object has no attribute 'app_stack'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 566, in processor
+    return handler()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in <lambda>
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 279, in wsgi
+    result = self.handle_with_processors()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 249, in handle_with_processors
+    return process(self.processors)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+[pid: 29645|app: 0|req: 4/4] 127.0.0.1 () {38 vars in 774 bytes} [Mon May 11 12:17:31 2015] GET /main => generated 0 bytes in 5054 msecs (HTTP/1.1 500) 0 headers in 0 bytes (1 switches on core 98)
+[pid: 29645|app: 0|req: 7/5] 127.0.0.1 () {38 vars in 774 bytes} [Mon May 11 12:17:36 2015] GET /main => generated 1059 bytes in 5037 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 98)
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 90, in _processor
+    self._save()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 137, in _save
+    self._setcookie(self.session_id)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 71, in __getattr__
+    return getattr(self._data, name)
+AttributeError: 'ThreadedDict' object has no attribute 'session_id'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 585, in processor
+    h()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 98, in _unload
+    web.ctx.app_stack = web.ctx.app_stack[:-1]
+AttributeError: 'ThreadedDict' object has no attribute 'app_stack'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 566, in processor
+    return handler()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in <lambda>
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 279, in wsgi
+    result = self.handle_with_processors()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 249, in handle_with_processors
+    return process(self.processors)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+[pid: 29645|app: 0|req: 7/6] 127.0.0.1 () {38 vars in 774 bytes} [Mon May 11 12:17:40 2015] GET /main => generated 0 bytes in 5050 msecs (HTTP/1.1 500) 0 headers in 0 bytes (1 switches on core 97)
+[pid: 29645|app: 0|req: 8/7] 127.0.0.1 () {38 vars in 774 bytes} [Mon May 11 12:17:41 2015] GET /main => generated 1059 bytes in 5032 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 90, in _processor
+    self._save()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 137, in _save
+    self._setcookie(self.session_id)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 71, in __getattr__
+    return getattr(self._data, name)
+AttributeError: 'ThreadedDict' object has no attribute 'session_id'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 585, in processor
+    h()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 98, in _unload
+    web.ctx.app_stack = web.ctx.app_stack[:-1]
+AttributeError: 'ThreadedDict' object has no attribute 'app_stack'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 566, in processor
+    return handler()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in <lambda>
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 279, in wsgi
+    result = self.handle_with_processors()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 249, in handle_with_processors
+    return process(self.processors)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+[pid: 29645|app: 0|req: 8/8] 127.0.0.1 () {38 vars in 774 bytes} [Mon May 11 12:17:45 2015] GET /main => generated 0 bytes in 5049 msecs (HTTP/1.1 500) 0 headers in 0 bytes (1 switches on core 97)
+[pid: 29645|app: 0|req: 11/9] 127.0.0.1 () {36 vars in 743 bytes} [Mon May 11 12:17:55 2015] GET /main => generated 1059 bytes in 5034 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 97)
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 90, in _processor
+    self._save()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 137, in _save
+    self._setcookie(self.session_id)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 71, in __getattr__
+    return getattr(self._data, name)
+AttributeError: 'ThreadedDict' object has no attribute 'session_id'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 585, in processor
+    h()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 98, in _unload
+    web.ctx.app_stack = web.ctx.app_stack[:-1]
+AttributeError: 'ThreadedDict' object has no attribute 'app_stack'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 566, in processor
+    return handler()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in <lambda>
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 279, in wsgi
+    result = self.handle_with_processors()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 249, in handle_with_processors
+    return process(self.processors)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+[pid: 29645|app: 0|req: 11/10] 127.0.0.1 () {36 vars in 743 bytes} [Mon May 11 12:17:56 2015] GET /main => generated 0 bytes in 5049 msecs (HTTP/1.1 500) 0 headers in 0 bytes (1 switches on core 99)
+[pid: 29645|app: 0|req: 12/11] 127.0.0.1 () {38 vars in 774 bytes} [Mon May 11 12:17:57 2015] GET /main => generated 1059 bytes in 5038 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 98)
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 90, in _processor
+    self._save()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 137, in _save
+    self._setcookie(self.session_id)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/session.py", line 71, in __getattr__
+    return getattr(self._data, name)
+AttributeError: 'ThreadedDict' object has no attribute 'session_id'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 585, in processor
+    h()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 98, in _unload
+    web.ctx.app_stack = web.ctx.app_stack[:-1]
+AttributeError: 'ThreadedDict' object has no attribute 'app_stack'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in process
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 566, in processor
+    return handler()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 237, in <lambda>
+    return p(lambda: process(processors))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+
+Traceback (most recent call last):
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 279, in wsgi
+    result = self.handle_with_processors()
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 249, in handle_with_processors
+    return process(self.processors)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/application.py", line 246, in process
+    raise self.internalerror()
+  File "./app/tools/app_processor.py", line 33, in internalerror
+    return web.internalerror(str(render._500(BaseHandler.errInfo())))
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 252, in InternalError
+    return _InternalError(message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 246, in __init__
+    HTTPError.__init__(self, status, headers, message or self.message)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 46, in __init__
+    header(k, v)
+  File "/Users/lamter/.virtualenvs/gevent@2.7.6/lib/python2.7/site-packages/web/webapi.py", line 276, in header
+    ctx.headers.append((hdr, value))
+AttributeError: 'ThreadedDict' object has no attribute 'headers'
+[pid: 29645|app: 0|req: 12/12] 127.0.0.1 () {36 vars in 743 bytes} [Mon May 11 12:18:01 2015] GET /main => generated 0 bytes in 5052 msecs (HTTP/1.1 500) 0 headers in 0 bytes (1 switches on core 99)
+[pid: 29645|app: 0|req: 13/13] 127.0.0.1 () {36 vars in 743 bytes} [Mon May 11 12:18:06 2015] GET /main => generated 1059 bytes in 5030 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+[pid: 29645|app: 0|req: 14/14] 127.0.0.1 () {36 vars in 735 bytes} [Mon May 11 12:25:52 2015] GET / => generated 21 bytes in 1 msecs (HTTP/1.1 301) 4 headers in 226 bytes (4 switches on core 99)
+[pid: 29645|app: 0|req: 15/15] 127.0.0.1 () {36 vars in 743 bytes} [Mon May 11 12:25:52 2015] GET /main => generated 1059 bytes in 5035 msecs (HTTP/1.1 200) 2 headers in 148 bytes (4 switches on core 99)
+respawned uWSGI http 1 (pid: 29757)
+DAMN ! worker 1 (pid: 29645) died, killed by signal 9 :( trying respawn ...
+Respawned uWSGI worker 1 (new pid: 29758)
+*** running gevent loop engine [addr:0x10f1930e0] ***
+Mon May 11 12:27:37 2015 - uWSGI worker 1 screams: UAAAAAAH my master disconnected: i will kill myself !!!

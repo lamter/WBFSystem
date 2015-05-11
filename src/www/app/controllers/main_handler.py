@@ -34,6 +34,9 @@ class Main(BaseHandler):
 
         user = session().user
 
+        import gevent
+        gevent.sleep(5)
+
         views = Views(user)
 
         ''' 渲染管理用户选项 '''

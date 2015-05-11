@@ -13,6 +13,9 @@ from controllers.manage_handler import (ManageUser, CreateUserGroup, CreateUser,
 from controllers.sim_terminal_handler import (SimTerminalPage, SimTermLocalServer)
 from controllers.static_handler import JavaScripteHandler
 
+# 测试模块
+from controllers.test_handler import TestLongWait
+
 
 URLS = (
     Index.url,                  Index.__name__,
@@ -31,6 +34,9 @@ URLS = (
     SimTermLocalServer.url,     SimTermLocalServer.__name__,
     Logout.url,                 Logout.__name__,
     JavaScripteHandler.url,     JavaScripteHandler.__name__,
+
+    # 测试 handler
+    # TestLongWait.url,           TestLongWait.__name__,
 )
 # for i,u in enumerate(URLS):
 #     print u, '\t',

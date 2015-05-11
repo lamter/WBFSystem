@@ -9,7 +9,7 @@ The only file which is directly executed. There's no reason to modify this
 file.
 
 """
-
+from gevent.wsgi import WSGIServer
 import sys
 
 reload(sys)
@@ -27,6 +27,7 @@ web.config.debug = settings.DEBUG
 
 appM = web.application(URLS, HANDLER, autoreload=False)
 application = appM.wsgifunc()
+
 appM.notfound = notfound
 appM.internalerror = internalerror
 
@@ -54,4 +55,4 @@ app.models.init()
 
 
 if __name__ == '__main__':
-  appM.run()
+  WSGIServer(('', 8080), application).serve_forever()

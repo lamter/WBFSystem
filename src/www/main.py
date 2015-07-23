@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 Created on 2014-10-28
@@ -15,8 +14,13 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+from gevent import monkey
+monkey.patch_all()
+
 from gevent.pywsgi import WSGIServer
 import web
+
+import pool
 import app
 from app.controllers import session
 from app import settings
@@ -27,8 +31,6 @@ from app.tools.app_processor import (header_html, notfound, internalerror, verif
 web.config.debug = settings.DEBUG
 
 appM = web.application(URLS, HANDLER, autoreload=False)
-
-
 
 application = appM.wsgifunc()
 appM.notfound = notfound
@@ -57,6 +59,12 @@ settings.setSessionParameters(web.config.session_parameters)
 app.models.init()
 
 
+''' 生成并发池 '''
+pool = pool.get()
+
+''' 主循环事务 '''
+
+
 if __name__ == '__main__':
   # appM.run()
-    WSGIServer(('', 8080), application).serve_forever()
+    WSGIServer(('', 8080), application, spawn=pool).serve_forever()

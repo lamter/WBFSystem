@@ -22,6 +22,9 @@ IS_UNITTEST = False
 
 # global session
 
+''' 并发数 '''
+ASYNC = 1000
+
 
 SESSION_TIMEOUT = 3600  # 1 Hour
 

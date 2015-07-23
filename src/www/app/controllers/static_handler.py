@@ -26,7 +26,7 @@ class BaseStaticHandler(BaseHandler):
     URL = BaseHandler.URL + '/static'
     url = BaseHandler.url + r'/static.*'
 
-    folder = BaseHandler._wwwPath() + '/www/static'
+    folder = BaseHandler._wwwPath() + '/static'
 
     suffix = ''
 
@@ -88,7 +88,7 @@ class StaticJavaScripteHandler(BaseStaticHandler):
     URL = BaseStaticHandler.URL + '/js'
     url = BaseStaticHandler.url + '/js.*'
 
-    folder = BaseStaticHandler._wwwPath() + '/www/static/js'
+    folder = BaseStaticHandler._wwwPath() + '/static/js'
 
     suffix = '.js'
 
@@ -106,7 +106,7 @@ class StaticCSSHandler(BaseStaticHandler):
     URL = BaseStaticHandler.URL + '/css'
     url = BaseStaticHandler.url + '/css.*'
 
-    folder = BaseStaticHandler._wwwPath() + '/www/static/css'
+    folder = BaseStaticHandler._wwwPath() + '/static/css'
 
     suffix = '.css'
 

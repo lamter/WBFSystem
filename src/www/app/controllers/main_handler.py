@@ -16,7 +16,7 @@ from . import (render, session)
 from base_handler import *
 from logout_handler import Logout
 from manage_handler import (ManageUser)
-from sim_terminal_handler import SimTerminalPage
+from sim_terminal_handler import SimTerminalPage,SimTermLocalServer
 from ..models.views import Views
 from ..models.usergroup import UserGroup
 
@@ -109,7 +109,7 @@ class Left(BaseHandler):
                            ManageUser,
                            DataTable,
                            JsCharts,
-                           SimTerminalPage
+                           SimTermLocalServer
                            )
 
 

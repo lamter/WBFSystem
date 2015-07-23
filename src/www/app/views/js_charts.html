@@ -1,0 +1,147 @@
+$def with (user)
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="static/css/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="static/js/jscharts.js"></script>
+
+</head>
+
+<body>
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">图表</a></li>
+    <li><a href="#">图表模板</a></li>
+    </ul>
+    </div>
+
+    <div class="rightinfo">
+    <div id="pieGraph">Loading graph...</div>
+    <div id="barGraph">Loading graph...</div>
+    <div id="lineGraph">Loading graph...</div>
+    <script type="text/javascript">
+
+        var myChart = new JSChart('pieGraph', 'pie');
+        myChart.setDataArray([['A', 40],['B', 16],['C', 20],['D', 10],['E', 10],['F', 4]]);
+        myChart.colorize(['#99CDFB','#3366FB','#0000FA','#F8CC00','#F89900','#F76600']);
+        myChart.setSize(600, 300);
+        myChart.setTitle('Phd Reference Chart');
+        myChart.setTitleFontFamily('Times New Roman');
+        myChart.setTitleFontSize(14);
+        myChart.setTitleColor('#0F0F0F');
+        myChart.setPieRadius(95);
+        myChart.setPieValuesColor('#FFFFFF');
+        myChart.setPieValuesFontSize(9);
+        myChart.setPiePosition(180, 165);
+        myChart.setShowXValues(false);
+        myChart.setLegend('#99CDFB', 'Papers where authors found');
+        myChart.setLegend('#3366FB', 'Papers which cite from other articles');
+        myChart.setLegend('#0000FA', 'Papers which cite from news');
+        myChart.setLegend('#F8CC00', 'Papers which lack crucial');
+        myChart.setLegend('#F89900', 'Papers with different conclusion');
+        myChart.setLegend('#F76600', 'Papers with useful information');
+        myChart.setLegendShow(true);
+        myChart.setLegendFontFamily('Times New Roman');
+        myChart.setLegendFontSize(10);
+        myChart.setLegendPosition(350, 120);
+        myChart.setPieAngle(30);
+        myChart.set3D(true);
+        myChart.draw();
+
+    </script>
+
+    <script type="text/javascript">
+
+        var myData = new Array(['Asia', 437, 520], ['Europe', 322, 390], ['North America', 233, 286], ['Latin America', 110, 162], ['Africa', 34, 49], ['Middle East', 20, 31], ['Aus/Oceania', 19, 22]);
+        var myChart = new JSChart('barGraph', 'bar');
+        myChart.setDataArray(myData);
+        myChart.setTitle('Internet usage by World Region (millions of users)');
+        myChart.setTitleColor('#8E8E8E');
+        myChart.setAxisNameX('');
+        myChart.setAxisNameY('');
+        myChart.setAxisNameFontSize(16);
+        myChart.setAxisNameColor('#999');
+        myChart.setAxisValuesAngle(30);
+        myChart.setAxisValuesColor('#777');
+        myChart.setAxisColor('#B5B5B5');
+        myChart.setAxisWidth(1);
+        myChart.setBarValuesColor('#2F6D99');
+        myChart.setAxisPaddingTop(60);
+        myChart.setAxisPaddingBottom(60);
+        myChart.setAxisPaddingLeft(45);
+        myChart.setTitleFontSize(11);
+        myChart.setBarColor('#2D6B96', 1);
+        myChart.setBarColor('#9CCEF0', 2);
+        myChart.setBarBorderWidth(0);
+        myChart.setBarSpacingRatio(50);
+        myChart.setBarOpacity(0.9);
+        myChart.setFlagRadius(6);
+        myChart.setTooltip(['North America', 'Click me', 1], callback);
+        myChart.setTooltipPosition('nw');
+        myChart.setTooltipOffset(3);
+        myChart.setLegendShow(true);
+        myChart.setLegendPosition('right top');
+        myChart.setLegendForBar(1, '2005');
+        myChart.setLegendForBar(2, '2010');
+        myChart.setSize(616, 321);
+        myChart.setGridColor('#C6C6C6');
+        myChart.draw();
+
+        function callback() {
+            alert('User click');
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        var myChart = new JSChart('lineGraph', 'line');
+        myChart.setDataArray([[1, 80],[2, 40],[3, 60],[4, 65],[5, 50],[6, 50],[7, 60],[8, 80],[9, 150],[10, 100]], 'blue');
+        myChart.setDataArray([[1, 100],[2, 55],[3, 80],[4, 115],[5, 80],[6, 70],[7, 30],[8, 130],[9, 160],[10, 170]], 'green');
+        myChart.setDataArray([[1, 150],[2, 25],[3, 100],[4, 80],[5, 20],[6, 65],[7, 0],[8, 155],[9, 190],[10, 200]], 'gray');
+        myChart.setSize(850, 500);
+        myChart.setAxisValuesNumberY(5);
+        myChart.setIntervalStartY(0);
+        myChart.setIntervalEndY(200);
+        myChart.setLabelX([2,'p1']);
+        myChart.setLabelX([4,'p2']);
+        myChart.setLabelX([6,'p3']);
+        myChart.setLabelX([8,'p4']);
+        myChart.setLabelX([10,'p5']);
+        myChart.setAxisValuesNumberX(5);
+        myChart.setShowXValues(false);
+        myChart.setTitleColor('#454545');
+        myChart.setAxisValuesColor('#454545');
+        myChart.setLineColor('#A4D314', 'green');
+        myChart.setLineColor('#BBBBBB', 'gray');
+        myChart.setTooltip([1,' ']);
+        myChart.setTooltip([2,' ']);
+        myChart.setTooltip([3,' ']);
+        myChart.setTooltip([4,' ']);
+        myChart.setTooltip([5,' ']);
+        myChart.setTooltip([6,' ']);
+        myChart.setTooltip([7,' ']);
+        myChart.setTooltip([8,' ']);
+        myChart.setTooltip([9,' ']);
+        myChart.setTooltip([10,' ']);
+        myChart.setFlagColor('#9D16FC');
+        myChart.setFlagRadius(4);
+        myChart.setAxisPaddingRight(100);
+        myChart.setLegendShow(true);
+        myChart.setLegendPosition(490, 80);
+        myChart.setLegendForLine('blue', 'Click me');
+        myChart.setLegendForLine('green', 'Click me');
+        myChart.setLegendForLine('gray', 'Click me');
+        myChart.draw();
+
+    </script>
+
+
+    </div>
+
+</body>
+</html>

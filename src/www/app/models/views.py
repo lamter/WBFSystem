@@ -40,6 +40,15 @@ class Views(object):
                 h.write(attr)
 
 
+    def render_test(self, StaticCSSHandler):
+        """
+        :return:
+        """
+
+        self.test = render.test(StaticCSSHandler)
+
+
+
     def render_manage_user_option(self, manage_handler):
         '''
         管理用户选项

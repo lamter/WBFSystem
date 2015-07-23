@@ -10,6 +10,7 @@ This module contains the main handler of the application.
 __author__ = 'Shawn'
 
 import traceback
+import os
 
 from web import utils
 
@@ -50,3 +51,11 @@ class BaseHandler(object):
             result = utils.re_compile('^' + pat + '$').match(url)
 
         return result
+
+
+    @staticmethod
+    def _wwwPath():
+        """
+        """
+
+        return os.getcwd().split("/www/app")[0]

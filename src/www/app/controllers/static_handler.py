@@ -12,8 +12,8 @@ import traceback
 
 import web
 
-from . import session
-from . import render
+from .. import settings
+from . import (render, session)
 from base_handler import BaseHandler
 from ..models.user import User
 from ..models.usergroup import UserGroup
@@ -26,14 +26,14 @@ class BaseStaticHandler(BaseHandler):
     URL = BaseHandler.URL + '/static'
     url = BaseHandler.url + r'/static.*'
 
+    folder = BaseHandler._wwwPath() + '/www/static'
+
+    suffix = ''
 
 
     def __init__(self):
-
         ''' 文件路径 '''
-        self.folder = self.__wwwPath() + '/www/static'
-
-        self.suffix = ''
+        BaseHandler.__init__(self)
 
         self.files = self._getTextFiles()
 
@@ -62,14 +62,6 @@ class BaseStaticHandler(BaseHandler):
         return dic
 
 
-    @staticmethod
-    def _wwwPath():
-        """
-        """
-
-        return os.getcwd().split("/www/app")[0]
-
-
     def GET(self):
         filneName = web.ctx.path.split('/')[-1]
         return self.getText(filneName)
@@ -79,19 +71,46 @@ class BaseStaticHandler(BaseHandler):
         return self.files.get(fileName)
 
 
+    @classmethod
+    def load(cls, file):
+        """
+        :return
+        """
+        # if settings.IS_UNITTEST:
+        #     return cls.folder + '/' +  file
+        return cls.URL + '/' + file
 
 
-
-class JavaScripteHandler(BaseStaticHandler):
+class StaticJavaScripteHandler(BaseStaticHandler):
     """
     js 脚本的发送句柄
     """
     URL = BaseStaticHandler.URL + '/js'
     url = BaseStaticHandler.url + '/js.*'
+
+    folder = BaseStaticHandler._wwwPath() + '/www/static/js'
+
+    suffix = '.js'
+
     def __init__(self):
+        BaseStaticHandler.__init__(self)
+        self.files = self._getTextFiles()
 
-        self.folder = self._wwwPath() + '/www/static/js'
 
-        self.suffix = '.js'
+
+
+class StaticCSSHandler(BaseStaticHandler):
+    """
+    css 的发送句柄
+    """
+    URL = BaseStaticHandler.URL + '/css'
+    url = BaseStaticHandler.url + '/css.*'
+
+    folder = BaseStaticHandler._wwwPath() + '/www/static/css'
+
+    suffix = '.css'
+
+    def __init__(self):
+        BaseStaticHandler.__init__(self)
 
         self.files = self._getTextFiles()

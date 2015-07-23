@@ -1,39 +1,16 @@
-$def with (user, UserGroup, views, ManageUser, SimTerminalPage, Logout)
-
-$ title = "某种管理系统"
-
-<html>
-<head><title>$title</title></head>
-<body>
-
-<h1>$title</h1>
-<table border="1">
-<caption>业务列表</caption>
-    <tr>
-        <td>业务1</td>
-    </tr>
-    <!-- 管理用户选项 -->
-    $if views.isHasAttr('manage_user_option'):
-        <tr>
-            <td>
-                <!-- 不再提供选项，直接跳到管理页面 -->
-                <p>进入<a href=$ManageUser.URL>管理用户页面</a></p>
-                <!--$:views.manage_user_option-->
-            </td>
-        </tr>
-    <!-- 伪终端页面 -->
-    <tr>
-        <td>
-            <p>进入<a href=$SimTerminalPage.URL>伪终端</a></p>
-        </td>
-    </tr>
-    <!-- 注销 -->
-    <tr>
-        <td>
-            <p>进入<a href=$Logout.URL>注销</a></p>
-        </td>
-    </tr>
-</table>
-
-</body>
+$def with (user, Top, Left, Right)
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>某种管理系统</title>
+</head>
+<frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">
+  <frame src="$Top.URL" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />
+  <frameset cols="187,*" frameborder="no" border="0" framespacing="0">
+    <frame src="$Left.URL" name="leftFrame" scrolling="No" noresize="noresize" id="leftFrame" title="leftFrame" />
+    <frame src="$Right.URL" name="rightFrame" id="rightFrame" title="rightFrame" />
+  </frameset>
+</frameset>
+<noframes><body>
+</body></noframes>
 </html>

@@ -1,0 +1,38 @@
+$def with (user)
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="static/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="static/js/jquery.js"></script>
+
+<script language="javascript">
+	jQuery(function(){
+    jQuery('.error').css({'position':'absolute','left':(jQuery(window).width()-490)/2});
+	jQuery(window).resize(function(){
+    jQuery('.error').css({'position':'absolute','left':(jQuery(window).width()-490)/2});
+    })
+});
+</script>
+
+
+</head>
+
+
+<body style="background:#edf6fa;">
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li>欢迎界面</li>
+    </ul>
+    </div>
+
+    <div class="welcome">
+
+    <h2>欢迎进入管理系统！</h2>
+    <p></p>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿$def with (user, Logout)
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="static/css/style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="static/js/jquery.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+	//顶部导航切换
+	jQuery(".nav li a").click(function(){
+		jQuery(".nav li a.selected").removeClass("selected")
+		jQuery(this).addClass("selected");
+	})	
+})	
+</script>
+
+
+</head>
+
+<body style="background:url(static/img/topbg.png);repeat-x;">
+
+    <div class="topleft">
+    <a href="#" ><img src="static/img/logo.png" title="系统首页" /></a>
+    </div>
+                    
+    <div class="topright">
+    <ul>
+    <li><span><img src="static/img/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
+    <!--<li><a href="#">关于</a></li>-->
+    <li><a href=$Logout.URL target="_parent">退出</a></li>
+    </ul>
+     
+    <div class="user">
+    <span>$user.username</span>
+    </div>    
+    
+    </div>
+</body>
+</html>

@@ -5,7 +5,7 @@ class handlers.
 """
 
 from controllers.base_handler import BaseHandler
-from controllers.main_handler import (Main)
+from controllers.main_handler import (Main, Top, Left, Right, DataTable, JsCharts)
 from controllers.login_handler import Login
 from controllers.logout_handler import Logout
 from controllers.index_handler import Index
@@ -19,6 +19,12 @@ URLS = (
     Index.url,                                                  Index.__name__,
     Login.url,                                                  Login.__name__,
     Main.url,                                                   Main.__name__,
+    Top.url,                                                    Top.__name__,
+    Left.url,                                                   Left.__name__,
+    Right.url,                                                  Right.__name__,
+    ManageUser.url,                                             ManageUser.__name__,
+    DataTable.url,                                              DataTable.__name__,
+    JsCharts.url,                                               JsCharts.__name__,
     ManageUser.url,                                             ManageUser.__name__,
     CreateUserGroup.url,                                        CreateUserGroup.__name__,
     CreateUser.url,                                             CreateUser.__name__,

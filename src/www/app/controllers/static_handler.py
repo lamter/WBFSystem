@@ -19,6 +19,7 @@ from ..models.user import User
 from ..models.usergroup import UserGroup
 
 
+
 class BaseStaticHandler(BaseHandler):
     """
     静态文件下发
@@ -26,14 +27,14 @@ class BaseStaticHandler(BaseHandler):
     URL = BaseHandler.URL + '/static'
     url = BaseHandler.url + r'/static.*'
 
-    folder = BaseHandler._wwwPath() + '/www/static'
-
-    suffix = ''
 
 
     def __init__(self):
+
         ''' 文件路径 '''
-        BaseHandler.__init__(self)
+        self.folder = self._wwwPath() + '/static'
+
+        self.suffix = ''
 
         self.files = self._getTextFiles()
 
@@ -43,7 +44,7 @@ class BaseStaticHandler(BaseHandler):
         """
 
         """
-        def endWith(s,*endstring):
+        def endWith(s, *endstring):
             array = map(s.endswith, endstring)
             if True in array:
                     return True
@@ -51,15 +52,21 @@ class BaseStaticHandler(BaseHandler):
                     return False
 
         dic = {}
-
         for fileName in os.listdir(self.folder):
             if not endWith(fileName, self.suffix):
                 ''' 后缀名见哈 '''
                 continue
-
             with open(os.path.join(self.folder, fileName)) as f:
                 dic[fileName] = f.read()
         return dic
+
+
+    @staticmethod
+    def _wwwPath():
+        """
+        """
+
+        return os.getcwd().split("/www/app")[0]
 
 
     def GET(self):
@@ -71,46 +78,50 @@ class BaseStaticHandler(BaseHandler):
         return self.files.get(fileName)
 
 
-    @classmethod
-    def load(cls, file):
-        """
-        :return
-        """
-        # if settings.IS_UNITTEST:
-        #     return cls.folder + '/' +  file
-        return cls.URL + '/' + file
 
 
-class StaticJavaScripteHandler(BaseStaticHandler):
+
+class JavaScripteHandler(BaseStaticHandler):
     """
     js 脚本的发送句柄
     """
     URL = BaseStaticHandler.URL + '/js'
     url = BaseStaticHandler.url + '/js.*'
-
-    folder = BaseStaticHandler._wwwPath() + '/www/static/js'
-
-    suffix = '.js'
-
     def __init__(self):
-        BaseStaticHandler.__init__(self)
+
+        self.folder = self._wwwPath() + '/static/js'
+
+        self.suffix = '.js'
+
         self.files = self._getTextFiles()
 
 
-
-
-class StaticCSSHandler(BaseStaticHandler):
+class CssHandler(BaseStaticHandler):
     """
-    css 的发送句柄
+    css 脚本的发送句柄
     """
     URL = BaseStaticHandler.URL + '/css'
     url = BaseStaticHandler.url + '/css.*'
 
-    folder = BaseStaticHandler._wwwPath() + '/www/static/css'
-
-    suffix = '.css'
-
     def __init__(self):
-        BaseStaticHandler.__init__(self)
+
+        self.folder = self._wwwPath() + '/static/css'
+
+        self.suffix = '.css'
+
+        self.files = self._getTextFiles()
+
+
+class ImageHandler(BaseStaticHandler):
+    """
+    图片 脚本的发送句柄
+    """
+    URL = BaseStaticHandler.URL + '/img'
+    url = BaseStaticHandler.url + '/img.*'
+    def __init__(self):
+
+        self.folder = self._wwwPath() + '/static/img'
+
+        self.suffix = '.png'
 
         self.files = self._getTextFiles()

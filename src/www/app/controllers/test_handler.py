@@ -15,7 +15,7 @@ import web
 from . import (render, session)
 from base_handler import *
 from logout_handler import Logout
-from static_handler import StaticCSSHandler
+from static_handler import JavaScripteHandler
 from sim_terminal_handler import SimTerminalPage
 from ..models.views import Views
 from ..models.usergroup import UserGroup

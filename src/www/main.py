@@ -15,6 +15,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+from gevent.pywsgi import WSGIServer
 import web
 import app
 from app.controllers import session
@@ -26,6 +27,9 @@ from app.tools.app_processor import (header_html, notfound, internalerror, verif
 web.config.debug = settings.DEBUG
 
 appM = web.application(URLS, HANDLER, autoreload=False)
+
+
+
 application = appM.wsgifunc()
 appM.notfound = notfound
 appM.internalerror = internalerror
@@ -54,4 +58,5 @@ app.models.init()
 
 
 if __name__ == '__main__':
-  appM.run()
+  # appM.run()
+    WSGIServer(('', 8080), application).serve_forever()

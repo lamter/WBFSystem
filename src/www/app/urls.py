@@ -11,7 +11,7 @@ from controllers.logout_handler import Logout
 from controllers.index_handler import Index
 from controllers.manage_handler import (ManageUser, CreateUserGroup, CreateUser, ModifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG, ModifUserGroup)
 from controllers.sim_terminal_handler import (SimTerminalPage, SimTermLocalServer)
-from controllers.static_handler import (StaticJavaScripteHandler, StaticCSSHandler)
+from controllers.static_handler import (JavaScripteHandler, CssHandler, ImageHandler)
 from controllers.test_handler import Test
 
 
@@ -37,9 +37,10 @@ URLS = (
     SimTerminalPage.url,                                        SimTerminalPage.__name__,
     SimTermLocalServer.url,                                     SimTermLocalServer.__name__,
     Logout.url,                                                 Logout.__name__,
-    StaticJavaScripteHandler.url,                               StaticJavaScripteHandler.__name__,
+    JavaScripteHandler.url,                                     JavaScripteHandler.__name__,
     Test.url,                                                   Test.__name__,
-    StaticCSSHandler.url,                                       StaticCSSHandler.__name__,
+    CssHandler.url,                                             CssHandler.__name__,
+    ImageHandler.url,                                           ImageHandler.__name__,
 )
 # for i,u in enumerate(URLS):
 #     print u, '\t',

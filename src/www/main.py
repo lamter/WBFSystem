@@ -72,5 +72,5 @@ if __name__ == '__main__':
     # 监听协议为 http
     # WSGIServer(('', settings.WEB_LISTEN_PORT), application, spawn=pool).serve_forever()
 
-    # 监听协议为 socket,用于nginx 转发
+    # 监听协议为 socket, 用于nginx 转发
     WSGIServer(("", settings.WEB_LISTEN_PORT), application, spawn=pool, handler_class=WebSocketHandler).serve_forever()

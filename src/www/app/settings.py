@@ -25,6 +25,7 @@ IS_UNITTEST = False
 ''' 并发数 '''
 ASYNC = 1000
 
+WEB_LISTEN_PORT = 8080
 
 SESSION_TIMEOUT = 3600  # 1 Hour
 

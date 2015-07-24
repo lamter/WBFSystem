@@ -18,6 +18,7 @@ from gevent import monkey
 monkey.patch_all()
 
 from gevent.pywsgi import WSGIServer
+from geventwebsocket.handler import WebSocketHandler
 import web
 
 import pool
@@ -66,5 +67,10 @@ pool = pool.get()
 
 
 if __name__ == '__main__':
-  # appM.run()
-    WSGIServer(('', 8080), application, spawn=pool).serve_forever()
+    # appM.run()
+
+    # 监听协议为 http
+    # WSGIServer(('', settings.WEB_LISTEN_PORT), application, spawn=pool).serve_forever()
+
+    # 监听协议为 socket, 用于nginx 转发
+    WSGIServer(("", settings.WEB_LISTEN_PORT), application, spawn=pool, handler_class=WebSocketHandler).serve_forever()

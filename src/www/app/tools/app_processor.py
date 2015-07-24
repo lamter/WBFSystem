@@ -46,8 +46,8 @@ def verify_session():
 
 
     # if not hasattr(session(), 'session_id'):
-    print 151511, web.ctx
-    print 161616, session()._data
+    # print 151511, web.ctx
+    # print 161616, session()._data
 
     if not hasattr(session(), 'username') and not hasattr(session(), 'login'):
         if Login.isMatch(web.ctx.path) or Index.isMatch(web.ctx.path):

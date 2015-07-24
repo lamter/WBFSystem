@@ -16,8 +16,14 @@ import redisco
 DEBUG = False
 # DEBUG = True
 
+IS_UNITTEST = False
+# IS_UNITTEST = True
+
 
 # global session
+
+''' 并发数 '''
+ASYNC = 1000
 
 
 SESSION_TIMEOUT = 3600  # 1 Hour

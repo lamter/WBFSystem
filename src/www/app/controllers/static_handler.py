@@ -12,11 +12,12 @@ import traceback
 
 import web
 
-from . import session
-from . import render
+from .. import settings
+from . import (render, session)
 from base_handler import BaseHandler
 from ..models.user import User
 from ..models.usergroup import UserGroup
+
 
 
 class BaseStaticHandler(BaseHandler):
@@ -31,7 +32,7 @@ class BaseStaticHandler(BaseHandler):
     def __init__(self):
 
         ''' 文件路径 '''
-        self.folder = self.__wwwPath() + '/www/static'
+        self.folder = self._wwwPath() + '/static'
 
         self.suffix = ''
 
@@ -43,7 +44,7 @@ class BaseStaticHandler(BaseHandler):
         """
 
         """
-        def endWith(s,*endstring):
+        def endWith(s, *endstring):
             array = map(s.endswith, endstring)
             if True in array:
                     return True
@@ -51,12 +52,10 @@ class BaseStaticHandler(BaseHandler):
                     return False
 
         dic = {}
-
         for fileName in os.listdir(self.folder):
             if not endWith(fileName, self.suffix):
                 ''' 后缀名见哈 '''
                 continue
-
             with open(os.path.join(self.folder, fileName)) as f:
                 dic[fileName] = f.read()
         return dic
@@ -90,8 +89,39 @@ class JavaScripteHandler(BaseStaticHandler):
     url = BaseStaticHandler.url + '/js.*'
     def __init__(self):
 
-        self.folder = self._wwwPath() + '/www/static/js'
+        self.folder = self._wwwPath() + '/static/js'
 
         self.suffix = '.js'
+
+        self.files = self._getTextFiles()
+
+
+class CssHandler(BaseStaticHandler):
+    """
+    css 脚本的发送句柄
+    """
+    URL = BaseStaticHandler.URL + '/css'
+    url = BaseStaticHandler.url + '/css.*'
+
+    def __init__(self):
+
+        self.folder = self._wwwPath() + '/static/css'
+
+        self.suffix = '.css'
+
+        self.files = self._getTextFiles()
+
+
+class ImageHandler(BaseStaticHandler):
+    """
+    图片 脚本的发送句柄
+    """
+    URL = BaseStaticHandler.URL + '/img'
+    url = BaseStaticHandler.url + '/img.*'
+    def __init__(self):
+
+        self.folder = self._wwwPath() + '/static/img'
+
+        self.suffix = '.png'
 
         self.files = self._getTextFiles()

@@ -44,6 +44,11 @@ def verify_session():
         session().user = settings.debug_user
         return
 
+
+    # if not hasattr(session(), 'session_id'):
+    print 151511, web.ctx
+    print 161616, session()._data
+
     if not hasattr(session(), 'username') and not hasattr(session(), 'login'):
         if Login.isMatch(web.ctx.path) or Index.isMatch(web.ctx.path):
             ''' 如果访问的是登录界面, 不需要验证 '''

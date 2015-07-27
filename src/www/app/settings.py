@@ -8,10 +8,16 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 import os
 import traceback
+import platform
+import logging
 
 import web
 import redis.exceptions
 import redisco
+
+''' 日志 '''
+log = './log/wsgi.log'
+loglevel = logging.ERROR
 
 DEBUG = False
 # DEBUG = True
@@ -84,3 +90,7 @@ def setSessionParameters(session_parameters):
     session_parameters['ignore_change_ip'] = False
     session_parameters['secret_key'] = 'fLjUfxqXtfNoIldA0A0J'
     session_parameters['expired_message'] = 'Session expired'
+
+
+def isMac():
+    return platform.system() == 'Darwin'

@@ -31,7 +31,6 @@ class Main(BaseHandler):
         主页面
         :return:
         """
-
         try:
             user = session().user
         except:

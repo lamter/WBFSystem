@@ -40,7 +40,7 @@ def verify_session():
     """
     ''' 这个session还没有初始化过 username 和 login 的属性 '''
 
-    if settings.DEBUG:
+    if settings.DEBUG and hasattr(settings, 'debug_user'):
         session().user = settings.debug_user
         return
 

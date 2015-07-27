@@ -27,7 +27,7 @@ class Log(WsgiLog):
 
 
 def new(application):
-    if settings.DEBUG:
-        return 'default'
-    else:
+    if settings.IS_LOG_TO_FILE:
         return Log(application)
+    else:
+        return 'default'

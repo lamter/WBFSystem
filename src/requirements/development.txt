@@ -8,3 +8,6 @@ python-dateutil==2.2
 pytz==2014.7
 six==1.8.0
 git+git://github.com/lamter/redisco.git@0.3.3#egg=redisco    # redisco
+gevent==1.0.1
+gevent-websocket==0.9.5
+wsgilog==0.3

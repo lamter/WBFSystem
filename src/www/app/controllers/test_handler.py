@@ -41,20 +41,3 @@ class Test(BaseHandler):
         # return views.test
         return '等了 5 秒'
 
-
-class Ajax(BaseHandler):
-    ''' ajax请求处理 '''
-
-    URL = BaseHandler.URL + '/ajax'
-    url = BaseHandler.url + r'/ajax.*'
-
-    def GET(self):
-        """
-        get请求
-        :return:
-        """
-
-
-        return
-
-

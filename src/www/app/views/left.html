@@ -1,4 +1,4 @@
-﻿$def with (user,UserGroup,views,ManageUser,DataTable,JsCharts)
+﻿$def with (user,UserGroup,views,ManageUser,DataTable,JsCharts,SimTermLocalServer,JqueryAjax)
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -60,7 +60,7 @@ jQuery(function(){
     <ul class="menuson">
 		<li><cite></cite><a href=$DataTable.URL target="rightFrame">列表模板</a><i></i></li>
 		<li><cite></cite><a href=$JsCharts.URL target="rightFrame">统计图表</a><i></i></li>
-		<li><cite></cite><a href="#">XXX统计</a><i></i></li>
+		<li><cite></cite><a href=$JqueryAjax.URL target="rightFrame">Ajax请求</a><i></i></li>
         </ul>     
     </dd> 
     

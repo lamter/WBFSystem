@@ -21,13 +21,14 @@ from gevent.pywsgi import WSGIServer
 from geventwebsocket.handler import WebSocketHandler
 import web
 
+from app import settings
+if settings.isMac():
+    import conf_debug
 import log
 import pool
 import app
 from app.controllers import session
-from app import settings
-if settings.isMac():
-    import conf_debug
+
 from app.tools.web_session import Initializer
 from app.urls import (URLS, HANDLER)
 from app.tools.app_processor import (header_html, notfound, internalerror, verify_session)
@@ -37,6 +38,10 @@ web.config.debug = settings.DEBUG
 appM = web.application(URLS, HANDLER, autoreload=False)
 
 application = appM.wsgifunc()
+
+''' 日志 '''
+log = log.new(application)
+
 appM.notfound = notfound
 appM.internalerror = internalerror
 
@@ -65,9 +70,6 @@ app.models.init()
 
 ''' 生成并发池 '''
 thePool = pool.get()
-
-''' 日志 '''
-log = log.new(application)
 
 
 if __name__ == '__main__':

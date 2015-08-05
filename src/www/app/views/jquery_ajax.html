@@ -1,0 +1,52 @@
+$def with (user, Aajx)
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="static/css/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="static/js/jscharts.js"></script>
+<script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+
+    jQuery(document).ready(function(){
+        jQuery("#ida").click(function(){
+                 jQuery.ajax({
+                    url:'$Aajx.URL',
+                    type:'get',
+                    data:{'requestA':22},
+                    dataType: "json",
+                    error:function(){
+                       alert('error');
+                    },
+                    success:fun_success,
+                });
+        })
+
+    });
+
+    function fun_success(data){
+        alert(data.a)
+    }
+
+</script>
+
+
+</head>
+
+<body>
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">图表</a></li>
+    <li><a href="#">图表模板</a></li>
+    </ul>
+    </div>
+
+    <div class="rightinfo">
+
+    <a id="ida">点我</a>
+    </div>
+</body>
+</html>

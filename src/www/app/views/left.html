@@ -1,4 +1,4 @@
-﻿$def with (user,UserGroup,views,ManageUser,DataTable,JsCharts)
+﻿$def with (user,UserGroup,views,ManageUser,DataTable,JsCharts,SimTermLocalServer,JqueryAjax)
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -46,12 +46,21 @@ jQuery(function(){
 
     <dd>
     <div class="title">
+    <span><img src="static/img/leftico02.png" /></span>伪终端
+    </div>
+    <ul class="menuson">
+		<li><cite></cite><a href=$SimTermLocalServer.URL target="rightFrame" >本地服务器</a><i></i></li>
+        </ul>
+    </dd>
+
+    <dd>
+    <div class="title">
     <span><img src="static/img/leftico02.png" /></span>数据统计
     </div>
     <ul class="menuson">
 		<li><cite></cite><a href=$DataTable.URL target="rightFrame">列表模板</a><i></i></li>
 		<li><cite></cite><a href=$JsCharts.URL target="rightFrame">统计图表</a><i></i></li>
-		<li><cite></cite><a href="#">XXX统计</a><i></i></li>
+		<li><cite></cite><a href=$JqueryAjax.URL target="rightFrame">Ajax请求</a><i></i></li>
         </ul>     
     </dd> 
     

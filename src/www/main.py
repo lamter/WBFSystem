@@ -74,8 +74,9 @@ thePool = pool.get()
 
 if __name__ == '__main__':
     # appM.run()
+    # 测试提交
 
-    # 监听协议为 http
+    # 监听协议为 http,
     # WSGIServer(('', settings.WEB_LISTEN_PORT), application, spawn=pool).serve_forever()
 
     # 监听协议为 socket, 用于nginx 转发

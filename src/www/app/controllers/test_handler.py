@@ -40,3 +40,4 @@ class Test(BaseHandler):
 
         # return views.test
         return '等了 5 秒'
+

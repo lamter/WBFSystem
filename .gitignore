@@ -19,3 +19,5 @@ uwsgi.pid
 # log
 log/*.log
 p.py
+wsgi.log
+*.log.*

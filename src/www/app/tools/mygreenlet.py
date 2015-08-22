@@ -32,6 +32,8 @@ class Greenlet(gl):
 
         self.event = Event()
 
+        self.timeOut = TIME_TO_WAIT
+
 
     def waitFinish(self, second=TIME_TO_WAIT):
         """
@@ -41,12 +43,24 @@ class Greenlet(gl):
         self.event.wait(second)
 
 
+    def setNoTimeOut(self):
+        """
+
+        :return:
+        """
+        self.timeOut = None
+
+
     def run(self):
         """
         :return:
         """
-        with Timeout(TIME_TO_WAIT, TooLong):
+        if self.timeOut is None:
+            ''' 不设超时 '''
             gevent.Greenlet.run(self)
+        else:
+            with Timeout(self.timeOut, TooLong):
+                gevent.Greenlet.run(self)
 
         ''' 完成事件 '''
         self.event.set()

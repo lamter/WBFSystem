@@ -13,9 +13,10 @@ from app import settings
 import loop
 
 from app.models.task import BaseTask
+from app.tools.mygreenlet import Greenlet
 
 ''' 生成并发池 '''
-pool = Pool(settings.ASYNC)
+pool = Pool(settings.ASYNC, greenlet_class=Greenlet)
 
 
 
@@ -29,7 +30,8 @@ def get():
     pool.start(task)
 
     ''' 主业务循环 '''
-    pool.spawn(loop.loop)
+    glLoop = pool.spawn(loop.loop)
+    glLoop.setNoTimeOut()
 
     web.ctx.pool = pool
     return pool

@@ -15,7 +15,7 @@ import loop
 from app.models.task import BaseTask
 from app.tools.mygreenlet import Greenlet
 
-''' 生成并发池 '''
+''' 生成并发池, 不再默认使用 '''
 pool = Pool(settings.ASYNC, greenlet_class=Greenlet)
 
 

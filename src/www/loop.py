@@ -14,7 +14,7 @@ def loop(*arg, **kwargs):
     主业务循环
     :return:
     """
-    while True:
+    while 1:
         doBusiness()
         ''' yield 出去 '''
         sleep(0)

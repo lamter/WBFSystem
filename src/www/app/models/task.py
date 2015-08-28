@@ -50,10 +50,9 @@ class BaseTask(Greenlet):
 
     def _run(self):
         """
-
         :return:
         """
-        self.running = True
+        self.running = 1
         print u'添加测试任务成功'
         interval = datetime.timedelta(seconds=1)
 

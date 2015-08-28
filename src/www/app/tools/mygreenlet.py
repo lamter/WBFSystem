@@ -5,15 +5,22 @@ Created on 2015-08-21
 @author: Shawn
 
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 import gevent
-
+from gevent import Timeout
 from gevent.greenlet import Greenlet as gl
 from gevent.event import Event
 from gevent.pool import Pool
+
+
+''' 超时时间 '''
+TIME_TO_WAIT = 30   # second
+
+
+''' 超时 '''
+class TooLong(Exception):
+    pass
+
 
 
 class Greenlet(gl):
@@ -25,22 +32,35 @@ class Greenlet(gl):
 
         self.event = Event()
 
+        self.timeOut = None
 
-    def waitFinish(self):
+
+    def waitFinish(self, second=TIME_TO_WAIT):
         """
         等待这个并发完成
         :return:
         """
-        self.event.wait()
+        self.event.wait(second)
 
+
+    def setNoTimeOut(self):
+        """
+
+        :return:
+        """
+        self.timeOut = None
 
 
     def run(self):
         """
         :return:
         """
-
-        gevent.Greenlet.run(self)
+        if self.timeOut is None:
+            ''' 不设超时 '''
+            gevent.Greenlet.run(self)
+        else:
+            with Timeout(self.timeOut, TooLong):
+                gevent.Greenlet.run(self)
 
         ''' 完成事件 '''
         self.event.set()
@@ -51,15 +71,24 @@ if __name__ == "__main__":
     pool = Pool(10, greenlet_class=Greenlet)
     def fun():
         print 'fun'
-        gevent.sleep(2)
+        gevent.sleep(6)
         print 1212121
-    greentlet = pool.spawn(fun)
+    glFun = pool.spawn(fun)
+    print 'glFun.ready() ->', glFun.ready()
 
     def bar():
         print 'bar'
-        greentlet.waitFinish()
+        print 'glFun.started->', glFun.started
+        glFun.waitFinish()
         print 13131313
-    pool.spawn(bar)
+
+    glBar = pool.spawn(bar)
+    print 'glBar->', glBar.ready()
     pool.join()
 
+    print 'glFun ->', glFun.ready()
+    print 'glFun.exception->', glFun.exception
+
+    print 'glBar->', glBar.ready()
+    print 'glBar.exception->', glBar.exception
 

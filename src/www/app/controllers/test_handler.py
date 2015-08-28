@@ -37,7 +37,7 @@ class Test(BaseHandler):
         # views = Views(user)
 
         # views.render_test(StaticCSSHandler)
-
+        raise
         # return views.test
         return '等了 5 秒'
 

@@ -7,12 +7,13 @@ Created on 2015-07-23
 """
 
 import web
-from gevent.pool import Pool
+# from gevent.pool import Pool
 
 from app import settings
 import loop
 
 from app.models.task import BaseTask
+from app.tools.mypool import Pool
 from app.tools.mygreenlet import Greenlet
 
 ''' 生成并发池, 不再默认使用 '''

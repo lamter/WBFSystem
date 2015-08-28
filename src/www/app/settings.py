@@ -17,7 +17,7 @@ import redisco
 
 ''' 日志 '''
 log = './log/wsgi.log'
-loglevel = logging.ERROR
+loglevel = logging.NOTSET
 IS_LOG_TO_FILE = True
 
 DEBUG = False

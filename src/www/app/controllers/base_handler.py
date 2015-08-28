@@ -11,7 +11,9 @@ __author__ = 'Shawn'
 
 import traceback
 import os
+import logging
 
+import web
 from web import utils
 
 from .. import settings
@@ -31,7 +33,13 @@ class BaseHandler(object):
         errStr = traceback.format_exc()
         if settings.DEBUG:
             traceback.print_exc()
+
+        ''' 将错误记录到日志 '''
+        if web.log != 'default':
+            web.log.logger.error('\n' + errStr)
+
         errStr = errStr.replace('\n', "<br/>")
+
         return errStr
         # return render.traceback(errStr)
 

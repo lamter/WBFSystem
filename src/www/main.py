@@ -41,6 +41,7 @@ application = appM.wsgifunc()
 
 ''' 日志 '''
 log = log.new(application)
+web.log = log
 
 appM.notfound = notfound
 appM.internalerror = internalerror

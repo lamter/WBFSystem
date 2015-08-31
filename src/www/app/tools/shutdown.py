@@ -59,6 +59,21 @@ def shutdown():
 
 if __name__ == '__main__':
     def run_forever():
+        import paramiko
+        ssh = paramiko.SSHClient()
+
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        ssh.connect('123.59.44.14', 22, 'bpsg')
+
+        cmd = 'ls'
+
+        stdin, stdout, stderr = ssh.exec_command(cmd)
+
+        print stdout.readlines()
+        print ''.join(stderr.readlines())
+
+        ssh.close()
         gevent.sleep(1000)
 
 

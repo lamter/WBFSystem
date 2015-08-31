@@ -72,13 +72,18 @@ app.models.init()
 ''' 生成并发池 '''
 thePool = pool.get()
 
+# appM.run()
+# 测试提交
+
+# 监听协议为 http,
+# wsgiServer = WSGIServer(('', settings.WEB_LISTEN_PORT), application, spawn=pool).serve_forever()
+
+# 监听协议为 socket, 用于nginx 转发
+wsgiServer = WSGIServer(("", settings.WEB_LISTEN_PORT), application, spawn=thePool, log=log, handler_class=WebSocketHandler)
+
+web.wsgiServer = wsgiServer
+
 
 if __name__ == '__main__':
-    # appM.run()
-    # 测试提交
-
-    # 监听协议为 http,
-    # WSGIServer(('', settings.WEB_LISTEN_PORT), application, spawn=pool).serve_forever()
-
-    # 监听协议为 socket, 用于nginx 转发
-    WSGIServer(("", settings.WEB_LISTEN_PORT), application, spawn=thePool, log=log, handler_class=WebSocketHandler).serve_forever()
+    ''' 运行 '''
+    wsgiServer.serve_forever()

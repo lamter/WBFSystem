@@ -32,7 +32,7 @@ class Greenlet(gl):
 
         self.event = Event()
 
-        self.timeOut = None
+        self.timeOut = TIME_TO_WAIT
 
 
     def waitFinish(self, second=TIME_TO_WAIT):
@@ -51,6 +51,7 @@ class Greenlet(gl):
         self.timeOut = None
 
 
+
     def run(self):
         """
         :return:
@@ -64,6 +65,7 @@ class Greenlet(gl):
 
         ''' 完成事件 '''
         self.event.set()
+
 
 
 

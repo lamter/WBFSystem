@@ -15,10 +15,14 @@ import loop
 from app.models.task import BaseTask
 from app.tools.mypool import Pool
 from app.tools.mygreenlet import Greenlet
+from app.tools.shutdown import getShutDown
 
 ''' 生成并发池, 不再默认使用 '''
 pool = Pool(settings.ASYNC, greenlet_class=Greenlet)
 
+
+''' 关服操作 '''
+getShutDown()
 
 
 def get():
@@ -34,5 +38,5 @@ def get():
     glLoop = pool.spawn(loop.loop)
     glLoop.setNoTimeOut()
 
-    web.ctx.pool = pool
+    web.pool = pool
     return pool

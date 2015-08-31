@@ -17,7 +17,7 @@ src/www/test/
 uwsgi.pid
 
 # log
-log/
+log/ 
 log/*.log
 p.py
 log/*.log.*

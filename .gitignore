@@ -21,3 +21,5 @@ log/
 log/*.log
 p.py
 log/*.log.*
+wsgi.log
+*.log.*

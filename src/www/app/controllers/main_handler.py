@@ -19,7 +19,7 @@ from manage_handler import (ManageUser)
 from sim_terminal_handler import SimTerminalPage
 from ..models.views import Views
 from ..models.usergroup import UserGroup
-
+from sim_terminal_handler import SimTermLocalServer
 
 class Main(BaseHandler):
 
@@ -31,7 +31,6 @@ class Main(BaseHandler):
         主页面
         :return:
         """
-
         try:
             user = session().user
         except:
@@ -105,7 +104,9 @@ class Left(BaseHandler):
                            views,
                            ManageUser,
                            DataTable,
-                           JsCharts
+                           JsCharts,
+                           SimTermLocalServer,
+                           JqueryAjax
                            )
 
 
@@ -157,3 +158,52 @@ class JsCharts(BaseHandler):
 
         ''' jsChart页面的数 '''
         return render.js_charts(user)
+
+
+class JqueryAjax(BaseHandler):
+
+    URL = BaseHandler.URL + '/jqueryAjax'
+    url = BaseHandler.url + r'/jqueryAjax'
+
+    def GET(self):
+        """
+        jquery的ajax的测试请求
+        :return:
+        """
+        user = session().user
+        return render.jquery_ajax(user, Ajax)
+
+
+class Ajax(BaseHandler):
+    ''' ajax请求处理 '''
+
+    URL = BaseHandler.URL + '/ajax'
+    url = BaseHandler.url + r'/ajax.*'
+
+    def GET(self):
+        """
+        get请求
+        :return:
+        """
+        requestA = web.input().get("requestA")
+        print "请求数据", requestA
+
+        import json
+        dic = {'a': '中文'}
+        jsonStr = json.dumps(dic)
+        return jsonStr
+
+
+    def POST(self):
+        """
+        get请求
+        :return:
+        """
+        requestA = web.input().get("requestA")
+        print "请求数据", requestA
+
+        import json
+        dic = {'a': '中文'}
+        jsonStr = json.dumps(dic)
+
+        return jsonStr

@@ -5,7 +5,7 @@ class handlers.
 """
 
 from controllers.base_handler import BaseHandler
-from controllers.main_handler import (Main, Top, Left, Right, DataTable, JsCharts)
+from controllers.main_handler import (Main, Top, Left, Right, DataTable, JsCharts, Ajax, JqueryAjax)
 from controllers.login_handler import Login
 from controllers.logout_handler import Logout
 from controllers.index_handler import Index
@@ -41,6 +41,8 @@ URLS = (
     Test.url,                                                   Test.__name__,
     CssHandler.url,                                             CssHandler.__name__,
     ImageHandler.url,                                           ImageHandler.__name__,
+    Ajax.url,                                                   Ajax.__name__,
+    JqueryAjax.url,                                             JqueryAjax.__name__,
 )
 # for i,u in enumerate(URLS):
 #     print u, '\t',

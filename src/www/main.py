@@ -18,12 +18,17 @@ from gevent import monkey
 monkey.patch_all()
 
 from gevent.pywsgi import WSGIServer
+from geventwebsocket.handler import WebSocketHandler
 import web
 
+from app import settings
+if settings.isMac():
+    import conf_debug
+import log
 import pool
 import app
 from app.controllers import session
-from app import settings
+
 from app.tools.web_session import Initializer
 from app.urls import (URLS, HANDLER)
 from app.tools.app_processor import (header_html, notfound, internalerror, verify_session)
@@ -33,6 +38,10 @@ web.config.debug = settings.DEBUG
 appM = web.application(URLS, HANDLER, autoreload=False)
 
 application = appM.wsgifunc()
+
+''' 日志 '''
+log = log.new(application)
+
 appM.notfound = notfound
 appM.internalerror = internalerror
 
@@ -60,11 +69,15 @@ app.models.init()
 
 
 ''' 生成并发池 '''
-pool = pool.get()
-
-''' 主循环事务 '''
+thePool = pool.get()
 
 
 if __name__ == '__main__':
-  # appM.run()
-    WSGIServer(('', 8080), application, spawn=pool).serve_forever()
+    # appM.run()
+    # 测试提交
+
+    # 监听协议为 http,
+    # WSGIServer(('', settings.WEB_LISTEN_PORT), application, spawn=pool).serve_forever()
+
+    # 监听协议为 socket, 用于nginx 转发
+    WSGIServer(("", settings.WEB_LISTEN_PORT), application, spawn=thePool, log=log, handler_class=WebSocketHandler).serve_forever()

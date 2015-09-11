@@ -19,7 +19,7 @@ from manage_handler import (ManageUser)
 from sim_terminal_handler import SimTerminalPage
 from ..models.views import Views
 from ..models.usergroup import UserGroup
-
+from log_handler import *
 
 class Main(BaseHandler):
 
@@ -46,4 +46,5 @@ class Main(BaseHandler):
                            ManageUser,
                            SimTerminalPage,
                            Logout,
+                           ShowLog,
         )

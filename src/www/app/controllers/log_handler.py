@@ -61,10 +61,11 @@ class TestShowLog(BaseHandler):
         views = Views(user)
 
         ''' 渲染管理用户选项 '''
-        url = TestRefreshLog.URL
+        # url = TestRefreshLog.URL
+        url = QueryLocalLogCache.URL
         views.render_refresh_log(url)
 
-        return views.log_show[0]
+        return views.log_show
 
 
 class QueryLocalLogCache(BaseHandler):
@@ -80,7 +81,6 @@ class QueryLocalLogCache(BaseHandler):
         :return:
         """
         user = session().user
-
         if not user.isHavePms(UserGroup.PERMISSION_SIM_TERM_LOCAL_SERVER):
             return '没有 查看 本地伪终端 的权限...'
 
@@ -95,14 +95,18 @@ class QueryLocalLogCache(BaseHandler):
             num = 100
 
         log = []
+        lastLine = None
         with open(settings.LOG, 'rb') as f:
             for t in f:
                 if tag and tag in t:
                     ''' 符合标签, 重新开始记录 '''
                     log = []
+                    lastLine = t
                     continue
                 ''' 去掉末尾换行符 '''
-                log.append(t.strip('\n'))
+                t = t.strip('\n')
+                log.append(t)
+                lastLine = t
 
         ''' 截取需要的长度 '''
         log = log[-num:]
@@ -111,7 +115,7 @@ class QueryLocalLogCache(BaseHandler):
         if log:
             newTag = log[-1]
         else:
-            newTag = None
+            newTag = lastLine
 
         response = {
             'tag': newTag,

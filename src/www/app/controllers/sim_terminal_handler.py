@@ -13,6 +13,7 @@ import os
 import web
 
 from . import session
+from log_handler import QueryLocalLogCache
 from base_handler import *
 from ..models.views import Views
 from ..models.term_server import TerminalServer
@@ -58,23 +59,27 @@ class SimTermLocalServer(BaseHandler):
         打开本地进程的伪终端页面
         :return:
         """
-        if not session().user.isHavePms(PM.PERMISSION_SIM_TERM_LOCAL_SERVER):
+        user = session().user
+        if not user.isHavePms(PM.PERMISSION_SIM_TERM_LOCAL_SERVER):
             return '没有 使用 游戏服务器进程终端 的权限...'
 
-        ''' 终端 '''
-        termLocalServer = TerminalServer()
-        termLocalServer.term_title = '本地服务进程'
-        termLocalServer.logfile = settings.logfile()
+        # ''' 终端 '''
+        # termLocalServer = TerminalServer()
+        # termLocalServer.term_title = '本地服务进程'
+        # termLocalServer.logfile = settings.logfile()
 
         ''' 获得日志内容 '''
         # termLocalServer.getLogText()
 
         ''' 生成用于显示的界面 '''
-        term_output = [termLocalServer]
-        views = Views(session().user)
-        views.render_terminal_output(term_output)
-        views.render_terminal_input()
-        views.render_sim_term_local_server(SimTermLocalServer)
+        # term_output = [termLocalServer]
+
+        views = Views(user)
+
+        ''' 本地实时刷log '''
+        views.render_terminal_output(QueryLocalLogCache.URL, '本地终端')
+        views.render_terminal_input(SimTermLocalServer)
+        views.render_sim_term_local_server()
         return views.sim_term_local_server
 
 
@@ -103,6 +108,6 @@ class SimTermLocalServer(BaseHandler):
         term_output = [termLocalServer]
         views = Views(session().user)
         views.render_terminal_output(term_output)
-        views.render_terminal_input()
-        views.render_sim_term_local_server(SimTermLocalServer)
+        views.render_terminal_input(SimTermLocalServer)
+        views.render_sim_term_local_server()
         return views.sim_term_local_server

@@ -1,16 +1,16 @@
-$def with (user, UserGroup, views, SimTermLocalServer)
+$def with (user, UserGroup, views)
 <html>
+<head>
+    <script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
+</head>
+
 <body>
 <table >
     <!-- 日志输出 -->
     <tr><td>$:views.terminal_output</td></tr>
-    <tr><td>
-        <table>
-        <form action=$SimTermLocalServer.URL method="POST">
-            <tr><td>$:views.terminal_input</td></tr>
-        </form>
-        </table>
-    </td></tr>
+    <tr><td>$:views.terminal_input</td></tr>
 </table>
 </body>
 </html>
+
+

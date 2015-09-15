@@ -1,8 +1,20 @@
-$def with (user, UserGroup)
+$def with (user, UserGroup, SimTermLocalServer)
+
+
+<script type="text/javascript" src="static/js/execpython.js"></script>
+<script type="text/javascript">
+    $$(document).ready(
+    function(){
+      $$("form").submit(function(e){
+        execPython.run($SimTermLocalServer.URL, $$("#python_code").innerHTML)
+      });
+    }
+    );
+</script>
 <table border="1">
     <tr><td>输入要执行的python代码</td></tr>
-    <tr><td>
-        <textarea cols=80 rows=10 name="python_code"></textarea>
-    </td></tr>
-    <tr><td><input type="submit" value="执行"></td></tr>
+    <form >
+        <tr><td><textarea id="python_code" cols=80 rows=10 name="python_code"></textarea></td></tr>
+        <tr><td><input type="submit" value="执行"></td></tr>
+    </form>
 </table>

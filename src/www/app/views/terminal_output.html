@@ -1,13 +1,17 @@
-$def with (user, UserGroup, output)
+$def with (user, UserGroup, querUrl, term_title)
 
-<table>
+<table border="1">
 <h1>日志输出</h1>
-    <!-- 日志输出 -->
-    $for server in output:
-        <table  border="1">
-            <tr><td>TAG：$server.term_title</td></tr>
-            <tr><td>$:server.term_output</td></tr>
-        </table>
-        </br>
-
+    <tr><td>TAG：$term_title</td></tr>
+    <tr>
+        <td id="outPrint">
+            <script type="text/javascript" src="static/js/refresh-log.js"></script>
+            <script type="text/javascript" charset="utf-8">
+                var reqData = {}
+                log.refreshLog("#outPrint", '$querUrl', reqData, 'GET', 100)
+            </script>
+            正在加载...
+        </td>
+    </tr>
+    </br>
 </table>

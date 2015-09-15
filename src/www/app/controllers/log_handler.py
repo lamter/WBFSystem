@@ -41,7 +41,7 @@ class ShowLog(BaseHandler):
         views = Views(user)
 
         ''' 渲染管理用户选项 '''
-        views.render_refresh_log(RefreshLog)
+        views.render_refresh_log(RefreshLog.URL)
 
-        return views.log_show
+        return views.log_show[0]
 

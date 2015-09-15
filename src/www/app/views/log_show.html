@@ -1,4 +1,4 @@
-$def with (user, UserGroup, RefreshLog)
+$def with (user, UserGroup, querUrl)
 
 
 <script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
@@ -6,8 +6,8 @@ $def with (user, UserGroup, RefreshLog)
 
 <script type="text/javascript" charset="utf-8">
         var reqData = {}
-        log.refreshLog("#outPrint", '$RefreshLog.URL', reqData, 'GET', 20)
-        // log.showLog("#outPrint", '$RefreshLog.URL', reqData, 'GET', 20)
+        log.refreshLog("#outPrint", '$querUrl', reqData, 'GET', 20)
+        // log.showLog("#outPrint", '$querUrl', reqData, 'GET', 20)
 </script>
 
 <table>

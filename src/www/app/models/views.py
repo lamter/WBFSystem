@@ -227,12 +227,12 @@ class Views(object):
 
 
 
-    def render_terminal_input(self, SimTermLocalServer):
+    def render_terminal_input(self, LocalExecPython):
         """
         虚拟终端 输入界面
         :return:
         """
 
         ''' 渲染用户信息 '''
-        self.terminal_input = render.terminal_input(self.user, UserGroup, SimTermLocalServer)
+        self.terminal_input = render.terminal_input(self.user, UserGroup, LocalExecPython)
 

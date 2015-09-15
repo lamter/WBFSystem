@@ -1,14 +1,16 @@
 /*
- * 提交要执行的 python 代码 - v1.1 - 9/10/2015
+ * 提交要执行的 python 代码 - v1.1 - 9/15/2015
  * Shawn
  */
 
 
 var execPython = {
+
     run: function(url, code){
-        // 要传递的参数
+
         requestData = {};
-        requestData.code = code
+        requestData.code = code;
+        // alert(url)
 
         jQuery.ajax({
             type: 'POST',
@@ -21,9 +23,11 @@ var execPython = {
                 //alert(status)
                 alert('requestError:' + status)
             },
+            success: function(data){},
 
         });
-    }
+
+    },
 
 }
 

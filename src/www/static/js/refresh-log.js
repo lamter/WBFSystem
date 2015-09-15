@@ -11,7 +11,7 @@ var log = {
 
     showLog: function(docId, url, reqData, reqMethod, logNum){
         // 循环请求log数据
-        alert(url)
+        // alert(url)
         jQuery.ajax({
             type: reqMethod,
             url: url,

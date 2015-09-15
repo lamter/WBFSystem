@@ -31,7 +31,7 @@ URLS = (
     SimTerminalPage.url,        SimTerminalPage.__name__,
     SimTermLocalServer.url,     SimTermLocalServer.__name__,
     Logout.url,                 Logout.__name__,
-    QueryLogCache.url,          QueryLogCache.__name__,
+    QueryLocalLogCache.url,     QueryLocalLogCache.__name__,
     TestRefreshLog.url,         TestRefreshLog.__name__,
     TestShowLog.url,            TestShowLog.__name__,
 )

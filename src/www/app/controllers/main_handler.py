@@ -46,5 +46,5 @@ class Main(BaseHandler):
                            ManageUser,
                            SimTerminalPage,
                            Logout,
-                           ShowLog,
+                           TestShowLog,
         )

@@ -23,20 +23,36 @@ class TestRefreshLog(BaseHandler):
     """
     log刷新
     """
-    URL = BaseHandler.URL + '/refresh_log'
-    url = BaseHandler.url + r'/refresh_log.*'
+    URL = BaseHandler.URL + '/test_refresh_log'
+    url = BaseHandler.url + r'/test_refresh_log.*'
 
     def GET(self):
 
-        return json.dumps({'log': ['log--->%s' % random.randint(10, 1000), 'log--->%s' % random.randint(10, 1000)]})
+        import requests
+        url = 'http://localhost:23001/bpm_http_request'
+
+        dic = {
+            'type': 20004,
+            'tag': web.input().get('tag'),
+            'num': 100,
+        }
+        data = json.dumps(dic)
+        response = requests.get(url, data=data)
+        # print 161616
+        # for k, v in json.loads(response.text).items():
+        #     print k,':', v
+
+        return response.text
+
+        # return json.dumps({'log': ['log--->%s' % random.randint(10, 1000), 'log--->%s' % random.randint(10, 1000)]})
 
 
 class TestShowLog(BaseHandler):
     """
     显示log
     """
-    URL = BaseHandler.URL + '/show_log'
-    url = BaseHandler.url + r'/show_log.*'
+    URL = BaseHandler.URL + '/test_show_log'
+    url = BaseHandler.url + r'/test_show_log.*'
 
     def GET(self):
 
@@ -45,17 +61,18 @@ class TestShowLog(BaseHandler):
         views = Views(user)
 
         ''' 渲染管理用户选项 '''
-        views.render_refresh_log(QueryLogCache.URL)
+        url = TestRefreshLog.URL
+        views.render_refresh_log(url)
 
         return views.log_show[0]
 
 
-class QueryLogCache(BaseHandler):
+class QueryLocalLogCache(BaseHandler):
     """
     查询日志缓存
     """
-    URL = BaseHandler.URL + '/query_log_cache'
-    url = BaseHandler.url + r'/query_log_cache.*'
+    URL = BaseHandler.URL + '/query_loacl_log_cache'
+    url = BaseHandler.url + r'/query_loacl_log_cache.*'
 
     def GET(self):
         """
@@ -101,7 +118,7 @@ class QueryLogCache(BaseHandler):
             'log': log,
 
         }
-        print json.dumps(log)
+
         return json.dumps(response)
 
 

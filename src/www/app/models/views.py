@@ -173,6 +173,16 @@ class Views(object):
         self.modif_user_group = render.modif_user_group(self.user, UserGroup, ModifUserGroup)
 
 
+    def render_refresh_log(self, queryUrl):
+        """
+        刷新log
+        :return:
+        """
+        if not hasattr(self, 'log_show'):
+            self.log_show = []
+
+        self.log_show.append(render.log_show(self.user, UserGroup, queryUrl))
+
 
     def render_sim_terminal_page(self, SimTermLocalServer):
         """

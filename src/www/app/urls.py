@@ -11,7 +11,8 @@ from controllers.logout_handler import Logout
 from controllers.index_handler import Index
 from controllers.manage_handler import (ManageUser, CreateUserGroup, CreateUser, ModifUser, ModifUserN, ModifUserPW, AddUG, RemoveUG, ModifUserGroup)
 from controllers.sim_terminal_handler import (SimTerminalPage, SimTermLocalServer)
-from controllers.log_handle import (QueryLogCache)
+from controllers.log_handler import *
+
 
 
 URLS = (
@@ -31,6 +32,8 @@ URLS = (
     SimTermLocalServer.url,     SimTermLocalServer.__name__,
     Logout.url,                 Logout.__name__,
     QueryLogCache.url,          QueryLogCache.__name__,
+    TestRefreshLog.url,         TestRefreshLog.__name__,
+    TestShowLog.url,            TestShowLog.__name__,
 )
 # for i,u in enumerate(URLS):
 #     print u, '\t',

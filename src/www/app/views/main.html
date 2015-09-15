@@ -1,4 +1,4 @@
-$def with (user, UserGroup, views, ManageUser, SimTerminalPage, Logout)
+$def with (user, UserGroup, views, ManageUser, SimTerminalPage, Logout, ShowLog)
 
 $ title = "某种管理系统"
 
@@ -31,6 +31,11 @@ $ title = "某种管理系统"
     <tr>
         <td>
             <p>进入<a href=$Logout.URL>注销</a></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>进入<a href=$ShowLog.URL>实时LOG</a></p>
         </td>
     </tr>
 </table>

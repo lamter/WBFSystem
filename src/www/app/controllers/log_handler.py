@@ -1,22 +1,53 @@
-# -*- coding: utf-8 -*-
-
+# coding:utf-8
 """
-Created on 2015-09-11
+Created on 2015/9/10
 
-@author: Shawn
+描述
 
-
+@author: Cordial
 """
 
+import random
 import json
-import traceback
 
 import web
 
 from . import (render, session)
 from .. import settings
-from base_handler import BaseHandler
+from ..models.views import Views
 from ..models.usergroup import UserGroup
+from base_handler import BaseHandler
+
+
+class TestRefreshLog(BaseHandler):
+    """
+    log刷新
+    """
+    URL = BaseHandler.URL + '/refresh_log'
+    url = BaseHandler.url + r'/refresh_log.*'
+
+    def GET(self):
+
+        return json.dumps({'log': ['log--->%s' % random.randint(10, 1000), 'log--->%s' % random.randint(10, 1000)]})
+
+
+class TestShowLog(BaseHandler):
+    """
+    显示log
+    """
+    URL = BaseHandler.URL + '/show_log'
+    url = BaseHandler.url + r'/show_log.*'
+
+    def GET(self):
+
+        user = session().user
+
+        views = Views(user)
+
+        ''' 渲染管理用户选项 '''
+        views.render_refresh_log(QueryLogCache.URL)
+
+        return views.log_show[0]
 
 
 class QueryLogCache(BaseHandler):
@@ -24,7 +55,7 @@ class QueryLogCache(BaseHandler):
     查询日志缓存
     """
     URL = BaseHandler.URL + '/query_log_cache'
-    url = BaseHandler.url + r'/query_log_cache'
+    url = BaseHandler.url + r'/query_log_cache.*'
 
     def GET(self):
         """
@@ -37,7 +68,7 @@ class QueryLogCache(BaseHandler):
             return '没有 查看 本地伪终端 的权限...'
 
         dic = web.input()
-        tag = dic.get('logTag')
+        tag = dic.get('tag')
         num = dic.get('num')
         if not tag:
             tag = None
@@ -52,6 +83,7 @@ class QueryLogCache(BaseHandler):
                 if tag and tag in t:
                     ''' 符合标签, 重新开始记录 '''
                     log = []
+                    continue
                 ''' 去掉末尾换行符 '''
                 log.append(t.strip('\n'))
 
@@ -69,7 +101,7 @@ class QueryLogCache(BaseHandler):
             'log': log,
 
         }
-
+        print json.dumps(log)
         return json.dumps(response)
 
 

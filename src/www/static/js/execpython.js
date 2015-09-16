@@ -6,7 +6,7 @@
 
 var execPython = {
 
-    run: function(url, code){
+    run: function(url, code, queryLog, logs){
 
         requestData = {};
         requestData.code = code;
@@ -23,7 +23,9 @@ var execPython = {
                 //alert(status)
                 // alert('requestError:' + status)
             },
-            success: function(data){},
+            success: function(data){
+                queryLog(logs);
+            }
 
         });
 

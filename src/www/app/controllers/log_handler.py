@@ -84,30 +84,9 @@ class QueryLocalLogCache(BaseHandler):
         if not user.isHavePms(UserGroup.PERMISSION_SIM_TERM_LOCAL_SERVER):
             return '没有 查看 本地伪终端 的权限...'
 
-        dic = web.input()
-        tag = dic.get('tag')
-        num = dic.get('num')
+        tag, num = self.getWebInput()
 
-        if not tag:
-            tag = None
-        if num:
-            num = int(num)
-        else:
-            num = 108
-
-        log = []
-        lastLine = None
-        with open(settings.LOG, 'rb') as f:
-            for t in f:
-                if tag and tag in t:
-                    ''' 符合标签, 重新开始记录 '''
-                    log = []
-                    lastLine = t
-                    continue
-                ''' 去掉末尾换行符 '''
-                t = t.strip('\n')
-                log.append(t)
-                lastLine = t
+        log, lastLine = self.getLog(tag)
 
         ''' 截取需要的长度 '''
         log = log[-num:]
@@ -127,7 +106,41 @@ class QueryLocalLogCache(BaseHandler):
         return json.dumps(response)
 
 
+    def getWebInput(self):
+        """
+
+        :return:
+        """
+
+        dic = web.input()
+        tag = dic.get('tag')
+        num = dic.get('num')
+
+        if not tag:
+            tag = None
+        if num:
+            num = int(num)
+        else:
+            num = 108
+        return tag, num
 
 
-
-
+    def getLog(self, tag):
+        log = []
+        lastLine = None
+        try:
+            with open(settings.LOG, 'rb') as f:
+                for t in f:
+                    if tag and tag in t:
+                        ''' 符合标签, 重新开始记录 '''
+                        log = []
+                        lastLine = t
+                        continue
+                    ''' 去掉末尾换行符 '''
+                    t = t.strip('\n')
+                    log.append(t)
+                    lastLine = t
+        except IOError:
+            pass
+        finally:
+            return log, lastLine

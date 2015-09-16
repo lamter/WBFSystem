@@ -78,9 +78,11 @@ class SimTermLocalServer(BaseHandler):
         views = Views(user)
 
         ''' 本地实时刷log '''
-        views.render_terminal_output(QueryLocalLogCache.URL, '本地终端')
-        views.render_terminal_input(LocalExecPython)
-        views.render_sim_term_local_server()
+        # views.render_terminal_output(QueryLocalLogCache.URL, '本地终端')
+        # views.render_terminal_input(LocalExecPython)
+        simTag = '本地终端'
+        views.render_sim_term_local_server(QueryLocalLogCache.URL, simTag, LocalExecPython)
+        # views.render_sim_term_local_server()
         return views.sim_term_local_server
 
 

@@ -5,10 +5,17 @@
 
 var logArray = []
 var requestData = {};
-alert(logArray.length)
+
 var log = {
     refreshLog: function(docId, url, reqData, reqMethod, logNum){
         setInterval(this.showLog, 2000, docId, url, reqData, reqMethod, logNum)
+    },
+    init: function(docId, url, reqData, reqMethod, logNum){
+        this.docId = docId;
+        this.url = url;
+        this.reqData = reqData;
+        this.reqMethod = reqMethod;
+        this.logNum = logNum;
     },
 
     showLog: function(docId, url, reqData, reqMethod, logNum){

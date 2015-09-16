@@ -21,7 +21,7 @@ var execPython = {
 
             error: function(errorData, status, error){
                 //alert(status)
-                alert('requestError:' + status)
+                // alert('requestError:' + status)
             },
             success: function(data){},
 

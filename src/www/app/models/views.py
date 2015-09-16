@@ -197,7 +197,8 @@ class Views(object):
         self.sim_terminal_page = render.sim_terminal_page(self.user, UserGroup, SimTermLocalServer)
 
 
-    def render_sim_term_local_server(self):
+    def render_sim_term_local_server(self, querUrl, simTermTag, LocalExecPython):
+    # def render_sim_term_local_server(self):
         """
         渲染 本地进程的终端页面
         :return:
@@ -209,7 +210,8 @@ class Views(object):
             return
 
         ''' 渲染用户信息 '''
-        self.sim_term_local_server = render.sim_term_local_server(self.user, UserGroup, self)
+        self.sim_term_local_server = render.sim_term_local_server(self.user, UserGroup, self, querUrl, simTermTag, LocalExecPython)
+        # self.sim_term_local_server = render.sim_term_local_server(self.user, UserGroup, self)
 
 
     def render_terminal_output(self, queryUrl, term_title):

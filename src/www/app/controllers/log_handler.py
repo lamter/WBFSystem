@@ -94,6 +94,9 @@ class QueryLocalLogCache(BaseHandler):
         else:
             num = 100
 
+        print 12121, tag
+        print 13131, num
+
         log = []
         lastLine = None
         with open(settings.LOG, 'rb') as f:

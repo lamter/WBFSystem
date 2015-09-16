@@ -4,19 +4,20 @@ $def with (user, UserGroup, views, querUrl, simTermTag, LocalExecPython)
     <script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="static/js/refresh-log.js"></script>
     <script type="text/javascript" src="static/js/execpython.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" charset="utf-8">
         $$(document).ready(function(){
             $$("#exec_python_buttoon").click(function(e){
-                python_code = $$("#python_code").val()
-                url = "$LocalExecPython.URL"
+                python_code = $$("#python_code").val();
+                url = "$LocalExecPython.URL";
                 // alert(url + python_code);
                 execPython.run(url, python_code);
             });
         });
-    </script>
-    <script type="text/javascript" charset="utf-8">
-        var reqData = {}
-        log.refreshLog("#outPrint", '$querUrl', reqData, 'GET', 100)
+
+        var logs = {};
+        log.init(logs, "#outPrint", '$querUrl', 'GET', 100);
+        log.queryLog()
+
     </script>
 </head>
 <body>

@@ -87,15 +87,13 @@ class QueryLocalLogCache(BaseHandler):
         dic = web.input()
         tag = dic.get('tag')
         num = dic.get('num')
+
         if not tag:
             tag = None
         if num:
             num = int(num)
         else:
-            num = 100
-
-        print 12121, tag
-        print 13131, num
+            num = 108
 
         log = []
         lastLine = None

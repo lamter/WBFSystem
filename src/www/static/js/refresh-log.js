@@ -8,6 +8,7 @@
 
 var log = {
     init: function(logs, docId, url, requestMethod , logNum) {
+        logs.queryNum = 0;
         logs.logs = logs;
         logs.docId = docId;
         logs.url = url;
@@ -21,6 +22,8 @@ var log = {
 };
 
 function queryLog(logs) {
+    logs.queryNum += 1;
+    //alert(logs.queryNum);
     jQuery.ajax({
         type: logs.reqMethod,
         url: logs.url,

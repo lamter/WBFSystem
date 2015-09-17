@@ -1,16 +1,43 @@
-$def with (user, UserGroup, views, SimTermLocalServer)
+$def with (user, UserGroup, views, querUrl, simTermTag, LocalExecPython)
 <html>
+<head>
+    <script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="static/js/refresh-log.js"></script>
+    <script type="text/javascript" src="static/js/execpython.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $$(document).ready(function(){
+            $$("#exec_python_buttoon").click(function(e){
+                python_code = $$("#python_code").val();
+                url = "$LocalExecPython.URL";
+                // alert(url + python_code);
+                execPython.run(url, python_code, queryLog, logs);
+            });
+        });
+
+        var logs = {};
+        log.init(logs, "#outPrint", '$querUrl', 'GET', 100);
+//        queryLog(logs)
+        refreshLog(logs)
+    </script>
+</head>
 <body>
-<table >
-    <!-- 日志输出 -->
-    <tr><td>$:views.terminal_output</td></tr>
-    <tr><td>
-        <table>
-        <form action=$SimTermLocalServer.URL method="POST">
-            <tr><td>$:views.terminal_input</td></tr>
+<h1>日志输出</h1>
+<table>
+    <tr><td><table border="1">
+            <tr><td>TAG：$simTermTag</td></tr>
+            <tr><td id="outPrint" cols="150" rows="30">正在加载...</td></tr>
+    </table></td></tr>
+    <tr><td><table border="1">
+        <tr><td>输入要执行的python代码</td></tr>
+        <form id='exec_python'>
+            <tr><td><textarea id='python_code' cols=80 rows=10 name="python_code"></textarea></td></tr>
+            <tr><td><input id='exec_python_buttoon' type="button" value="执行"></td></tr>
         </form>
-        </table>
-    </td></tr>
+    </table></td></tr>
+
 </table>
+
 </body>
 </html>
+
+

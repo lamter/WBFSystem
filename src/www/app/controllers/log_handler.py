@@ -23,20 +23,36 @@ class TestRefreshLog(BaseHandler):
     """
     log刷新
     """
-    URL = BaseHandler.URL + '/refresh_log'
-    url = BaseHandler.url + r'/refresh_log.*'
+    URL = BaseHandler.URL + '/test_refresh_log'
+    url = BaseHandler.url + r'/test_refresh_log.*'
 
     def GET(self):
 
-        return json.dumps({'log': ['log--->%s' % random.randint(10, 1000), 'log--->%s' % random.randint(10, 1000)]})
+        import requests
+        url = 'http://localhost:23001/bpm_http_request'
+
+        dic = {
+            'type': 20004,
+            'tag': web.input().get('tag'),
+            'num': 100,
+        }
+        data = json.dumps(dic)
+        response = requests.get(url, data=data)
+        # print 161616
+        # for k, v in json.loads(response.text).items():
+        #     print k,':', v
+
+        return response.text
+
+        # return json.dumps({'log': ['log--->%s' % random.randint(10, 1000), 'log--->%s' % random.randint(10, 1000)]})
 
 
 class TestShowLog(BaseHandler):
     """
     显示log
     """
-    URL = BaseHandler.URL + '/show_log'
-    url = BaseHandler.url + r'/show_log.*'
+    URL = BaseHandler.URL + '/test_show_log'
+    url = BaseHandler.url + r'/test_show_log.*'
 
     def GET(self):
 
@@ -45,17 +61,19 @@ class TestShowLog(BaseHandler):
         views = Views(user)
 
         ''' 渲染管理用户选项 '''
-        views.render_refresh_log(QueryLogCache.URL)
+        # url = TestRefreshLog.URL
+        url = QueryLocalLogCache.URL
+        views.render_refresh_log(url)
 
-        return views.log_show[0]
+        return views.log_show
 
 
-class QueryLogCache(BaseHandler):
+class QueryLocalLogCache(BaseHandler):
     """
     查询日志缓存
     """
-    URL = BaseHandler.URL + '/query_log_cache'
-    url = BaseHandler.url + r'/query_log_cache.*'
+    URL = BaseHandler.URL + '/query_loacl_log_cache'
+    url = BaseHandler.url + r'/query_loacl_log_cache.*'
 
     def GET(self):
         """
@@ -63,29 +81,12 @@ class QueryLogCache(BaseHandler):
         :return:
         """
         user = session().user
-
         if not user.isHavePms(UserGroup.PERMISSION_SIM_TERM_LOCAL_SERVER):
             return '没有 查看 本地伪终端 的权限...'
 
-        dic = web.input()
-        tag = dic.get('tag')
-        num = dic.get('num')
-        if not tag:
-            tag = None
-        if num:
-            num = int(num)
-        else:
-            num = 100
+        tag, num = self.getWebInput()
 
-        log = []
-        with open(settings.LOG, 'rb') as f:
-            for t in f:
-                if tag and tag in t:
-                    ''' 符合标签, 重新开始记录 '''
-                    log = []
-                    continue
-                ''' 去掉末尾换行符 '''
-                log.append(t.strip('\n'))
+        log, lastLine = self.getLog(tag)
 
         ''' 截取需要的长度 '''
         log = log[-num:]
@@ -94,18 +95,52 @@ class QueryLogCache(BaseHandler):
         if log:
             newTag = log[-1]
         else:
-            newTag = None
+            newTag = lastLine
 
         response = {
             'tag': newTag,
             'log': log,
 
         }
-        print json.dumps(log)
+
         return json.dumps(response)
 
 
+    def getWebInput(self):
+        """
+
+        :return:
+        """
+
+        dic = web.input()
+        tag = dic.get('tag')
+        num = dic.get('num')
+
+        if not tag:
+            tag = None
+        if num:
+            num = int(num)
+        else:
+            num = 108
+        return tag, num
 
 
-
-
+    def getLog(self, tag):
+        log = []
+        lastLine = None
+        try:
+            with open(settings.LOG, 'rb') as f:
+                for t in f:
+                    if tag and tag in t:
+                        ''' 符合标签, 重新开始记录 '''
+                        log = []
+                        lastLine = t
+                        continue
+                    ''' 去掉末尾换行符 '''
+                    t = t.strip('\n')
+                    log.append(t)
+                    lastLine = t
+        except IOError:
+            pass
+        finally:
+            return log, lastLine

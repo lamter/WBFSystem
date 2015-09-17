@@ -178,10 +178,8 @@ class Views(object):
         刷新log
         :return:
         """
-        if not hasattr(self, 'log_show'):
-            self.log_show = []
 
-        self.log_show.append(render.log_show(self.user, UserGroup, queryUrl))
+        self.log_show = render.log_show(self.user, UserGroup, queryUrl)
 
 
     def render_sim_terminal_page(self, SimTermLocalServer):
@@ -199,7 +197,8 @@ class Views(object):
         self.sim_terminal_page = render.sim_terminal_page(self.user, UserGroup, SimTermLocalServer)
 
 
-    def render_sim_term_local_server(self, SimTermLocalServer):
+    def render_sim_term_local_server(self, querUrl, simTermTag, LocalExecPython):
+    # def render_sim_term_local_server(self):
         """
         渲染 本地进程的终端页面
         :return:
@@ -211,10 +210,11 @@ class Views(object):
             return
 
         ''' 渲染用户信息 '''
-        self.sim_term_local_server = render.sim_term_local_server(self.user, UserGroup, self, SimTermLocalServer)
+        self.sim_term_local_server = render.sim_term_local_server(self.user, UserGroup, self, querUrl, simTermTag, LocalExecPython)
+        # self.sim_term_local_server = render.sim_term_local_server(self.user, UserGroup, self)
 
 
-    def render_terminal_output(self, term_output):
+    def render_terminal_output(self, queryUrl, term_title):
         """
         虚拟终端的输出界面
         :param term_output: [server, ...]
@@ -225,16 +225,16 @@ class Views(object):
         """
 
         ''' 渲染用户信息 '''
-        self.terminal_output = render.terminal_output(self.user, UserGroup, term_output)
+        self.terminal_output = render.terminal_output(self.user, UserGroup, queryUrl, term_title)
 
 
 
-    def render_terminal_input(self):
+    def render_terminal_input(self, LocalExecPython):
         """
         虚拟终端 输入界面
         :return:
         """
 
         ''' 渲染用户信息 '''
-        self.terminal_input = render.terminal_input(self.user, UserGroup)
+        self.terminal_input = render.terminal_input(self.user, UserGroup, LocalExecPython)
 

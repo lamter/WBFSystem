@@ -25,7 +25,8 @@ function queryLog(logs) {
     logs.queryNum += 1;
     //alert(logs.queryNum);
     jQuery.ajax({
-        type: logs.reqMethod,
+
+        type: logs.requestMethod,
         url: logs.url,
         timeout: 1000,
         dataType: 'json',

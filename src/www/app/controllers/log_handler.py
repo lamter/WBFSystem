@@ -26,7 +26,7 @@ class TestRefreshLog(BaseHandler):
     URL = BaseHandler.URL + '/test_refresh_log'
     url = BaseHandler.url + r'/test_refresh_log.*'
 
-    def GET(self):
+    def POST(self):
 
         import requests
         url = 'http://localhost:23001/bpm_http_request'
@@ -54,7 +54,7 @@ class TestShowLog(BaseHandler):
     URL = BaseHandler.URL + '/test_show_log'
     url = BaseHandler.url + r'/test_show_log.*'
 
-    def GET(self):
+    def POST(self):
 
         user = session().user
 
@@ -75,7 +75,7 @@ class QueryLocalLogCache(BaseHandler):
     URL = BaseHandler.URL + '/query_loacl_log_cache'
     url = BaseHandler.url + r'/query_loacl_log_cache.*'
 
-    def GET(self):
+    def POST(self):
         """
         直接使用最新的一行日志来作为标签
         :return:

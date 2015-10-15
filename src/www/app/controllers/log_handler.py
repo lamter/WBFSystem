@@ -75,6 +75,9 @@ class QueryLocalLogCache(BaseHandler):
     URL = BaseHandler.URL + '/query_loacl_log_cache'
     url = BaseHandler.url + r'/query_loacl_log_cache.*'
 
+    IGNORE_LOG = '(HTTP/1.1 200)'
+
+
     def POST(self):
         """
         直接使用最新的一行日志来作为标签
@@ -99,7 +102,8 @@ class QueryLocalLogCache(BaseHandler):
 
         response = {
             'tag': newTag,
-            'log': log,
+            # HTTP 请求的信息忽略掉
+            'log': [l for l in log if self.IGNORE_LOG not in l],
 
         }
 

@@ -106,7 +106,6 @@ class QueryLocalLogCache(BaseHandler):
             'log': [l for l in log if self.IGNORE_LOG not in l],
 
         }
-
         return json.dumps(response)
 
 

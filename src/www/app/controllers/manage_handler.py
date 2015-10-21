@@ -3,7 +3,7 @@
 """
 Created on 2014-10-28
 
-@author: Shawn
+@author: lamter
 
 This module contains the main handler of the application.
 """

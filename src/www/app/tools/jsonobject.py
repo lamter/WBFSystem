@@ -32,3 +32,7 @@ class JsonObject(object):
         self.dic[name] = value
 
         object.__setattr__(self, name, value)
+
+
+    def json(self):
+        return json.dumps(self.dic)

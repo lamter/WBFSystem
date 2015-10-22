@@ -32,7 +32,7 @@ function restart (url){
 
 function refresh () {
     // 正常地获取最新的日志
-    $.getJSON(term.url, {tag: term.tag, num:term.size}).done(function (data) {
+    $.getJSON(term.url, term.getRequestData()).done(function (data) {
         for(i in data.log){
             // 将新的日志逐条装填在尾部
             term.fill(data.log[i]);
@@ -85,6 +85,14 @@ function Terminal (url, ul) {
     this.fill = fill;
     this.getLogNum = function () {
         return this.ul.children('li').length
+    };
+    this.getRequestData = function () {
+        data = {
+            tag: term.tag
+            ,num:term.size
+        };
+
+        return data
     }
 }
 

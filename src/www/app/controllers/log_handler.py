@@ -109,6 +109,14 @@ class QueryLocalLogCache(BaseHandler):
         return json.dumps(response)
 
 
+    def GET(self):
+        """
+        直接使用最新的一行日志来作为标签
+        :return:
+        """
+        return self.POST()
+
+
     def getWebInput(self):
         """
 

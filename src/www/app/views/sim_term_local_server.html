@@ -4,21 +4,29 @@ $ term_name='outPrint'
 <head>
     <script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="static/js/refresh-log.js"></script>
+    <script type="text/javascript" src="static/js/term.js"></script>
     <script type="text/javascript" src="static/js/execpython.js"></script>
     <script type="text/javascript" charset="utf-8">
+        var terminal = null;
         $$(document).ready(function(){
+            terminal = newTerminal("$querUrl", $$("#$term_name"));
+            // 终端的实例
             $$("#exec_python_buttoon").click(function(e){
                 python_code = $$("#python_code").val();
                 url = "$LocalExecPython.URL";
                 // alert(url + python_code);
-                execPython.run(url, python_code, queryLog, logs);
+//                execPython.run(url, python_code, queryLog, logs);
+                execPython(url, python_code)
             });
+
+            // 加载完页面开始刷新日志
+            terminal.start()
         });
 
-        var logs = {};
-        log.init(logs, "#$term_name", '$querUrl', 'POST', 100);
+//        var logs = {};
+//        log.init(logs, "#$term_name", '$querUrl', 'POST', 100);
 //        queryLog(logs)
-        refreshLog(logs)
+//        refreshLog(logs)
     </script>
 </head>
 <body>

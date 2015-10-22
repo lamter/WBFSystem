@@ -4,33 +4,13 @@
  */
 
 
-var execPython = {
+function execPython (url, code) {
+    $.post(url, {code:code, dataType:"json"}).done(function (data) {
 
-    run: function(url, code, queryLog, logs){
-
-        requestData = {};
-        requestData.code = code;
-        // alert(url)
-
-        jQuery.ajax({
-            type: 'POST',
-            url: url,
-            timeout: 1000,
-            dataType: 'json',
-            data: jQuery.param(requestData, true),
-
-            error: function(errorData, status, error){
-                //alert(status)
-                // alert('requestError:' + status)
-            },
-            success: function(data){
-                queryLog(logs);
-            }
-
-        });
-
-    },
-
+        }
+    ).fail(function (xhr, status) {
+            alert('失败: ' + xhr.status + ', 原因: ' + status);
+        }
+    ).always()
 }
-
 

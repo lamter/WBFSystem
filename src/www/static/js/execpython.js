@@ -4,10 +4,17 @@
  */
 
 
-function execPython (url, code) {
-    $.post(url, {code:code, dataType:"json"}).done(function (data) {
-
+function execPython (url, code, fill) {
+    $.post(url,
+        {code:code}
+        ,function (data) {
+            if (data.log){
+                for(i in data.log){
+                fill(data.log[i])
+            }
+            }
         }
+        ,"json"
     ).fail(function (xhr, status) {
             alert('失败: ' + xhr.status + ', 原因: ' + status);
         }

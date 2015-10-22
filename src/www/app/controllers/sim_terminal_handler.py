@@ -8,8 +8,10 @@ Created on 2014-10-28
     伪终端，用于直接直接使用代码同服务进程交互
 
 """
+import sys
 import json
-import os
+import StringIO
+import contextlib
 
 import web
 
@@ -109,3 +111,31 @@ class LocalExecPython(BaseHandler):
             traceback.print_exc()
 
         return json.dumps({})
+
+        # log = []
+        # err = u''
+        # with stdoutIO() as s:
+        #     try:
+        #         exec data.code
+        #     except:
+        #         err += traceback.format_exc()
+        # r = s.getvalue()
+        # if r:
+        #     # print r
+        #     log.append(r)
+        #
+        # if err:
+        #     # print err
+        #     log.extend(err.split('\n'))
+        #
+        # return json.dumps({'log': log})
+
+
+@contextlib.contextmanager
+def stdoutIO(stdout=None):
+    old = sys.stdout
+    if stdout is None:
+        stdout = StringIO.StringIO()
+    sys.stdout = stdout
+    yield stdout
+    sys.stdout = old

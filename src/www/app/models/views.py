@@ -238,3 +238,10 @@ class Views(object):
         ''' 渲染用户信息 '''
         self.terminal_input = render.terminal_input(self.user, UserGroup, LocalExecPython)
 
+
+    def render_real_time_term(self, term_name):
+        """
+        实时终端
+        :return:
+        """
+        self.real_time_term = render.real_time_term(term_name)

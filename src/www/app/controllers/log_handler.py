@@ -106,8 +106,15 @@ class QueryLocalLogCache(BaseHandler):
             'log': [l for l in log if self.IGNORE_LOG not in l],
 
         }
-
         return json.dumps(response)
+
+
+    def GET(self):
+        """
+        直接使用最新的一行日志来作为标签
+        :return:
+        """
+        return self.POST()
 
 
     def getWebInput(self):

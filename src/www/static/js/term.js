@@ -59,7 +59,7 @@ function fill (log) {
     // 装填日志
     term.ul.append("<li>" + log + "</li>");
     if (term.getLogNum() > term.size) {
-        term.ul.first().remove(); // 清掉最前面的log
+        term.ul.children('li').first().remove(); // 清掉最前面的log
     }
 }
 
@@ -88,8 +88,8 @@ function Terminal (url, ul) {
     };
     this.getRequestData = function () {
         data = {
-            tag: term.tag
-            ,num:term.size
+            tag: this.tag
+            ,num:this.size
         };
 
         return data

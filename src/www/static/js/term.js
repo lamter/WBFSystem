@@ -15,8 +15,8 @@ function stop () {
 
 function start () {
     // 开始刷新
-    this.pause = false;
-    this.clean();
+    term.pause = false;
+    term.clean();
     refresh()
 
 }
@@ -57,11 +57,10 @@ function refresh () {
 
 function fill (log) {
     // 装填日志
-    this.ul.append("<li>" + log + "</li>");
-    if (this.getLogNum() > this.size) {
-        this.ul.first().remove(); // 清掉最前面的log
+    term.ul.append("<li>" + log + "</li>");
+    if (term.getLogNum() > term.size) {
+        term.ul.first().remove(); // 清掉最前面的log
     }
-
 }
 
 function clean () {

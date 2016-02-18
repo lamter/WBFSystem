@@ -1,0 +1,15 @@
+$def with (user, UserGroup, querUrl)
+
+
+<script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="static/js/refresh-log.js"></script>
+
+<tr>
+    <td id="outPrint">正在加载...</td>
+</tr>
+
+<script type="text/javascript" charset="utf-8">
+    var reqData = {}
+    log.refreshLog("#outPrint", '$querUrl', reqData, 'GET', 100)
+    // log.showLog("#outPrint", '$querUrl', reqData, 'GET', 100)
+</script>

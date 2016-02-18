@@ -20,6 +20,7 @@ from sim_terminal_handler import SimTerminalPage
 from ..models.views import Views
 from ..models.usergroup import UserGroup
 from sim_terminal_handler import SimTermLocalServer
+from log_handler import *
 
 class Main(BaseHandler):
 
@@ -103,6 +104,9 @@ class Left(BaseHandler):
                            UserGroup,
                            views,
                            ManageUser,
+                            SimTerminalPage,
+                           Logout,
+                           TestShowLog,
                            DataTable,
                            JsCharts,
                            SimTermLocalServer,

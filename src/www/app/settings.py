@@ -46,6 +46,9 @@ REDIS_PW = ''
 REDIS_PORT = 8911
 REDIS_DB = 1
 
+''' 日志文件 '''
+LOG = '../www/log/wbfs.log'
+
 try:
     redisco.connection_setup(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
     if not redisco.connection.ping():

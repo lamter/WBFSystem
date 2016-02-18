@@ -1,8 +1,21 @@
-$def with (user, UserGroup)
+$def with (user, UserGroup, LocalExecPython)
+
+
+<script type="text/javascript" src="static/js/execpython.js"></script>
+<script type="text/javascript">
+    $$(document).ready(function(){
+        $$("#exec_python_buttoon").click(function(e){
+            python_code = $$("#python_code").val()
+            url = "$LocalExecPython.URL"
+            // alert(url + python_code);
+            execPython.run(url, python_code);
+        });
+    });
+</script>
 <table border="1">
     <tr><td>输入要执行的python代码</td></tr>
-    <tr><td>
-        <textarea cols=80 rows=10 name="python_code"></textarea>
-    </td></tr>
-    <tr><td><input type="submit" value="执行"></td></tr>
+    <form id='exec_python'>
+        <tr><td><textarea id='python_code' cols=80 rows=10 name="python_code"></textarea></td></tr>
+        <tr><td><input id='exec_python_buttoon' type="button" value="执行"></td></tr>
+    </form>
 </table>

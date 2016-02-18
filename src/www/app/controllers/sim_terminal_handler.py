@@ -8,11 +8,15 @@ Created on 2014-10-28
     伪终端，用于直接直接使用代码同服务进程交互
 
 """
-import os
+import sys
+import json
+import StringIO
+import contextlib
 
 import web
 
 from . import session
+from log_handler import QueryLocalLogCache
 from base_handler import *
 from ..models.views import Views
 from ..models.term_server import TerminalServer
@@ -58,24 +62,36 @@ class SimTermLocalServer(BaseHandler):
         打开本地进程的伪终端页面
         :return:
         """
-        if not session().user.isHavePms(PM.PERMISSION_SIM_TERM_LOCAL_SERVER):
+        user = session().user
+        if not user.isHavePms(PM.PERMISSION_SIM_TERM_LOCAL_SERVER):
             return '没有 使用 游戏服务器进程终端 的权限...'
 
-        ''' 终端 '''
-        termLocalServer = TerminalServer()
-        termLocalServer.term_title = '本地服务进程'
-        termLocalServer.logfile = settings.logfile()
+        # ''' 终端 '''
+        # termLocalServer = TerminalServer()
+        # termLocalServer.term_title = '本地服务进程'
+        # termLocalServer.logfile = settings.logfile()
 
         ''' 获得日志内容 '''
         # termLocalServer.getLogText()
 
         ''' 生成用于显示的界面 '''
-        term_output = [termLocalServer]
-        views = Views(session().user)
-        views.render_terminal_output(term_output)
-        views.render_terminal_input()
-        views.render_sim_term_local_server(SimTermLocalServer)
+        # term_output = [termLocalServer]
+
+        views = Views(user)
+
+        ''' 本地实时刷log '''
+        # views.render_terminal_output(QueryLocalLogCache.URL, '本地终端')
+        # views.render_terminal_input(LocalExecPython)
+        simTag = '本地终端'
+        views.render_sim_term_local_server(QueryLocalLogCache.URL, simTag, LocalExecPython)
+        # views.render_sim_term_local_server()
         return views.sim_term_local_server
+
+
+class LocalExecPython(BaseHandler):
+
+    URL = BaseHandler.URL + '/local_exec_python'
+    url = BaseHandler.url + r'/local_exec_python.*'
 
 
     def POST(self):
@@ -86,23 +102,40 @@ class SimTermLocalServer(BaseHandler):
         if not session().user.isHavePms(PM.PERMISSION_SIM_TERM_LOCAL_SERVER):
             return '没有 使用 游戏服务器进程终端 的权限...'
 
-        exe = web.input(_unicode=True)
-
-        ''' 终端 '''
-        termLocalServer = TerminalServer()
-        termLocalServer.term_title = '本地服务进程'
-        termLocalServer.logfile = settings.logfile()
+        data = web.input(_unicode=True)
 
         ''' 执行 python 代码 '''
-        termLocalServer.execPythonCode(exe.python_code)
+        try:
+            exec data.code
+        except:
+            traceback.print_exc()
 
-        # ''' 获得日志内容 '''
-        # termLocalServer.getLogText()
+        return json.dumps({})
 
-        ''' 生成用于显示的界面 '''
-        term_output = [termLocalServer]
-        views = Views(session().user)
-        views.render_terminal_output(term_output)
-        views.render_terminal_input()
-        views.render_sim_term_local_server(SimTermLocalServer)
-        return views.sim_term_local_server
+        # log = []
+        # err = u''
+        # with stdoutIO() as s:
+        #     try:
+        #         exec data.code
+        #     except:
+        #         err += traceback.format_exc()
+        # r = s.getvalue()
+        # if r:
+        #     # print r
+        #     log.append(r)
+        #
+        # if err:
+        #     # print err
+        #     log.extend(err.split('\n'))
+        #
+        # return json.dumps({'log': log})
+
+
+@contextlib.contextmanager
+def stdoutIO(stdout=None):
+    old = sys.stdout
+    if stdout is None:
+        stdout = StringIO.StringIO()
+    sys.stdout = stdout
+    yield stdout
+    sys.stdout = old
